@@ -1,0 +1,31 @@
+<div class="cabinet" [ngClass]="{isMobileDevice}">
+  <div class="container" [ngClass]="{isMobileDevice}">
+    <!-- <div class="breadcrumb">
+      <az-breadcrumb></az-breadcrumb>
+    </div> -->
+    <div class="cabinet__block" [ngClass]="{isMobileDevice}">
+      <div class="cabinet__menu">
+        <!-- DESKTOP MENU -->
+        <az-cabinet-menu
+          [hasResume]="hasResume"
+          [resumeCount]="resumeCount"
+        ></az-cabinet-menu>
+        <nz-divider></nz-divider>
+
+        <div *ngIf="!hasResume && resumeCount === 0" class="become-consultant">
+          <div class="become-consultant__btn">
+            <button (click)="navigateTo()">
+              {{ "becomeConsultant" | translate }}
+            </button>
+          </div>
+          <div class="become-consultant__img">
+            <img src="./assets/images/menu-consultant.png" alt="image" />
+          </div>
+        </div>
+      </div>
+      <div class="cabinet__content" [ngClass]="{isMobileDevice}">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

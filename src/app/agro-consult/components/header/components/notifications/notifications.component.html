@@ -1,0 +1,274 @@
+<div class="notification">
+  <div class="notification__title">
+    <h4>{{ "notifications" | translate }}</h4>
+    <div>
+      <span *ngIf="messagePack.length" (click)="clearNotification()">{{
+        "clear" | translate
+      }}</span>
+      <button class="close-drawer" (click)="closeDrawer.emit()">
+        <span nz-icon nzType="close" nzTheme="outline"></span>
+      </button>
+    </div>
+  </div>
+  <az-tg-bot-link></az-tg-bot-link>
+
+  <nz-tabset>
+    <nz-tab [nzTitle]="clientTitle">
+      <ul
+        class="notification__list"
+        *ngIf="clientNotifications && clientNotifications.length; else empty"
+      >
+        <!-- NOTIFICATION TYPE MESSAGE -->
+        <li
+          class="notification__list__item"
+          *ngFor="let notification of clientNotifications; let isLast = last"
+        >
+          <div [ngSwitch]="notification.type">
+            <!-- NOTIFICATION TYPE MESSAGE -->
+            <div *ngSwitchCase="'message'">
+              <az-message-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-message-type>
+            </div>
+
+            <!-- NOTIFICATION TYPE RESUME -->
+            <div *ngSwitchCase="'resume'">
+              <az-resume
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToResume)="navigateToResume($event)"
+              ></az-resume>
+            </div>
+
+            <!-- NOTIFICATION TYPE PRIVATE APPLICATION -->
+            <div *ngSwitchCase="'private_application'">
+              <az-private-application-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToPrivateApplication)="navigateToPrivate($event)"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-private-application-type>
+            </div>
+
+            <!-- NOTIFICATION APPLICATION BLOCK TYPE -->
+            <div *ngSwitchCase="'application'">
+              <az-blocked-application-type
+                [notification]="notification"
+                [isLast]="isLast"
+              ></az-blocked-application-type>
+            </div>
+
+            <!-- NOTIFICATEION CANCEL PRIVATE BLOCK -->
+            <div *ngSwitchCase="'cancel_private_application'">
+              <az-private-application-type
+                [cancelPrivate]="true"
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToPrivateApplication)="navigateToResponses($event)"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-private-application-type>
+            </div>
+
+            <!-- NOTIFICATEION NEW APPLICATION COUNT -->
+            <div *ngSwitchCase="'new_applications_count'">
+              <az-applications-count
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToSearchApplications)="
+                  navigateToSearchApplications($event)
+                "
+              ></az-applications-count>
+            </div>
+
+            <!-- NOTIFICATION TYPE RESPONSE -->
+            <div *ngSwitchCase="'response'">
+              <az-response-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToResume)="navigateToResponses($event)"
+              ></az-response-type>
+            </div>
+
+            <!-- NOTIFICATION PRIVATE RESPONSE -->
+            <div *ngSwitchCase="'private_response'">
+              <az-response-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToResume)="navigateToPrivateResponses($event)"
+              ></az-response-type>
+            </div>
+
+            <!-- NOTIFICATION WARNING TYPE -->
+            <div *ngSwitchCase="'warning_private_application'">
+              <az-warning-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToPrivateChat)="navigateToPrivate($event)"
+              ></az-warning-type>
+            </div>
+
+            <!-- NOTIFICATION REMEMBER TYPE -->
+            <div *ngSwitchCase="'remember'">
+              <az-remember-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-remember-type>
+            </div>
+            <!-- NOTIFICATION PAYMENT TYPE -->
+            <div *ngSwitchCase="'payment'">
+              <az-payment-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-payment-type>
+            </div>
+          </div>
+        </li>
+        <!-- ------------------------- -->
+      </ul></nz-tab
+    >
+    <nz-tab [nzTitle]="consultanttTitle">
+      <ul
+        class="notification__list"
+        *ngIf="
+          consultantNotifications && consultantNotifications.length;
+          else empty
+        "
+      >
+        <!-- NOTIFICATION TYPE MESSAGE -->
+        <li
+          class="notification__list__item"
+          *ngFor="
+            let notification of consultantNotifications;
+            let isLast = last
+          "
+        >
+          <div [ngSwitch]="notification.type">
+            <!-- NOTIFICATION TYPE MESSAGE -->
+            <div *ngSwitchCase="'message'">
+              <az-message-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-message-type>
+            </div>
+
+            <!-- NOTIFICATION TYPE RESUME -->
+            <div *ngSwitchCase="'resume'">
+              <az-resume
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToResume)="navigateToResume($event)"
+              ></az-resume>
+            </div>
+
+            <!-- NOTIFICATION TYPE PRIVATE APPLICATION -->
+            <div *ngSwitchCase="'private_application'">
+              <az-private-application-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToPrivateApplication)="navigateToPrivate($event)"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-private-application-type>
+            </div>
+
+            <!-- NOTIFICATION APPLICATION BLOCK TYPE -->
+            <div *ngSwitchCase="'application'">
+              <az-blocked-application-type
+                [notification]="notification"
+                [isLast]="isLast"
+              ></az-blocked-application-type>
+            </div>
+
+            <!-- NOTIFICATEION CANCEL PRIVATE BLOCK -->
+            <div *ngSwitchCase="'cancel_private_application'">
+              <az-private-application-type
+                [cancelPrivate]="true"
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToPrivateApplication)="navigateToResponses($event)"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-private-application-type>
+            </div>
+
+            <!-- NOTIFICATEION NEW APPLICATION COUNT -->
+            <div *ngSwitchCase="'new_applications_count'">
+              <az-applications-count
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToSearchApplications)="
+                  navigateToSearchApplications($event)
+                "
+              ></az-applications-count>
+            </div>
+
+            <!-- NOTIFICATION TYPE RESPONSE -->
+            <div *ngSwitchCase="'response'">
+              <az-response-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToResume)="navigateToResponses($event)"
+              ></az-response-type>
+            </div>
+
+            <!-- NOTIFICATION PRIVATE RESPONSE -->
+            <div *ngSwitchCase="'private_response'">
+              <az-response-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToResume)="navigateToPrivateResponses($event)"
+              ></az-response-type>
+            </div>
+
+            <!-- NOTIFICATION WARNING TYPE -->
+            <div *ngSwitchCase="'warning_private_application'">
+              <az-warning-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToPrivateChat)="navigateToPrivate($event)"
+              ></az-warning-type>
+            </div>
+
+            <!-- NOTIFICATION REMEMBER TYPE -->
+            <div *ngSwitchCase="'remember'">
+              <az-remember-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-remember-type>
+            </div>
+            <!-- NOTIFICATION PAYMENT TYPE -->
+            <div *ngSwitchCase="'payment'">
+              <az-payment-type
+                [notification]="notification"
+                [isLast]="isLast"
+                (navigateToChat)="navigateToChat($event)"
+              ></az-payment-type>
+            </div>
+          </div>
+        </li>
+        <!-- ------------------------- -->
+      </ul></nz-tab
+    >
+  </nz-tabset>
+
+  <ng-template #empty>
+    <div class="empty">
+      <nz-empty
+        [nzNotFoundContent]="'haveNotNotification' | translate"
+      ></nz-empty>
+    </div>
+  </ng-template>
+
+  <ng-template #clientTitle>
+    <span>{{ "client" | translate }} </span>
+    <span class="counter">{{ unreadClient }}</span>
+  </ng-template>
+  <ng-template #consultanttTitle>
+    <span>{{ "consultant" | translate }} </span>
+    <span class="counter">{{ unreadConsultant }}</span>
+  </ng-template>
+</div>

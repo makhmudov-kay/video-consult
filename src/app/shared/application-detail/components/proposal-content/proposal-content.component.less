@@ -1,0 +1,138 @@
+.proposal {
+  &__user {
+    padding-bottom: 24px;
+  }
+
+  &__price {
+    padding: 24px 0;
+  }
+
+  &__text {
+    padding: 24px 0;
+  }
+
+  &__title {
+    font-size: 16px;
+    line-height: 20px;
+    color: #242533;
+    font-family: Mont-Bold;
+    margin-bottom: 8px;
+
+    &.mb {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    color: #86898c;
+    font-family: Agrofont-Regular;
+    margin-bottom: 16px;
+  }
+
+  &__actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+
+    &__btn {
+      padding: 16px 0;
+      width: 49%;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Medium;
+      cursor: pointer;
+
+      &.back {
+        color: #282828;
+
+        @media (max-width: 575px) {
+          display: none;
+        }
+      }
+
+      &.request {
+        background: #2c4eff;
+        padding: initial;
+        color: #fff;
+        height: 50px;
+
+        @media (max-width: 575px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__select {
+    padding: 24px 0;
+
+    @media (max-width: 575px) {
+      padding-bottom: 0;
+    }
+
+    .proposal__title {
+      margin-bottom: 16px;
+    }
+
+    .select {
+      width: 100%;
+    }
+  }
+}
+
+.borderBottom {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.response__label {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-bottom: 16px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  input {
+    appearance: none;
+  }
+
+  .check-custom-mark {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    background: #f5f5f7;
+    margin-right: 8px;
+
+    img {
+      opacity: 0;
+    }
+  }
+
+  input:checked ~ .check-custom-mark {
+    background: #2b4cff;
+
+    img {
+      opacity: 1;
+    }
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: Mont-SemiBold;
+
+    &.private {
+      background: #f3f5ff;
+      padding: 4px 8px;
+      border-radius: 24px;
+    }
+  }
+}

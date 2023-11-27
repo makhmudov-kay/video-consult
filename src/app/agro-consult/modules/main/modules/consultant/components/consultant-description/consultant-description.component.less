@@ -1,0 +1,97 @@
+.consultant {
+  &__description {
+    .text {
+      font-size: 24px;
+      line-height: 30px;
+      font-family: Agrofont-Regular;
+      color: #242533;
+      margin-bottom: 0;
+
+      @media (max-width: 575px) {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+
+    &__yourself {
+      .title {
+        font-size: 32px;
+        line-height: 40px;
+        // margin-top: 40px;
+        margin-bottom: 16px;
+
+        @media (max-width: 575px) {
+          font-size: 24px;
+          line-height: 30px;
+        }
+      }
+    }
+
+    &__specialization {
+      margin-top: 24px;
+
+      .title {
+        font-size: 32px;
+        line-height: 40px;
+
+        @media (max-width: 575px) {
+          font-size: 24px;
+          line-height: 30px;
+        }
+      }
+
+      ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 8px;
+          list-style: none;
+        }
+      }
+    }
+
+    .divider {
+      margin: 40px 0;
+
+      @media (max-width: 575px) {
+        margin: 24px 0;
+      }
+    }
+
+    &__btn {
+      button {
+        padding: 16px 0;
+        border-radius: 8px;
+        background: #2b4cff;
+        width: 100%;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        line-height: 26px;
+        font-family: Mont-Bold;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          background: lighten(#2b4cff, 10%);
+        }
+        &:active {
+          background: darken(#2b4cff, 10%);
+        }
+      }
+    }
+  }
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    background: rgba(214, 214, 214, 0.65);
+    padding: 10px;
+    border-radius: 8px;
+    margin-right: 8px;
+  }
+}

@@ -1,0 +1,107 @@
+<div class="view">
+  <div class="blocked" *ngIf="data.status === 3">
+    <nz-alert
+      nzType="error"
+      [nzMessage]="'resumeHasBeenBlocked' | translate"
+      [nzDescription]="data.reason_inactive"
+    ></nz-alert>
+  </div>
+  <div class="blocked" *ngIf="data.status === 1">
+    <nz-alert
+      nzType="info"
+      [nzMessage]="'onModerate.text' | translate"
+    ></nz-alert>
+  </div>
+
+  <div class="view__user">
+    <div class="view__user__ava">
+      <div class="view__user__ava__img">
+        <nz-avatar
+          [nzShape]="'square'"
+          [nzSrc]="data.user.avatar"
+          [nzSize]="120"
+          nzIcon="user"
+        ></nz-avatar>
+      </div>
+    </div>
+    <div class="view__user__info">
+      <div class="view__user__name">{{ data.user.fullname }}</div>
+      <div class="view__user__rating">
+        <div class="view__user__rating__stars">
+          <az-svg-rating-star class="d-flex"></az-svg-rating-star>
+          <span>{{ data.review.rating | number : "1.1-1" }}</span>
+        </div>
+        <div class="view__user__rating__response">
+          <az-svg-response class="d-flex"></az-svg-response>
+          <span>{{
+            "respondCount" | translate : { count: data.review.count }
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="view__description">
+    <h4 class="view__title">{{ "aboutHimself" | translate }}</h4>
+    <div [froalaView]="data.about"></div>
+  </div>
+  <div class="view__attached" *ngIf="data.files && data.files.length">
+    <h4 class="view__title">{{ "attachImg.view" | translate }}</h4>
+    <div class="view__attached__block">
+      <div class="view__attached__img" *ngFor="let img of data.files">
+        <img nz-image [nzSrc]="img" alt="attached img" />
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="data.attached_files.length > 0">
+    <div class="attached__documents">
+      <h5 class="view__title">{{ "attachedFiles" | translate }}</h5>
+      <div class="attached__docs">
+        <a
+          class="attached__files__docs"
+          *ngFor="let doc of data.attached_files"
+          [href]="doc.file"
+          download
+          target="_blank"
+        >
+          <span>{{ doc.name }}</span>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="view__specialization">
+    <h4 class="view__title">{{ "category.type" | translate }}</h4>
+    <span class="view__text">
+      {{ data.category }}
+    </span>
+  </div>
+  <div class="view__specialization">
+    <h4 class="view__title">{{ "specialization" | translate }}</h4>
+    <span class="view__text">
+      {{ data.position }}
+    </span>
+  </div>
+  <!-- <div class="view__skills">
+    <h4 class="view__title">{{ "mainSkills" | translate }}</h4>
+    <span class="view__text some" *ngFor="let skill of data.skills">{{
+      skill
+    }}</span>
+  </div> -->
+  <div class="view__language">
+    <h4 class="view__title">{{ "consultLanguage" | translate }}</h4>
+    <div class="view__language__list" *ngFor="let lang of data.language">
+      <span class="view__text">{{ lang }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="actions__btn back" [routerLink]="['../../resume']">
+    {{ "back" | translate }}
+  </button>
+  <button class="actions__btn request" (click)="navigateTo(data.id)">
+    {{ "changeResume" | translate }}
+  </button>
+</div>

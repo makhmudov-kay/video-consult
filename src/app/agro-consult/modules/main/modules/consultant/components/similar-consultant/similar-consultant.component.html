@@ -1,0 +1,33 @@
+<div class="similar" *ngIf="similarConsultant$ | async as similarConsultant">
+  <h4 class="title">{{ "similarConsultant" | translate }}</h4>
+  <swiper
+    [slidesPerView]="1"
+    [spaceBetween]="10"
+    [pagination]="{
+      clickable: true
+    }"
+    [breakpoints]="{
+      '575': {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      '767': {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      '991': {
+        slidesPerView: 3,
+        spaceBetween: 24
+      },
+      '1200': {
+        slidesPerView: 4,
+        spaceBetween: 24
+      }
+    }"
+    class="mySwiper"
+  >
+    <ng-template swiperSlide *ngFor="let card of similarConsultant"
+      ><az-consultant-card [consultant]="card"></az-consultant-card
+    ></ng-template>
+  </swiper>
+</div>

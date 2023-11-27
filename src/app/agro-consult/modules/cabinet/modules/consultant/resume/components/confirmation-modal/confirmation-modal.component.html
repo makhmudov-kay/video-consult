@@ -1,0 +1,18 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <div class="has-active">
+      <h3 class="has-active__title">{{ "warning" | translate }}</h3>
+      <p class="has-active__text">
+        {{ "deprecateDeleteResume" | translate }}
+      </p>
+      <div class="has-active__btn">
+        <button (click)="handleCancel()">{{ "close" | translate }}</button>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>

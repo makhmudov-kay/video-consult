@@ -1,0 +1,27 @@
+<!-- TYPE -->
+<section class="container">
+  <div class="step-header">
+    <h3 class="step-header__title">
+      {{ "chooseTypeApplication" | translate }}
+    </h3>
+  </div>
+  <div class="create-application__content">
+    <div class="create-application__btn">
+      <button routerLink="../../create-application">
+        {{ "publicTypeApplication" | translate }}
+      </button>
+      <p>
+        {{ "publicTypeApplication.description" | translate }}
+      </p>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="create-application__btn">
+      <button routerLink="../private">
+        {{ "privateApplication" | translate }}
+      </button>
+      <p>
+        {{ "privateTypeApplication.description" | translate }}
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,99 @@
+h4 {
+  font-size: 32px;
+  line-height: 40px;
+  font-family: Agrofont-Medium;
+  color: #333;
+  margin-bottom: 0;
+}
+
+.step {
+  &__radio {
+    display: flex;
+    flex-direction: column;
+    margin-top: 38px;
+
+    &__label {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      line-height: 31px;
+      color: #282828;
+      font-family: Agrofont-Regular;
+      margin-bottom: 20px;
+
+      input {
+        appearance: none;
+      }
+
+      .check-custom-mark {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f5f7;
+        margin-right: 12px;
+
+        span {
+          display: none;
+        }
+      }
+
+      input:checked ~ .check-custom-mark {
+        border: 1px solid #f5f5f7;
+        background: #fff;
+        outline: 2px solid #2a4aff;
+
+        span {
+          display: block;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #325bfe;
+          
+        }
+      }
+    }
+  }
+}
+
+p {
+  font-size: 16px;
+  line-height: 20px;
+  font-family: Agrofont-Regular;
+  color: #86898c;
+}
+
+.modal-btn {
+  button {
+    display: block;
+    width: 100%;
+    padding: 20px 0;
+    border-radius: 8px;
+    background: #2a4aff;
+    color: #fff;
+    font-size: 20px;
+    line-height: 24px;
+    font-family: Agrofont-Medium;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background: lighten(#2a4aff, 5%);
+    }
+  }
+}
+
+
+.radio-label {
+  cursor: pointer;
+
+  &:hover {
+    .check-custom-mark {
+      outline: 2px solid #2a4aff;
+    }
+  }
+}

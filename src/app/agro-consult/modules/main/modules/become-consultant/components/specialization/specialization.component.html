@@ -1,0 +1,75 @@
+<form nz-form [formGroup]="form" nzLayout="vertical">
+  <div class="skills">
+    <!-- category -->
+    <div class="skills__select">
+      <nz-form-item>
+        <nz-form-label
+          ><span class="skills__name">{{
+            "category" | translate
+          }}</span></nz-form-label
+        >
+        <nz-form-control [nzErrorTip]="'category.choose' | translate">
+          <nz-select
+            nzSize="large"
+            nzShowSearch
+            [nzPlaceHolder]="'category.placeholder' | translate"
+            formControlName="category_id"
+            (ngModelChange)="chooseCategory($event)"
+          >
+            <nz-option
+              [nzLabel]="item.name"
+              [nzValue]="item.id"
+              *ngFor="let item of category"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div formGroupName="position">
+      <nz-form-item>
+        <nz-form-label
+          ><span class="skills__name">{{
+            "specialization" | translate
+          }}</span></nz-form-label
+        >
+        <nz-form-control [nzErrorTip]="'specialization.choose' | translate">
+          <input
+            nz-input
+            formControlName="ru"
+            [placeholder]="'specialization.placeholder' | translate"
+            nzSize="large"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <!-- ------- -->
+    <!-- skills -->
+    <!-- <div class="skills__select" *ngIf="skills">
+      <nz-form-item>
+        <nz-form-label
+          ><span class="skills__name">{{
+            "mainSkills" | translate
+          }}</span></nz-form-label
+        >
+        <nz-form-control [nzErrorTip]="'mainSkills.error' | translate">
+          <nz-select
+            nzSize="large"
+            nzMode="tags"
+            [nzPlaceHolder]="'mainSkills.placeholder' | translate"
+            formControlName="skill_ids"
+            (ngModelChange)="chooseSkills($event)"
+          >
+            <nz-option
+              *ngFor="let option of skills"
+              [nzLabel]="option.name"
+              [nzValue]="option.id"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div> -->
+    <!-- ------- -->
+  </div>
+</form>

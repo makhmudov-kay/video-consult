@@ -1,0 +1,80 @@
+@import "../../../../../../../assets/styles/text.less";
+@import "../../../../../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+
+.applications {
+  &__search {
+    display: flex;
+    margin-bottom: 24px;
+
+    @media (max-width: 575px) {
+      margin-bottom: 16px;
+    }
+
+    &__input {
+      flex: 4;
+    }
+
+    button {
+      .text(14px, 19px, #fff, Agrofont-Medium);
+      flex: 1;
+      margin-left: 24px;
+      border: none;
+      outline: none;
+      background: #3056ff;
+      border-radius: 8px;
+      transition: 0.3s;
+
+      @media (max-width: 575px) {
+        margin-left: 8px;
+      }
+
+      &:hover {
+        background: darken(#3056ff, 10%);
+      }
+    }
+
+    &__btn {
+      cursor: pointer;
+
+      &__text {
+        @media (max-width: 575px) {
+          display: none;
+        }
+      }
+
+      &__icon {
+        display: none;
+        @media (max-width: 575px) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__filter {
+    margin-bottom: 24px;
+
+    @media (max-width: 575px) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__list {
+    max-height: 590px;
+    overflow: auto;
+    padding-right: 10px;
+    .scroll();
+
+    @media (max-width: 767px) {
+      max-height: initial;
+      // padding-right: 0;
+    }
+  }
+}
+
+.skeleton {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  padding: 16px;
+}

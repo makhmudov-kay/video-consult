@@ -1,0 +1,54 @@
+<div class="horizontal-menu">
+  <ul class="horizontal-menu__list">
+    <li class="horizontal-menu__list__item">
+      <a [routerLink]="['search']" routerLinkActive="active">
+        <span nz-icon>
+          <az-svg-search></az-svg-search>
+        </span>
+        <span class="horizontal-menu__list__item__text">{{
+          "applicationsSearch" | translate
+        }}</span></a
+      >
+    </li>
+    <li class="horizontal-menu__list__item">
+      <a [routerLink]="['applications']" routerLinkActive="active">
+        <span nz-icon>
+          <az-my-applications></az-my-applications>
+        </span>
+        <span class="horizontal-menu__list__item__text">{{
+          "orders" | translate
+        }}</span></a
+      >
+    </li>
+    <li class="horizontal-menu__list__item">
+      <a [routerLink]="['chat']" routerLinkActive="active">
+        <span nz-icon>
+          <az-svg-chats></az-svg-chats>
+        </span>
+        <span class="horizontal-menu__list__item__text">{{
+          "chat.STATUS_DEFAULT" | translate
+        }}</span></a
+      >
+    </li>
+    <li class="horizontal-menu__list__item">
+      <a [routerLink]="['payment']" routerLinkActive="active">
+        <span nz-icon>
+          <az-svg-payment></az-svg-payment>
+        </span>
+        <span class="horizontal-menu__list__item__text">{{
+          "paymentMethod" | translate
+        }}</span></a
+      >
+    </li>
+    <li class="horizontal-menu__list__item">
+      <a [routerLink]="['resume']" routerLinkActive="active">
+        <span nz-icon>
+          <az-svg-resume></az-svg-resume>
+        </span>
+        <span class="horizontal-menu__list__item__text">{{
+          "myResumes" | translate
+        }}</span></a
+      >
+    </li>
+  </ul>
+</div>

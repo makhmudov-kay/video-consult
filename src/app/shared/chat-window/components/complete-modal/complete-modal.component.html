@@ -1,0 +1,39 @@
+<nz-modal
+  [(nzVisible)]="isVisibleComplete"
+  (nzOnCancel)="closeCompleteModal()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <form [formGroup]="form">
+      <div class="complete__rating">
+        <h4 class="complete__title">{{ "markConsultantWork" | translate }}</h4>
+        <div class="complete__rating__block">
+          <nz-rate
+            [(ngModel)]="rate"
+            [ngModelOptions]="{ standalone: true }"
+            [nzCharacter]="characterIcon"
+          ></nz-rate>
+          <ng-template #characterIcon
+            ><span nz-icon nzType="star" style="font-size: 32px"></span
+          ></ng-template>
+        </div>
+      </div>
+      <div class="complete__comment">
+        <h4 class="complete__title">{{ "youtRequest" | translate }}</h4>
+        <textarea
+          nz-input
+          [placeholder]="'sendYourRequest' | translate"
+          [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+          formControlName="text"
+        ></textarea>
+      </div>
+      <div class="complete__actions">
+        <button class="btn" (click)="closeCompleteModal()">
+          <az-svg-x class="d-flex"></az-svg-x>
+          <span>{{ "skip" | translate }}</span>
+        </button>
+        <button (click)="sendReview()">{{ "sendRequestBtn" | translate }}</button>
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>

@@ -1,0 +1,25 @@
+<div class="container">
+  <az-banner></az-banner>
+  <!-- MY APPLICATIONS -->
+  <ng-container *ngIf="applications$ | async as applications">
+    <div class="applications" *ngIf="applications.length">
+      <h4 class="title">{{ "myApplications" | translate }}</h4>
+      <az-client-application-card
+        *ngFor="let application of applications"
+        [routerLink]="[
+          '../../cabinet',
+          'client',
+          'applications',
+          application.id
+        ]"
+        [cardInfo]="application"
+      ></az-client-application-card>
+    </div>
+  </ng-container>
+
+  <!-- <az-top-category></az-top-category> -->
+  <!-- <az-top-consultants></az-top-consultants> -->
+  <az-category-list (categoryId)="handleCategory($event)"></az-category-list>
+  <az-consultant-list></az-consultant-list>
+  <az-mobile-app-banner></az-mobile-app-banner>
+</div>

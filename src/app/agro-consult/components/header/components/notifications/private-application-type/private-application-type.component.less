@@ -1,0 +1,75 @@
+.notification-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0 10px;
+    padding: 16px 0;
+    margin-right: 16px;
+    cursor: pointer;
+
+    @media (max-width: 575px) {
+      margin-right: 0;
+    }
+  
+    &.border {
+      border-bottom: 1px solid #d9d9d9;
+    }
+  
+    &__left {
+      &__time {
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 5%;
+        font-family: Agrofont-Medium;
+        color: #bfbfbf;
+        display: block;
+      }
+  
+      &__unread {
+        font-size: 10px;
+        line-height: 10px;
+        font-family: Agrofont-Regular;
+        letter-spacing: 5%;
+        color: #2b4cff;
+  
+        &__badge {
+          height: 8px;
+          width: 8px;
+          border-radius: 50%;
+          display: inline-block;
+          background: #2b4cff;
+          margin-right: 4px;
+        }
+      }
+  
+      &__application {
+        padding: 9px 0;
+        font-size: 20px;
+        line-height: 26px;
+        font-family: Agrofont-Medium;
+        color: #282828;
+        display: flex;
+        align-items: center;
+        gap: 0 8px;
+      }
+  
+      &__text {
+        font-size: 14px;
+        line-height: 22px;
+        color: #212121;
+        font-family: Agrofont-Regular;
+        letter-spacing: 5%;
+  
+        &__title {
+          font-family: Agrofont-Medium;
+        }
+      }
+    }
+  
+    &__right {
+      [nz-icon] {
+        color: #bfbfbf;
+      }
+    }
+  }
+  

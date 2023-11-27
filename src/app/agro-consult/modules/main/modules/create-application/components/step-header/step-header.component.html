@@ -1,0 +1,11 @@
+<div class="step-header">
+  <h3 class="step-header__title">{{ title }}</h3>
+  <span class="step-header__part"
+    ><span>{{ step }}</span> {{ "from.step" | translate }} {{ maxSteps }}</span
+  >
+  <ng-container *ngIf="description">
+    <p class="step-header__subtitle">
+      {{ description }}
+    </p>
+  </ng-container>
+</div>

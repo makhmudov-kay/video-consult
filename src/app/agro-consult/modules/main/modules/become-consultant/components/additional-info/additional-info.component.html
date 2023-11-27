@@ -1,0 +1,98 @@
+<form nz-form [formGroup]="form" nzLayout="vertical">
+  <div class="info">
+    <div class="info__top">
+      <nz-form-item>
+        <nz-form-label
+          ><span class="info__name">{{
+            "consultLanguage" | translate
+          }}</span></nz-form-label
+        >
+        <nz-form-control [nzErrorTip]="'chooseConsultLanguage' | translate">
+          <nz-select
+            nzSize="large"
+            [nzPlaceHolder]="'chooseConsultLanguage' | translate"
+            formControlName="language"
+            nzMode="multiple"
+            [nzMaxTagCount]="3"
+          >
+            <nz-option
+              [nzLabel]="language.label"
+              [nzValue]="language.value"
+              *ngFor="let language of consultationLanguages"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="info__middle">
+      <nz-form-item formGroupName="about">
+        <nz-form-label
+          ><span class="info__name about">{{
+            "aboutYourSelf" | translate
+          }}</span></nz-form-label
+        >
+        <nz-form-control [nzErrorTip]="'aboutYourSelf.text' | translate">
+          <quill-editor
+            [modules]="options"
+            [(ngModel)]="form.value.about.ru"
+            formControlName="ru"
+            class="quill"
+          ></quill-editor> </nz-form-control
+      ></nz-form-item>
+    </div>
+    <!-- ATTACH IMG -->
+    <div class="info__bottom">
+      <div class="info__name about">
+        <span>{{ "attachImg" | translate }}</span>
+      </div>
+      <span class="subtitle" style="margin-bottom: 6px">{{
+        "attachedFiles.limit" | translate
+      }}</span>
+      <span class="subtitle" style="margin-top: 6px"
+        >{{ "limitSizeImg" | translate }}. {{ "supportImg" | translate }}</span
+      >
+      <az-upload-img
+        [imageSrc]="imageSrc"
+        [form]="form"
+        [limit]="10"
+        (fileSize)="checkFileSize($event)"
+        (deletedFileSize)="deletedFileSize($event)"
+        (deletedImage)="imgForDelete($event)"
+      ></az-upload-img>
+      <nz-alert
+        *ngIf="blockedAddImg"
+        nzType="warning"
+        [nzMessage]="'limitSizeImg' | translate"
+        nzShowIcon
+      ></nz-alert>
+    </div>
+
+    <!-- ATTACH files -->
+    <div class="info__bottom">
+      <div class="info__name about">
+        <span>{{ "attachedFiles" | translate }}</span>
+      </div>
+      <span class="subtitle" style="margin-bottom: 6px">{{
+        "attachedFiles.limit" | translate
+      }}</span>
+      <span class="subtitle" style="margin-top: 6px"
+        >{{ "limitSizeFile" | translate }}. {{ "supportDocument" | translate }}
+      </span>
+      <az-upload-img
+        [docsSrc]="docsSrc"
+        [form]="form"
+        [limit]="10"
+        [uploadImage]="false"
+        (fileSize)="checkDocFileSize($event)"
+        (deletedFile)="fileForDelete($event)"
+        (deletedDocFileSize)="deletedDocFileSize($event)"
+      ></az-upload-img>
+      <nz-alert
+        *ngIf="blockedAddFiles"
+        nzType="warning"
+        [nzMessage]="'limitSizeImg' | translate"
+        nzShowIcon
+      ></nz-alert>
+    </div>
+  </div>
+</form>

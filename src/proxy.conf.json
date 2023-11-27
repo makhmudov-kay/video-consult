@@ -1,0 +1,25 @@
+{
+  "/api/v1/*": {
+    "target": "https://aztester.uz/api-consultant",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api-core-for-proxy": {
+    "target": "https://aztester.uz",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api-core-for-proxy": "/api-core/api/v1"
+    }
+  },
+  "/api-core/": {
+    "target": "https://agroid.aztester.uz",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/socket.io": {
+    "target": "https://aztester.uz",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

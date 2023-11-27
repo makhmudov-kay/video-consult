@@ -1,0 +1,128 @@
+.consultant {
+  // padding-bottom: 80px;
+  background: #282828;
+
+  @media (max-width: 991px) {
+    padding-bottom: 36px;
+  }
+
+  @media (max-width: 575px) {
+    padding-bottom: 20px;
+  }
+
+  &__block {
+    &__top {
+      border-radius: 0 0 32px 32px;
+      overflow: hidden;
+      background: #fff;
+
+      @media (max-width: 575px) {
+        border-radius: 0;
+      }
+    }
+
+    &__middle {
+      border-radius: 32px;
+      margin: 8px 0;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    &__bottom {
+      border-radius: 32px 32px 0 0;
+      overflow: hidden;
+      background: #fff;
+      padding-bottom: 80px;
+    }
+  }
+}
+
+.empty {
+  padding: 80px 0;
+
+  @media (max-width: 991px) {
+    padding: 36px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 20px;
+  }
+
+  &__text {
+    font-size: 20px;
+    line-height: 25px;
+    font-family: Agrofont-Regular;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .feedback__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-size: 32px;
+      line-height: 40px;
+      margin-bottom: 0;
+
+      @media (max-width: 575px) {
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+
+    &__raiting {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 32px;
+        line-height: 40px;
+        font-family: Agrofont-Medium;
+
+        @media (max-width: 575px) {
+          font-size: 24px;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+}
+
+.consultant__description__btn {
+  display: none;
+
+  @media (max-width: 575px) {
+    display: block;
+    margin-top: -1px;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    z-index: 10;
+    bottom: 0;
+    background: #fff;
+    border-radius: 0 0 32px 32px;
+    padding: 0 15px 20px 15px;
+  }
+
+  button {
+    padding: 16px 0;
+    border-radius: 8px;
+    background: #2b4cff;
+    width: 100%;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 26px;
+    font-family: Mont-Bold;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background: lighten(#2b4cff, 10%);
+    }
+    &:active {
+      background: darken(#2b4cff, 10%);
+    }
+  }
+}

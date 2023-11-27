@@ -1,0 +1,140 @@
+<div class="container" (window:resize)="onResize($event)">
+  <div class="support">
+    <h1 class="support__title">{{ "support" | translate }}</h1>
+    <h4 class="support__subtitle">{{ "gladToHelp" | translate }}</h4>
+    <p class="support__text">
+      {{ "support.text" | translate }}
+      <a href="tel:998995328168">+998 (78) 150-00-88</a>
+    </p>
+
+    <div class="chat">
+      <div class="chat__info">
+        <div class="chat__info__avatar">
+          <nz-avatar [nzSize]="size" nzIcon="user"></nz-avatar>
+        </div>
+        <p class="chat__info__text">{{ "supportService" | translate }}</p>
+      </div>
+      <div class="chat__window">
+        <ul
+          class="chat__window__list message-list"
+          #scrollMe
+          (scroll)="onScrollEvent($event)"
+          [ngClass]="{ empty: messagesByDate.size === 0 }"
+        >
+          <ng-container *ngFor="let key of messagesByDate.keys()">
+            <div class="message__date">
+              {{ key | formatDateByLang | async }}
+            </div>
+            <li
+              class="chat__window__item"
+              *ngFor="let message of messagesByDate.get(key)"
+              [ngClass]="{ isOwner: message.owner }"
+            >
+              <ng-container *ngIf="message.file as image; else text">
+                <nz-spin
+                  [nzSpinning]="message.isLoading"
+                  *ngIf="!message.deleted"
+                >
+                  <div class="img-message">
+                    <img
+                      [src]="image"
+                      azHandleImgError="./assets/images/default-placeholder.png"
+                      (click)="viewImage(image)"
+                    />
+                  </div>
+                  <div class="image__error" *ngIf="message.hasError">
+                    <button
+                      nz-button
+                      nzType="default"
+                      nzShape="circle"
+                      nzSize="small"
+                      (click)="reUpload(message)"
+                    >
+                      <i nz-icon nzType="reload" nzTheme="outline"></i>
+                    </button>
+                    <button
+                      nz-button
+                      nzType="default"
+                      nzShape="circle"
+                      nzSize="small"
+                      (click)="cancelUploadingImage(message)"
+                    >
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </button>
+                  </div>
+                </nz-spin>
+              </ng-container>
+              <ng-template #text>
+                <p>{{ message.text }}</p>
+                <span>{{ message.created_at | date : "HH:mm" }}</span>
+              </ng-template>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <div class="chat__input">
+        <div class="chat__input__attach">
+          <button
+            nz-button
+            (click)="uploadImage.click()"
+            nzType="default"
+            class="attach-btn"
+          >
+            <az-svg-attach class="d-flex"></az-svg-attach>
+          </button>
+          <input
+            hidden
+            #uploadImage
+            type="file"
+            (change)="handleImages($event)"
+            multiple="false"
+            accept="image/png, image/jpeg"
+          />
+        </div>
+        <div class="chat__input__textarea">
+          <textarea
+            nz-input
+            [placeholder]="'text' | translate"
+            [nzAutosize]="{ minRows: 1, maxRows: 3 }"
+            [(ngModel)]="message"
+            [ngModelOptions]="{ standalone: true }"
+            (keydown.enter)="handleSendMessageByEnter($event)"
+            nzBorderless
+          ></textarea>
+        </div>
+        <div class="chat__input__send">
+          <button class="send-btn" (click)="handleSendMessage(message)">
+            <svg
+              width="19"
+              height="20"
+              viewBox="0 0 19 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.4151 10.0069L3.27773 10.0502L1.55374 2.56818C1.30685 1.49606 2.4458 0.631482 3.40992 1.1593L17.5391 8.88751C18.4224 9.37039 18.4168 10.6421 17.5286 11.1245L3.37424 18.8124C2.40572 19.3379 1.27619 18.4753 1.52983 17.4042L3.27487 10.0487"
+                stroke="url(#paint0_linear_1073_14847)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_1073_14847"
+                  x1="1.49365"
+                  y1="9.98536"
+                  x2="18.1982"
+                  y2="9.98536"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#396AFC" />
+                  <stop offset="1" stop-color="#2948FF" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

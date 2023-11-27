@@ -1,0 +1,44 @@
+<div *ngIf="checkHasResume$ | async as resumeCount">
+  <div class="become-consultant">
+    <div class="container">
+      <div class="become-consultant__top">
+        <div class="become-consultant__top__title">
+          <h4>{{ "howBecomeConsultant" | translate }}</h4>
+          <button
+            *ngIf="resumeCount && resumeCount.count < 3; else limited"
+            routerLink="./resume"
+          >
+            {{ "fillResume" | translate }}
+          </button>
+          <ng-template #limited>
+            <button (click)="isVisible = true">
+              {{ "fillResume" | translate }}
+            </button>
+          </ng-template>
+        </div>
+        <div class="become-consultant__top__subtitle">
+          <p>{{ "findConsultant.people" | translate }}</p>
+        </div>
+      </div>
+    </div>
+    <az-banner></az-banner>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="null"
+  nzClosable
+>
+  <ng-container *nzModalContent>
+    <div class="resume-limit">
+      <h4 class="resume-limit__title">{{ "resume.limitTitle" | translate }}</h4>
+      <div class="resume-limit__text">
+        <p>
+          {{ "resume.limitText" | translate }}
+        </p>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>

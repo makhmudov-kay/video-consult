@@ -1,0 +1,29 @@
+<div
+  class="notification-wrapper"
+  [ngClass]="{ border: !isLast }"
+>
+  <div class="notification-wrapper__left">
+    <span class="notification-wrapper__left__time">{{
+      notification.created_at | formatDateFns | async
+    }}</span>
+    <span
+      class="notification-wrapper__left__unread"
+      *ngIf="!notification.showed"
+      ><span class="notification-wrapper__left__unread__badge"></span>
+      {{ "unreaded" | translate }}</span
+    >
+    <div class="notification-wrapper__left__title">
+      {{ "applicationBlocked" | translate }}
+    </div>
+    <p class="notification-wrapper__left__text">
+      <ng-container>
+        {{ notification.data.reason_inactive }}
+      </ng-container>
+    </p>
+  </div>
+  <div class="notification-wrapper__right">
+    <span nz-icon>
+      <img src="./assets/images/icons/Close_round_fill.svg" alt="icon" />
+    </span>
+  </div>
+</div>

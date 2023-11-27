@@ -1,0 +1,82 @@
+<div class="chat">
+  <div class="consultant-chat">
+    <div class="search-app__search">
+      <div class="consultant-chat__search">
+        <az-search-input (searchText)="searchText($event)"></az-search-input>
+      </div>
+      <button class="search-app__search__btn" (click)="open()">
+        <img src="./assets/images/icons/filter.svg" alt="icon" />
+      </button>
+    </div>
+
+    <div class="consultant-chat__messages mb-1">
+      <ul
+        class="consultant-chat__messages__list"
+        *ngIf="consultantChatList; else skeleton"
+      >
+        <ng-container *ngIf="consultantChatList.length; else empty">
+          <li
+            *ngFor="let chat of consultantChatList"
+            [routerLink]="[chat.messages.chat_id]"
+          >
+            <az-chat-item [card]="chat"></az-chat-item>
+          </li>
+        </ng-container>
+        <ng-template #empty>
+          <div class="applications__list__content">
+            <az-empty-application></az-empty-application>
+          </div>
+        </ng-template>
+      </ul>
+      <ng-template #skeleton>
+        <div class="skeleton" *ngFor="let item of [].constructor(3)">
+          <nz-skeleton
+            [nzAvatar]="true"
+            [nzParagraph]="{ rows: 2 }"
+          ></nz-skeleton>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="chat__right">
+    <az-filter
+      *ngIf="categoryList$ | async as categoryList; else filterSkelet"
+      [categoryList]="categoryList"
+      [categoryNull]="categoryNull"
+      [form]="form"
+      (resetInputs)="reset()"
+      (changeStatus)="filterByStatus($event)"
+      (changeResume)="filterByCategory($event)"
+      [clientApplicationRadioOptions]="clientApplicationRadioOptions"
+    ></az-filter>
+
+    <ng-template #filterSkelet>
+      <div class="chat__right__skelet">
+        <nz-skeleton [nzParagraph]="{ rows: 10 }"></nz-skeleton>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- FILTER DRAWER -->
+<!-- <az-drawer
+  [visible]="visible"
+  (closeDrawer)="close($event)"
+  [height]="'75%'"
+  [placement]="'bottom'"
+>
+  <div class="drawer__filter">
+    <div class="drawer__filter__close" (click)="close(false)">
+      <span nz-icon nzType="close" nzTheme="outline"></span>
+    </div>
+    <az-filter
+      *ngIf="categoryList$ | async as categoryList"
+      [categoryList]="categoryList"
+      [categoryNull]="categoryNull"
+      [form]="form"
+      (resetInputs)="reset()"
+      (changeStatus)="filterByStatus($event)"
+      [clientApplicationRadioOptions]="clientApplicationRadioOptions"
+    ></az-filter>
+  </div>
+</az-drawer> -->

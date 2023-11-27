@@ -1,0 +1,72 @@
+<ng-container *ngIf="notification.data.status !== 3; else isActualPrivate">
+  <div
+    class="notification-wrapper"
+    [ngClass]="{ border: !isLast }"
+    (click)="
+      handleNavigateToPrivate({
+        link: notification.link,
+        id: notification.id
+      })
+    "
+  >
+    <div class="notification-wrapper__left">
+      <span class="notification-wrapper__left__time">{{
+        notification.created_at | formatDateFns | async
+      }}</span>
+      <span
+        class="notification-wrapper__left__unread"
+        *ngIf="!notification.showed"
+        ><span class="notification-wrapper__left__unread__badge"></span>
+        {{ "unreaded" | translate }}</span
+      >
+      <div class="notification-wrapper__left__application">
+        <span nz-icon
+          ><img src="./assets/images/icons/Lock_duotone.svg" alt="icon"
+        /></span>
+        {{
+          cancelPrivate
+            ? ("private.cancel.consultant"
+              | translate : { title: notification.text })
+            : ("newPrivateApplication" | translate)
+        }}
+      </div>
+    </div>
+    <div class="notification-wrapper__right">
+      <span nz-icon nzType="right" nzTheme="outline"></span>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #isActualPrivate>
+  <div
+    class="notification-wrapper"
+    [ngClass]="{ border: !isLast }"
+    (click)="
+      handleNavigateToChat({
+        is_consultant: notification.is_consultant,
+        link: notification.link,
+        id: notification.id
+      })
+    "
+  >
+    <div class="notification-wrapper__left">
+      <span class="notification-wrapper__left__time">{{
+        notification.created_at | formatDateFns | async
+      }}</span>
+      <span
+        class="notification-wrapper__left__unread"
+        *ngIf="!notification.showed"
+        ><span class="notification-wrapper__left__unread__badge"></span>
+        {{ "unreaded" | translate }}</span
+      >
+      <div class="notification-wrapper__left__application">
+        {{ "isActual.notification" | translate }}
+      </div>
+    </div>
+    <div class="notification-wrapper__right">
+      <span nz-icon>
+        <img src="./assets/images/icons/Time_duotone_line.svg" alt="icon" />
+      </span>
+    </div>
+  </div>
+</ng-template>

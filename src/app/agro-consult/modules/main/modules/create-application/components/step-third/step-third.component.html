@@ -1,0 +1,51 @@
+<az-step-header
+  [step]="step"
+  [title]="'whatYourQuestion' | translate"
+  [description]="'whatYourQuestions.description' | translate"
+></az-step-header>
+<form nz-form [formGroup]="form">
+  <textarea
+    nz-input
+    class="step__textarea"
+    [placeholder]="'whatYourQuestions.placeholder' | translate"
+    formControlName="description"
+    nzSize="large"
+    [nzAutosize]="{ minRows: 5, maxRows: 5 }"
+    [nzStatus]="
+      (form.get('description')?.touched && form.get('description')?.invalid) ||
+      validation
+        ? 'error'
+        : ''
+    "
+    (ngModelChange)="changeValidationStatus($event)"
+  ></textarea>
+  <div
+    class="validation"
+    *ngIf="
+      (form.get('description')?.touched && form.get('description')?.invalid) ||
+      validation
+    "
+  >
+    <small>
+      {{ "describeYourProblem" | translate }}
+    </small>
+  </div>
+</form>
+<p class="step__subtitle">
+  {{ "downloadYourFiles" | translate }}
+</p>
+<az-upload-img
+  [imageSrc]="imageSrc"
+  (fileSize)="checkFileSize($event)"
+  (deletedFileSize)="deletedFileSize($event)"
+  [form]="form"
+  [limit]="5"
+></az-upload-img>
+<div>
+  <nz-alert
+    *ngIf="blockedAddImg"
+    nzType="warning"
+    [nzMessage]="'limitSizeImg' | translate"
+    nzShowIcon
+  ></nz-alert>
+</div>

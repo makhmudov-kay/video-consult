@@ -1,0 +1,19 @@
+<ng-container (window:resize)="onResize($event)">
+  <az-landing-banner
+    (guideVisible)="handleGuideVisible($event)"
+  ></az-landing-banner>
+  <!-- <az-guide></az-guide> -->
+  <az-top-consultants></az-top-consultants>
+  <az-reviews></az-reviews>
+  <ng-container *ngIf="faqsData$ | async as faq">
+    <az-f-a-q [faqsData]="faq"></az-f-a-q
+  ></ng-container>
+
+  <az-useability-guide-modal
+    [(isVisibleGuide)]="isVisibleGuide"
+    [(visibleGuideDrawer)]="visibleGuideDrawer"
+    [isVisibleModal]="isVisibleModal"
+    [userInfo]="userInfo"
+    [checkResume]="checkResume"
+  ></az-useability-guide-modal>
+</ng-container>

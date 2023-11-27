@@ -1,0 +1,35 @@
+<div class="user border-top" *ngIf="userInfo">
+  <nz-avatar
+    [nzSize]="36"
+    [nzSrc]="
+      isClient ? userInfo.profile.avatar : userInfo.application.user.avatar
+    "
+    nzIcon="user"
+  ></nz-avatar>
+  <div class="user__info">
+    <!-- CHECK RESUME ID FROM DATA -->
+    <div
+      class="user__info__name"
+      [ngClass]="{ consultant: isClient }"
+      (click)="checkResume(userInfo.profile.resume_id)"
+    >
+      <div style="overflow: hidden; text-overflow: ellipsis">
+        {{
+          isClient
+            ? userInfo.profile.fullname
+            : userInfo.application.user.fullname
+        }}
+      </div>
+    </div>
+    <div
+      class="user__info__status"
+      [ngClass]="userInfo.profile.is_online ? 'green' : 'grey'"
+    >
+      {{
+        userInfo.profile.is_online
+          ? ("online" | translate)
+          : ("offline" | translate)
+      }}
+    </div>
+  </div>
+</div>

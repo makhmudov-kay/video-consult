@@ -1,0 +1,74 @@
+.step {
+  &__radio {
+    display: flex;
+    flex-direction: column;
+    margin-top: 38px;
+
+    &__label {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      line-height: 31px;
+      color: #282828;
+      font-family: Agrofont-Regular;
+
+      input {
+        appearance: none;
+      }
+
+      .check-custom-mark {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f5f7;
+        margin-right: 12px;
+
+        span {
+          display: none;
+        }
+      }
+
+      input:checked ~ .check-custom-mark {
+        border: 1px solid #f5f5f7;
+        background: #fff;
+
+        span {
+          display: block;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #325bfe;
+        }
+      }
+    }
+  }
+
+  &__date {
+    margin-top: 24px;
+
+    &__text {
+      font-size: 24px;
+      line-height: 30px;
+      color: #282828;
+      font-family: Agrofont-Regular;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+nz-date-picker {
+  padding: 14px 16px;
+
+  width: 100%;
+  background: #f5f5f7;
+  color: #c0c0c0;
+
+  input {
+    font-size: 20px !important;
+    line-height: 20px !important;
+    font-family: Agrofont-Regular !important;
+  }
+}

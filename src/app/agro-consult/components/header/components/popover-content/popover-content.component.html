@@ -1,0 +1,40 @@
+<div class="header__user-popover" [ngClass]="isDrawer ? 'is-drawer' : ''">
+  <div [ngClass]="isDrawer ? 'drawer-menu' : ''">
+    <div class="header__user-popover__title">
+      <div class="header__user-popover__avatar">
+        <nz-avatar
+          [nzShape]="'square'"
+          [nzIcon]="'user'"
+          [nzSize]="38"
+          [nzSrc]="(user | async)?.photo"
+        ></nz-avatar>
+      </div>
+      <div class="header__user-popover__info">
+        <div class="header__user-popover__info__name">
+          {{ (user | async)?.l_name }}
+          {{ (user | async)?.f_name }}
+        </div>
+        <div class="header__user-popover__info__logout">
+          <a (click)="logout()">{{ "goOut" | translate }}</a>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isDrawer">
+      <button class="drawer-menu__close" (click)="visibleDrawer.emit()">
+        <span nz-icon nzType="close" nzTheme="outline"></span>
+      </button>
+    </div>
+  </div>
+
+  <nz-divider [ngStyle]="{ margin: isDrawer ? '' : '8px 0' }"></nz-divider>
+  <az-cabinet-logos></az-cabinet-logos>
+  <nz-divider [ngStyle]="{ margin: isDrawer ? '' : '8px 0' }"></nz-divider>
+  <div class="header__user-popover__menu header__menu">
+    <az-popover-menu
+      [isDrawer]="isDrawer"
+      (visiblePopover)="visiblePopover.emit()"
+      (visibleDrawer)="visibleDrawer.emit()"
+    ></az-popover-menu>
+  </div>
+</div>

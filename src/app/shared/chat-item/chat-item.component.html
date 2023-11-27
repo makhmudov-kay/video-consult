@@ -1,0 +1,41 @@
+<div class="chat-card">
+  <h4 class="chat-card__application">{{ card.application.title }}</h4>
+
+  <div class="chat-card__block">
+    <div class="chat-card__user">
+      <nz-avatar
+        [nzSize]="48"
+        nzIcon="user"
+        [nzSrc]="card.profile.avatar"
+      ></nz-avatar>
+      <div class="chat-card__user__info">
+        <div class="chat-card__user__info__name">
+          {{ card.profile.fullname }}
+        </div>
+        <p class="chat-card__user__info__position" *ngIf="isClient">{{ card.profile.position }}</p>
+      </div>
+    </div>
+    <span class="count" *ngIf="card.unread_count">{{ card.unread_count }}</span>
+  </div>
+
+  <div class="chat-card__text">
+    <p nz-typography *ngIf="card.messages.type === 'chat'; else call">
+      {{
+        card.messages.message
+          ? card.messages.message
+          : ("systemMessage" | translate)
+      }}
+    </p>
+    <ng-template #call>
+      <p nz-typography class="d-flex">
+        <az-svg-phone class="d-flex"></az-svg-phone>
+        <span>{{
+          card.messages.owner
+            ? ("outgoingCall" | translate)
+            : ("incomingCall" | translate)
+        }}</span>
+      </p>
+    </ng-template>
+    <span>{{ card.messages.created_at | date : "dd.MM.yyyy" }}</span>
+  </div>
+</div>

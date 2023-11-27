@@ -1,0 +1,84 @@
+<div class="payment" *ngIf="checkPaymentCard$ | async as checkPaymentCard">
+  <div class="payment__info">
+    <div class="payment__info__safe">
+      <span class="logo">
+        <az-svg-zamin-pay></az-svg-zamin-pay>
+      </span>
+      <p class="payment__info__subtitle">
+        {{ "aboutZaminPayShort" | translate }}
+      </p>
+      <p class="payment__info__text">
+        {{ "aboutZaminPay" | translate }}
+      </p>
+      <ng-container *ngIf="checkPaymentCard.active; else addCard">
+        <button (click)="addPaymentCard()" class="payment__info__btn">
+          {{ "moreInformation" | translate }}
+        </button>
+      </ng-container>
+      <ng-template #addCard>
+        <button (click)="addPaymentCard()" class="payment__info__btn-add">
+          {{ "addCard" | translate }}
+        </button>
+      </ng-template>
+    </div>
+
+    <div class="payment__info__transactions">
+      <h4 class="payment__info__title">{{ "lastTranzactions" | translate }}</h4>
+      <ng-container *ngIf="data.data.length > 0; else empty">
+        <div
+          class="payment__info__transactions__desc"
+          *ngFor="let transaction of data.data"
+        >
+          <div class="payment__info__transactions__desc__action">
+            <span class="payment__info__transactions__desc__action__name">{{
+              transaction.title
+            }}</span>
+            <div class="payment__info__right">
+              <span
+                class="payment__info__transactions__desc__action__count sum"
+                [ngClass]="
+                  profileId === transaction.to_profile_id
+                    ? 'profit'
+                    : 'expenditure'
+                "
+                >{{ profileId !== transaction.to_profile_id ? "-" : "+"
+                }}{{
+                  profileId !== transaction.to_profile_id ? (transaction.amount | azCurrency : true : true : true) : (transaction?.detail?.amount_credit
+                    | azCurrency : true : true : true)
+                }}
+              </span>
+              <button
+                nz-tooltip
+                [nzTooltipTitle]="'downloadCheque' | translate"
+                nz-button
+                nzType="default"
+                nzSize="large"
+                (click)="handleDownloadBtn(transaction)"
+                [disabled]="isDisableChequeBtn"
+              >
+                <span nz-icon nzType="download" nzTheme="outline"></span>
+              </button>
+            </div>
+          </div>
+          <div class="payment__info__transactions__desc__time">
+            <span class="payment__info__transactions__desc__time__text">{{
+              transaction.created_at | formatDateFns | async
+            }}</span>
+          </div>
+        </div>
+        <button
+          class="payment__info__transactions__btn"
+          (click)="viewPaymentsHistory()"
+        >
+          {{ "seeAll" | translate }}
+        </button>
+      </ng-container>
+      <ng-template #empty>
+        <nz-empty
+          nzNotFoundImage="simple"
+          [nzNotFoundContent]="'emptyTransactionHistory' | translate"
+        ></nz-empty>
+      </ng-template>
+    </div>
+  </div>
+</div>

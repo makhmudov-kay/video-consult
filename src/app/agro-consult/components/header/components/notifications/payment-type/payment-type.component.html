@@ -1,0 +1,41 @@
+<div
+  class="notification-wrapper"
+  [ngClass]="{ border: !isLast }"
+  (click)="
+    handleNavigateToChat({
+      is_consultant: !notification.is_consultant,
+      link: notification.link,
+      id: notification.id
+    })
+  "
+>
+  <div class="notification-wrapper__left">
+    <span class="notification-wrapper__left__time">{{
+      notification.created_at | formatDateFns | async
+    }}</span>
+    <span
+      class="notification-wrapper__left__unread"
+      *ngIf="!notification.showed"
+      ><span class="notification-wrapper__left__unread__badge"></span>
+      {{ "unreaded" | translate }}</span
+    >
+    <div class="notification-wrapper__left__message">
+      {{ notification.text }}
+    </div>
+    <span class="notification-wrapper__left__amount sum">
+      {{
+        notification.data.detail.amount_credit
+          | azCurrency : true : true : true
+      }}</span
+    >
+    <div class="notification-wrapper__left__paid">
+      <div>
+        <img src="./assets/images/icons/card-tick.svg" alt="icon" />
+      </div>
+      <p>{{ "applicationWasPaid" | translate }}</p>
+    </div>
+  </div>
+  <div class="notification-wrapper__right">
+    <span nz-icon nzType="right" nzTheme="outline"></span>
+  </div>
+</div>

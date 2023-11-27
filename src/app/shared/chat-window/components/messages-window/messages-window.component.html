@@ -1,0 +1,429 @@
+<div class="chat__content" *ngIf="listenApplication; else skelet">
+  <div class="chat__content__window">
+    <ul class="chat__content__window__list" #scrollContainer>
+      <ng-container *ngFor="let date of messagesByDate.keys()">
+        <div class="message__date">{{ date | formatDateByLang | async }}</div>
+        <li *ngFor="let message of messagesByDate.get(date)">
+          <div
+            class="chat__content__window__message"
+            [ngClass]="{ owner: message.owner }"
+          >
+            <div class="message-text" *ngIf="message.file || message.message">
+              <span
+                class="chat__content__window__message__title"
+                *ngIf="message.is_price"
+                >{{ "offeredPrice" | translate }}</span
+              >
+              <ng-container *ngIf="message.file; else text">
+                <ng-container [ngSwitch]="message.fileType">
+                  <!-- IMAGE -->
+                  <div *ngSwitchCase="'img'">
+                    <span class="image">
+                      <img
+                        nz-image
+                        width="200px"
+                        height="200px"
+                        [nzSrc]="message.file"
+                        alt="file"
+                      />
+                    </span>
+                  </div>
+
+                  <!-- VIDEO -->
+                  <div *ngSwitchCase="'video'">
+                    <span class="video-tag">
+                      <video [src]="message.file" controls></video>
+                    </span>
+                  </div>
+
+                  <!-- DOCUMENT -->
+                  <div *ngSwitchCase="'doc'">
+                    <span class="document">
+                      <az-svg-attach-doc></az-svg-attach-doc>
+                      <div style="overflow: hidden; text-overflow: ellipsis">
+                        <a
+                          [href]="message.file"
+                          class="ellipsis"
+                          target="_blank"
+                          >{{ message.file_original_name }}</a
+                        >
+                      </div>
+                    </span>
+                  </div>
+                </ng-container>
+              </ng-container>
+              <ng-template #text>
+                <div style="word-wrap: break-word; word-break: break-all">
+                  <span
+                    class="chat__content__window__message__text text"
+                    *ngIf="!checkOnLink(message.message)"
+                    >{{
+                      message.is_price
+                        ? message.message > 0
+                          ? message.message
+                          : ("free" | translate)
+                        : message.message
+                    }}
+
+                    {{
+                      message.is_price && message.message > 0 ? "сум" : ""
+                    }}</span
+                  >
+                  <a
+                    target="_blank"
+                    [href]="message.message"
+                    *ngIf="checkOnLink(message.message)"
+                  >
+                    {{ message.message }}
+                  </a>
+                </div>
+              </ng-template>
+              <span class="time">{{
+                message.created_at | date : "HH:mm"
+              }}</span>
+            </div>
+
+            <div class="message-call" *ngIf="message.type === 'call'">
+              <!-- Не решили проблему со статусом звонков поэтому однотипное сообщение выведем -->
+              <div class="message-call-info">
+                <az-svg-phone class="d-flex"></az-svg-phone>
+                <div class="message-call-text">
+                  <h5>
+                    {{
+                      profileId === message.from_profile_id
+                        ? ("outgoingCall" | translate)
+                        : ("incomingCall" | translate)
+                    }}
+                  </h5>
+
+                  <p *ngIf="message.call_duration; else missedCall">
+                    {{ "duration" | translate }}
+                    {{ message.call_duration | convertTimeFormat }}
+                    {{ message.call_duration < 60 ? "сек" : "мин" }}
+                  </p>
+
+                  <ng-template #missedCall>
+                    <p>{{ "notRecievedCall" | translate }}</p>
+                  </ng-template>
+                </div>
+              </div>
+              <!--  -->
+
+              <span class="time">{{
+                message.created_at | date : "HH:mm"
+              }}</span>
+            </div>
+          </div>
+
+          <!-- ACTIONS GUIDE -->
+          <az-action-guide
+            [message]="message"
+            [isClient]="isClient"
+            [profileId]="profileId"
+            [joinedUser]="joinedUser"
+            (handleVideoCall)="handleVideoCall.emit()"
+            (handleInvite)="inviteToVideoCall()"
+            [status]="listenApplication.status"
+            [isStreaming]="isStreaming"
+            [isFreeApplication]="applicationInfo.application.is_free"
+            [isOnline]="applicationInfo.profile.is_online"
+          ></az-action-guide>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <div>
+    <!-- CLIENT ACTIONS -->
+    <ng-container *ngIf="isClient; else consultant">
+      <div [ngSwitch]="listenApplication.status">
+        <div *ngSwitchCase="1">
+          <div class="chat__content__options">
+            <button
+              class="chat__content__options__btn"
+              (click)="acceptOffer()"
+              *ngIf="
+                listenApplication.from_profile_id !== profileId &&
+                listenApplication.type === 'offer'
+              "
+            >
+              {{ "accept" | translate }}
+            </button>
+            <button
+              class="chat__content__options__btn"
+              (click)="cancelResponse()"
+            >
+              {{ "deny" | translate }}
+              <!-- application_id and consultant_profile_id for another API -->
+            </button>
+            <!-- <button
+              class="chat__content__options__btn"
+              (click)="offerPrice()"
+              *ngIf="listenApplication.status === 1"
+            >
+              {{ "offerYourPrice" | translate }}
+            </button> -->
+          </div>
+        </div>
+        <div *ngSwitchCase="7">
+          <div class="chat__content__options">
+            <!-- <button class="chat__content__options__btn" (click)="handleToPay()">
+              {{ "pay" | translate }}
+            </button> -->
+            <button
+              class="chat__content__options__btn"
+              (click)="cancelResponse(true)"
+            >
+              {{ "deny" | translate }}
+              <!-- application_id and consultant_profile_id for another API -->
+            </button>
+          </div>
+        </div>
+        <div *ngSwitchCase="2">
+          <div class="chat__content__options">
+            <button
+              class="chat__content__options__btn"
+              (click)="openConfirmModal()"
+            >
+              {{ "toComplete" | translate }}
+            </button>
+          </div>
+        </div>
+        <!-- ============================================ -->
+        <div *ngSwitchCase="3">
+          <button
+            class="chat__content__options__btn"
+            (click)="isActual(true)"
+            *ngIf="
+              listenApplication.from_profile_id !== profileId &&
+              listenApplication.type === 'is_actual'
+            "
+          >
+            {{ "isActual.yes" | translate }}
+          </button>
+          <button
+            class="chat__content__options__btn"
+            (click)="isActual()"
+            *ngIf="
+              listenApplication.from_profile_id !== profileId &&
+              listenApplication.type === 'is_actual'
+            "
+          >
+            {{ "isActual.no" | translate }}
+          </button>
+        </div>
+        <!-- ============================================ -->
+      </div>
+    </ng-container>
+    <!-- CONSULTANT ACTIONS -->
+    <ng-template #consultant>
+      <div [ngSwitch]="listenApplication.status">
+        <div *ngSwitchCase="1">
+          <div class="chat__content__options">
+            <button
+              class="chat__content__options__btn"
+              (click)="acceptOffer(true)"
+              *ngIf="
+                listenApplication.from_profile_id !== profileId &&
+                listenApplication.type === 'offer'
+              "
+            >
+              {{ "accept" | translate }}
+            </button>
+            <button
+              class="chat__content__options__btn"
+              (click)="cancelResponse()"
+              *ngIf="
+                listenApplication.from_profile_id !== profileId &&
+                listenApplication.type === 'offer'
+              "
+            >
+              {{ "deny" | translate }}
+            </button>
+            <!-- <button
+              class="chat__content__options__btn"
+              (click)="offerPrice()"
+              *ngIf="listenApplication.status === 1 && lastPrice !== 0"
+            >
+              {{ "offerYourPrice" | translate }}
+            </button> -->
+          </div>
+        </div>
+        <div *ngSwitchCase="7">
+          <div class="chat__content__options">
+            <button
+              class="chat__content__options__btn"
+              (click)="cancelResponse()"
+            >
+              {{ "canceledConsultation" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-container *ngIf="listenApplication.status !== 2; else textArea">
+    <div *ngIf="listenApplication.status === 4">
+      <div class="completed">
+        <az-svg-accept class="d-flex"></az-svg-accept>
+        <span>{{ "consultationCompleted" | translate }}</span>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="listenApplication.status === 3"></div> -->
+
+    <div *ngIf="listenApplication.status === 6">
+      <div
+        *ngIf="
+          listenApplication.from_profile_id == consultantId;
+          else consultantCanceled
+        "
+      >
+        <ng-container
+          *ngIf="listenApplication.from_profile_id == profileId; else client"
+        >
+          <div class="response-cancel">{{ "canceledConsult" | translate }}</div>
+        </ng-container>
+        <ng-template #client>
+          <div class="response-cancel">
+            {{ "consultantCanceled" | translate }}
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-template #consultantCanceled>
+        <ng-container
+          *ngIf="listenApplication.from_profile_id !== profileId; else client"
+        >
+          <div class="response-cancel">{{ "canceledConsult" | translate }}</div>
+        </ng-container>
+        <ng-template #client>
+          <div class="response-cancel">
+            {{ "canceledConsultation.you" | translate }}
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+  </ng-container>
+
+  <ng-template #textArea>
+    <form [formGroup]="form" *ngIf="listenApplication.status == 2">
+      <div class="chat__content__textarea">
+        <div class="chat__content__textarea__addicon">
+          <button class="attach-btn" (click)="openAttachModal()">
+            <span nz-icon nzType="plus" nzTheme="outline"></span>
+          </button>
+        </div>
+
+        <div class="chat__content__textarea__input">
+          <textarea
+            nz-input
+            [placeholder]="'toWrite' | translate"
+            formControlName="message"
+            nzBorderless
+            [nzAutosize]="{ minRows: 1, maxRows: 3 }"
+            (keydown.enter)="sendMessageByEnter($event)"
+          ></textarea>
+        </div>
+        <div class="chat__content__textarea__send">
+          <button (click)="sendMessage()">
+            <az-svg-send class="d-flex"></az-svg-send>
+          </button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</div>
+
+<ng-template #skelet>
+  <div class="skeleton">
+    <content-loader
+      viewBox="0 0 972 435"
+      [speed]="2"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
+    >
+      <svg:rect x="13" y="42" rx="8" ry="8" width="156" height="45" />
+      <svg:rect x="14" y="109" rx="8" ry="8" width="260" height="66" />
+      <svg:rect x="696" y="194" rx="8" ry="8" width="276" height="49" />
+      <svg:rect x="661" y="260" rx="8" ry="8" width="311" height="43" />
+      <svg:rect x="17" y="367" rx="25" ry="25" width="150" height="50" />
+      <svg:rect x="185" y="367" rx="25" ry="25" width="150" height="50" />
+      <svg:rect x="354" y="367" rx="25" ry="25" width="150" height="50" />
+    </content-loader>
+  </div>
+</ng-template>
+
+<az-offer-modal
+  [isModal]="isModal"
+  [isVisibleModal]="isVisibleModal"
+  (handleCancelModal)="handleCancel()"
+  (handleSendOffer)="sendOffer()"
+  [form]="form"
+></az-offer-modal>
+
+<!-- MODAL ATTACH -->
+<az-attach-files-content
+  [isVisibleAccept]="isVisibleAttachModal"
+  (closeModal)="closeAttachFileModal()"
+  [form]="form"
+  [id]="id"
+  (addMessage)="addMessage($event)"
+></az-attach-files-content>
+
+<!-- COMPLETE CONFIRM -->
+<az-confirm-complete
+  [(isVisibleConfirm)]="isVisibleConfirm"
+  (confirmComplete)="openCompleteModal()"
+  [isModal]="isModal"
+></az-confirm-complete>
+
+<!-- COMPLETE MODAL -->
+<az-complete-modal
+  [(isVisibleComplete)]="isVisibleComplete"
+  [resumeId]="resumeId"
+  (completeApplication)="completeApplication()"
+></az-complete-modal>
+
+<!-- PAYMENT MODAL -->
+<az-payment-modal></az-payment-modal>
+
+<!-- Pay -->
+<nz-modal
+  [(nzVisible)]="isVisiblePaymentModal"
+  (nzOnCancel)="closePaymentModal()"
+  (nzOnOk)="navigateToAgroPay(applicationInfo)"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <div class="payment-modal">
+      <div class="payment__title">
+        <az-svg-zamin-pay></az-svg-zamin-pay>
+        <p class="payment__text">
+          {{ "aboutZaminPay" | translate }}
+        </p>
+      </div>
+      <div class="payment__reciever">
+        <span class="payment__subtitle">{{ "receiver" | translate }}</span>
+        <div class="payment__reciever__user">
+          <nz-avatar
+            [nzSize]="24"
+            nzIcon="user"
+            [nzSrc]="applicationInfo.profile.avatar"
+          ></nz-avatar>
+          <span>{{ applicationInfo.profile.fullname }}</span>
+        </div>
+      </div>
+      <div class="payment__reciever">
+        <span class="payment__subtitle">{{ "sumOfTransfer" | translate }}</span>
+        <p class="payment__price">{{ lastPrice | number }} сум</p>
+      </div>
+      <div class="payment__btn">
+        <button (click)="navigateToAgroPay(applicationInfo)">
+          {{ "pay" | translate }}
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>

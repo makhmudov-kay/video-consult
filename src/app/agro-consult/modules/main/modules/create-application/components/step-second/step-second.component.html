@@ -1,0 +1,16 @@
+<az-step-header
+  [step]="step"
+  [title]="'whichCategory' | translate"
+  [description]="'whichCategory.description' | translate"
+></az-step-header>
+<az-category-list
+  [customClassName]="'application'"
+  [isRadioBtn]="true"
+  [selectedCategory]="form.controls['category_id'].value"
+  (categoryId)="setCategory($event)"
+  [consultantResume]="consultantResume"
+  [isCreateApplication]="true"
+></az-category-list>
+<div class="validation" *ngIf="validation">
+  <small> {{ "chooseCategory.error" | translate }} </small>
+</div>

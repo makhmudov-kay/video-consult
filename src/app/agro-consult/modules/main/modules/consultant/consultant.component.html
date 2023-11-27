@@ -1,0 +1,56 @@
+<div class="consultant" *ngIf="consultantInfo$ | async as consultantInfo">
+  <div class="consultant__block__top">
+    <div class="container content-wrapper">
+      <az-consultant-about
+        [consultantInfo]="consultantInfo"
+        [profileId]="profileId"
+      ></az-consultant-about>
+      <az-consultant-description
+        [profileId]="profileId"
+        [consultantInfo]="consultantInfo"
+      ></az-consultant-description>
+      <ng-container *ngIf="consultantInfo.files">
+        <az-attached-files
+          [consultantInfo]="consultantInfo"
+        ></az-attached-files>
+      </ng-container>
+    </div>
+  </div>
+
+  <div
+    class="consultant__description__btn"
+    *ngIf="profileId !== consultantInfo.profile_id"
+  >
+    <button [routerLink]="['../../create-application', consultantInfo.id]">
+      {{ "submitApplication" | translate }}
+    </button>
+  </div>
+
+  <div class="consultant__block__middle">
+    <div class="container">
+      <ng-container *ngIf="consultantInfo.reviews.length; else empty">
+        <az-feedbacks [consultantInfo]="consultantInfo"></az-feedbacks>
+      </ng-container>
+
+      <ng-template #empty>
+        <div class="empty">
+          <div class="feedback__title">
+            <h4 class="title">{{ "responds" | translate }}</h4>
+            <div class="feedback__title__raiting">
+              <img src="./assets/images/star-feed.svg" alt="icon" />
+            </div>
+          </div>
+          <h4 class="empty__text">{{ "respond.empty" | translate }}</h4>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="consultant__block__bottom">
+    <div class="container">
+      <az-similar-consultant
+        [categoryId]="consultantInfo.category_id"
+      ></az-similar-consultant>
+    </div>
+  </div>
+</div>

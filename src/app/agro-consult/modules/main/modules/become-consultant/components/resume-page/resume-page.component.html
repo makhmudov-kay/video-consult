@@ -1,0 +1,84 @@
+<ng-container *ngIf="hasPaymentCard$ | async as hasPaymentCard">
+  <div class="container" *ngIf="authorizedUser$ | async as user">
+    <az-modal-header
+      *ngIf="current < 2"
+      [title]="resumeTitle"
+    ></az-modal-header>
+    <div class="payment-card" *ngIf="!hasPaymentCard.active">
+      <div class="payment-card__description">
+        <h4>{{ "paymentCard.add.title" | translate }}</h4>
+        <p>
+          {{ "paymentCard.add.description.agroMaslahat" | translate }}
+        </p>
+      </div>
+      <div class="payment-card__btn">
+        <span class="payment-card__btn__logo">
+          <az-svg-zamin-pay></az-svg-zamin-pay>
+        </span>
+        <p>{{ "navigateToPay" | translate }}</p>
+        <button (click)="addPaymentCard()">{{ "addCard" | translate }}</button>
+      </div>
+    </div>
+
+    <ng-container *ngIf="form">
+      <div class="content" *ngIf="current === 0">
+        <!-- <div class="barrier" *ngIf="!hasPaymentCard">
+          <p>
+            {{ "addCard.message" | translate }}
+          </p>
+        </div> -->
+        <h3 class="content__title">{{ "mainInfo" | translate }}</h3>
+        <confirm-user [user]="user"></confirm-user>
+        <az-specialization
+          [form]="form"
+          (selectedValues)="handleSelectedValues($event)"
+        ></az-specialization>
+        <h3 class="content__title">{{ "additionalInfo" | translate }}</h3>
+        <az-additional-info
+          [form]="form"
+          (disableNextBtn)="disableNextBtn($event)"
+          [imageSrc]="imageSrc"
+          [docsSrc]="docsSrc"
+          (deletedImg)="imageForDelete($event)"
+          (deletedFile)="fileForDelete($event)"
+        ></az-additional-info>
+      </div>
+
+      <div class="content" *ngIf="current === 1">
+        <az-resume-view
+          [user]="user"
+          [form]="form"
+          [imageSrc]="imageSrc"
+          [docsSrc]="docsSrc"
+          [selectedValues]="selectedValues"
+        ></az-resume-view>
+      </div>
+
+      <div class="footer">
+        <az-modal-actions
+          [current]="current"
+          (previous)="pre()"
+          (nextStep)="next()"
+          (createResume)="createResume()"
+          [isLoading]="isLoading"
+          [isError]="isError"
+          [resumeCount]="resumeCount"
+          [edit]="id"
+          [disableBtn]="disableBtn"
+        ></az-modal-actions>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzWidth="768px"
+  [nzClosable]="false"
+  class="consultant-modal"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <az-resume-success></az-resume-success>
+  </ng-container>
+</nz-modal>

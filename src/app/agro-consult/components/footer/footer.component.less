@@ -1,0 +1,140 @@
+.footer {
+  background: #282828;
+  padding: 80px 0;
+
+  @media (max-width: 991px) {
+    padding: 48px 0;
+  }
+
+  @media (max-width: 575px) {
+    padding: 24px 0;
+  }
+
+  &__blocks {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 860px) {
+      flex-direction: column;
+
+      .block {
+        margin-bottom: 48px;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &__main {
+    &__logo {
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    &__social {
+      margin: 0;
+      padding: 0;
+      display: flex;
+
+      .social {
+        list-style: none;
+        margin-right: 24px;
+        cursor: pointer;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+
+    &__rights {
+      margin-top: 10px;
+      color: #fff;
+      font-family: Agrofont-Regular;
+      font-size: 14px;
+    }
+  }
+
+  &__apps {
+    @media (max-width: 860px) {
+      display: flex;
+    }
+
+    &__img {
+      margin-bottom: 17px;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+
+        @media (max-width: 860px) {
+          margin-right: 0;
+        }
+      }
+
+      @media (max-width: 860px) {
+        margin-right: 24px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__links {
+    &__title {
+      font-size: 16px;
+      line-height: 20px;
+      font-family: Agrofont-Medium;
+      color: #86898c;
+      margin-bottom: 8px;
+    }
+
+    &__menu {
+      margin: 0;
+      padding: 0;
+
+      &__item {
+        list-style: none;
+        margin-bottom: 8px;
+        cursor: pointer;
+
+        a {
+          font-size: 14px;
+          line-height: 18px;
+          font-family: Mont-Regular;
+          color: #edeff5;
+        }
+      }
+    }
+  }
+
+  &__info {
+    &__call {
+      margin-bottom: 20px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      h5 {
+        font-size: 16px;
+        line-height: 20px;
+        font-family: Agrofont-Bold;
+        color: #86898c;
+      }
+
+      a {
+        font-size: 20px;
+        line-height: 25px;
+        font-family: Agrofont-Bold;
+        color: #00cc69;
+      }
+    }
+  }
+}

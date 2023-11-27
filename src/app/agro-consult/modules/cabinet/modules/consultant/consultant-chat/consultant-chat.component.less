@@ -1,0 +1,136 @@
+@import "../../../../../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+
+.chat {
+  display: flex;
+
+  &__right {
+    flex: 1;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+
+    &__skelet {
+      background: #fff;
+      padding: 20px;
+      min-height: 419px;
+      border-radius: 8px;
+    }
+  }
+}
+
+.consultant-chat {
+  flex: 2;
+  margin-right: 30px;
+
+  @media (max-width: 767px) {
+    margin-right: 0;
+  }
+
+  &__messages {
+    &__list {
+      padding: 0;
+      margin: 0;
+      max-height: 650px;
+      overflow: auto;
+      padding-right: 10px;
+      .scroll();
+
+      @media (max-width: 767px) {
+        max-height: initial;
+        padding-right: 0;
+      }
+
+      li {
+        list-style: none;
+      }
+    }
+  }
+}
+
+.mb-1 {
+  margin-bottom: 16px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+
+  &__info {
+    margin-left: 12px;
+
+    &__name {
+      font-size: 16px;
+      line-height: 16px;
+      font-family: Agrofont-Medium;
+      color: #292d32;
+      margin-bottom: 8px;
+    }
+
+    &__status {
+      font-size: 14px;
+      line-height: 14px;
+      color: #333333;
+      font-family: Agrofont-Regular;
+    }
+  }
+}
+
+.search-app__search {
+  flex-grow: 1;
+  display: flex;
+  margin-bottom: 24px;
+
+  .consultant-chat__search {
+    flex-grow: 1;
+  }
+
+  &__btn {
+    background: #3056ff;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    margin-left: 16px;
+    display: none;
+    width: 40px;
+    height: 40px;
+
+    @media (max-width: 767px) {
+      display: block;
+    }
+
+    @media (max-width: 575px) {
+      margin-left: 8px;
+    }
+  }
+}
+
+.skeleton {
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  max-height: 155px;
+  margin-bottom: 16px;
+}
+
+.drawer__filter {
+  position: relative;
+
+  &__close {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #000;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    z-index: 10;
+
+    span {
+      font-size: 20px;
+    }
+  }
+}

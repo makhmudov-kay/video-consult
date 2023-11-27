@@ -1,0 +1,369 @@
+nz-modal {
+  border-radius: 16px;
+}
+
+.guide-modal {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__title {
+      font-size: 24px;
+      line-height: 30px;
+      font-family: Agrofont-Medium;
+      color: #333333;
+
+      @media (max-width: 767px) {
+        text-align: center;
+        font-size: 20px;
+        line-height: 25px;
+        color: #000000;
+        margin-bottom: 16px;
+      }
+    }
+
+    &__close {
+      button {
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        outline: none;
+        border: none;
+      }
+    }
+  }
+
+  &__middle {
+    display: flex;
+    align-items: center;
+
+    button {
+      border: none;
+      outline: none;
+    }
+  }
+
+  &__type {
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 575px) {
+      gap: 16px;
+    }
+
+    &__card {
+      width: 50%;
+      height: 100%;
+
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        appearance: none;
+      }
+
+      label {
+        border: 1px solid #d9d9d9;
+        padding: 20px 24px;
+        border-radius: 16px;
+        display: block;
+        cursor: pointer;
+        // min-height: 157px;
+
+        // @media (max-width: 991px) {
+        //   min-height: 200px;
+        // }
+
+        // @media (max-width: 767px) {
+        //   min-height: 140px;
+        // }
+
+        @media (max-width: 575px) {
+          min-height: initial;
+          padding: 16px;
+        }
+
+        h5 {
+          font-size: 24px;
+          line-height: 30px;
+          font-family: Agrofont-Medium;
+          color: #11253d;
+          // margin-bottom: 5px;
+
+          @media (max-width: 575px) {
+            text-align: center;
+          }
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 20px;
+          font-family: Agrofont-Regular;
+          color: #86898c;
+          margin-bottom: 0;
+
+          @media (max-width: 575px) {
+            display: none;
+          }
+        }
+      }
+
+      .check-marker {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        span {
+          width: 16px;
+          height: 16px;
+          background: #f4f6ff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          i {
+            font-size: 10px;
+            line-height: 10px;
+            color: #fff;
+            display: none;
+          }
+        }
+      }
+
+      input:checked + label {
+        background: #f4f6ff;
+        border: 1px solid #2a4aff;
+
+        .check-marker {
+          span {
+            background: #2a4aff;
+
+            i {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    min-height: 400px;
+
+    &__step {
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Medium;
+      color: #282828;
+      display: block;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    &__title {
+      font-size: 36px;
+      line-height: 46px;
+      font-family: Agrofont-Medium;
+      color: #282828;
+      margin-bottom: 16px;
+      text-align: center;
+
+      @media (max-width: 767px) {
+        font-size: 24px;
+        line-height: 30px;
+        color: #282828;
+        font-family: Agrofont-Medium;
+      }
+    }
+
+    &__description {
+      max-width: 790px;
+      margin: auto;
+      width: 100%;
+      font-size: 16px;
+      line-height: 20px;
+      font-family: Agrofont-Regular;
+      color: #86898c;
+      text-align: center;
+      margin-bottom: 24px;
+
+      @media (max-width: 767px) {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+
+    &__video {
+      height: 470px;
+      max-width: 780px;
+      width: 100%;
+      margin: auto;
+      border-radius: 16px;
+      overflow: hidden;
+
+      @media (max-width: 767px) {
+        height: 240px;
+      }
+
+      @media (max-width: 575px) {
+        height: 200px;
+      }
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+      }
+    }
+
+    &__btn {
+      position: absolute;
+      top: 63%;
+      transform: translateY(-50%);
+      z-index: 100;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f5f5f7;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &.drawer {
+        top: 16px;
+      }
+
+      &:hover {
+        background: darken(#f5f5f7, 5%);
+      }
+
+      &:active {
+        background: darken(#f5f5f7, 8%);
+      }
+    }
+
+    &__prev {
+      left: 0;
+    }
+
+    &__next {
+      right: 0;
+    }
+  }
+
+  &__action {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+
+    &__btn {
+      width: 100%;
+    }
+
+    button {
+      padding: 17px;
+      border-radius: 8px;
+      background: #f4f6ff;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 16px;
+      font-family: Agrofont-Medium;
+      color: #282828;
+      transition: 0.3s;
+      display: block;
+      width: 100%;
+
+      &:hover {
+        background: darken(#f4f6ff, 5%);
+      }
+
+      &:active {
+        background: darken(#f4f6ff, 8%);
+      }
+
+      &.next {
+        background: #2a4aff;
+        color: #fff;
+
+        &:hover {
+          background: darken(#2a4aff, 5%);
+        }
+
+        &:active {
+          background: darken(#2a4aff, 8%);
+        }
+      }
+    }
+  }
+}
+
+.steps-content {
+  margin-bottom: 24px;
+}
+
+.steps-action {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__btn {
+    display: block;
+    width: 100%;
+    padding: 13px 0;
+    background: #2a4aff;
+    color: #fff;
+    font-size: 16px;
+    line-height: 16px;
+    font-family: Agrofont-Medium;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    &:active {
+      background: lighten(#2a4aff, 3%);
+    }
+
+    span {
+      margin-left: 4px;
+    }
+
+    &.skip {
+      background: #f4f6ff;
+      color: #282828;
+      font-size: 16px;
+      line-height: 16px;
+      font-family: Agrofont-Medium;
+
+      span {
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+.copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #000;
+  margin-bottom: 0;
+}

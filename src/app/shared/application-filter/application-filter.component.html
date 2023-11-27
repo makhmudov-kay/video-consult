@@ -1,0 +1,343 @@
+<ng-container *ngIf="categoryList">
+  <form [formGroup]="form">
+    <div class="filter" *ngIf="!isDrawer; else drawerFilter">
+      <div class="filter__header">
+        <h4>{{ "filters" | translate }}</h4>
+        <button type="reset" (click)="resetForm()">
+          <span>{{ "reset" | translate }}</span>
+        </button>
+      </div>
+
+      <div class="filter__category">
+        <h5 class="filter__title">{{ "resumeService" | translate }}</h5>
+        <div class="filter__category__checkbox">
+          <label class="filter__category__checkbox__label">
+            <input
+              type="radio"
+              [value]="null"
+              (change)="setCountFilter(null)"
+              formControlName="category_id"
+            />
+            <span class="check-custom-mark">
+              <img src="./assets/images/check-filter.png" alt="icon" />
+            </span>
+            <span class="filter__category__checkbox__label__text">{{
+              "all" | translate
+            }}</span>
+          </label>
+          <label
+            *ngFor="let resume of filteredCategoryList"
+            class="filter__category__checkbox__label"
+          >
+            <input
+              type="radio"
+              (change)="setCountFilter(resume.category_id)"
+              [value]="resume.category_id"
+              formControlName="category_id"
+            />
+            <span class="check-custom-mark">
+              <img src="./assets/images/check-filter.png" alt="icon" />
+            </span>
+            <span class="filter__category__checkbox__label__text">{{
+              resume.category
+            }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="filter__price">
+        <h5 class="filter__title">{{ "priceToService" | translate }}</h5>
+        <div class="filter__price__range">
+          <div class="filter__price__range__input min">
+            <input
+              mask="separator"
+              [placeholder]="'from' | translate"
+              formControlName="price_from"
+            />
+          </div>
+          <div class="filter__price__range__input max">
+            <input
+              mask="separator"
+              [placeholder]="'to' | translate"
+              formControlName="price_to"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="filter__additional" *ngIf="filterCount">
+        <h5 class="filter__title">{{ "anotherFilters" | translate }}</h5>
+        <div class="filter__category__checkbox">
+          <div class="filter-with-count">
+            <label class="filter__category__checkbox__label">
+              <input type="checkbox" formControlName="is_free" />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="filter__category__checkbox__label__text">{{
+                "onlyFreeApplication" | translate
+              }}</span>
+            </label>
+            <span class="filter__count">{{ filterCount.free }}</span>
+          </div>
+
+          <div class="filter-with-count">
+            <label class="filter__category__checkbox__label">
+              <input type="checkbox" formControlName="when_date" />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="filter__category__checkbox__label__text">{{
+                "onlyUrgent" | translate
+              }}</span>
+            </label>
+            <span class="filter__count">{{ filterCount.immediately }}</span>
+          </div>
+
+          <div class="filter-with-count">
+            <label class="drawer-filter__category__checkbox__label">
+              <input type="checkbox" formControlName="type" />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="drawer-filter__category__checkbox__label__text">
+                {{ "privateApplications" | translate }}</span
+              >
+            </label>
+            <span class="filter__count">{{ filterCount.private }}</span>
+          </div>
+
+          <!--!!TODO  -->
+          <div class="filter-with-count">
+            <label class="drawer-filter__category__checkbox__label">
+              <input type="checkbox" formControlName="private_expired" />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="drawer-filter__category__checkbox__label__text">
+                {{ "privateApplications.expired" | translate }}</span
+              >
+            </label>
+            <span class="filter__count">{{ filterCount.private_archive }}</span>
+          </div>
+          <!-- ========= -->
+
+          <div class="filter-with-count" *ngIf="!isMyApplication">
+            <label class="filter__category__checkbox__label">
+              <input type="checkbox" formControlName="response_status" />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="filter__category__checkbox__label__text">{{
+                "youResponded" | translate
+              }}</span>
+            </label>
+            <span class="filter__count">{{ filterCount.response }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter__category radio-status" *ngIf="myOrderApplication">
+        <h5 class="filter__title">{{ "status" | translate }}</h5>
+        <div class="filter__category__checkbox">
+          <label
+            *ngFor="let radio of myOrderApplication"
+            class="filter__category__checkbox__label"
+          >
+            <input
+              type="radio"
+              [value]="radio.value"
+              formControlName="status"
+            />
+            <span class="check-custom-mark">
+              <img src="./assets/images/check-filter.png" alt="icon" />
+            </span>
+            <span class="filter__category__checkbox__label__text">{{
+              radio.label | translate
+            }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="filter__btn">
+        <button (click)="submit()">{{ "search" | translate }}</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- MOBILE VERSION -->
+  <ng-template #drawerFilter>
+    <form [formGroup]="form">
+      <div class="close" (click)="closeDrawer.emit()">
+        <span nz-icon nzType="close" nzTheme="outline"></span>
+      </div>
+      <div class="drawer-filter">
+        <div class="drawer-filter__header">
+          <h4>{{ "filters" | translate }}</h4>
+          <button type="reset" (click)="resetForm()">
+            <span>{{ "reset" | translate }}</span>
+          </button>
+        </div>
+        <div class="drawer-filter__category">
+          <h5 class="drawer-filter__title">
+            {{ "resumeService" | translate }}
+          </h5>
+          <div class="drawer-filter__category__checkbox">
+            <label class="drawer-filter__category__checkbox__label">
+              <input
+                type="radio"
+                [value]="null"
+                formControlName="category_id"
+              />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="drawer-filter__category__checkbox__label__text">{{
+                "all" | translate
+              }}</span>
+            </label>
+            <label
+              class="drawer-filter__category__checkbox__label"
+              *ngFor="let resume of categoryList"
+            >
+              <input
+                type="radio"
+                [value]="resume.category_id"
+                formControlName="category_id"
+              />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="drawer-filter__category__checkbox__label__text">{{
+                resume.category
+              }}</span>
+            </label>
+          </div>
+        </div>
+        <div class="drawer-filter__price">
+          <h5 class="drawer-filter__title">
+            {{ "priceToService" | translate }}
+          </h5>
+          <div class="drawer-filter__price__range">
+            <div class="drawer-filter__price__range__input min">
+              <input
+                type="number"
+                placeholder="От"
+                formControlName="price_from"
+              />
+            </div>
+            <div class="drawer-filter__price__range__input max">
+              <input
+                type="number"
+                placeholder="До"
+                formControlName="price_to"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="drawer-filter__additional" *ngIf="filterCount">
+          <h5 class="drawer-filter__title">
+            {{ "anotherFilters" | translate }}
+          </h5>
+
+          <div class="drawer-filter__category__checkbox">
+            <div class="filter-with-count">
+              <label class="drawer-filter__category__checkbox__label">
+                <input type="checkbox" formControlName="is_free" />
+                <span class="check-custom-mark">
+                  <img src="./assets/images/check-filter.png" alt="icon" />
+                </span>
+                <span class="drawer-filter__category__checkbox__label__text">{{
+                  "onlyFreeApplication" | translate
+                }}</span>
+              </label>
+              <span class="filter__count">{{ filterCount.free }}</span>
+            </div>
+
+            <div class="filter-with-count">
+              <label class="drawer-filter__category__checkbox__label">
+                <input type="checkbox" formControlName="when_date" />
+                <span class="check-custom-mark">
+                  <img src="./assets/images/check-filter.png" alt="icon" />
+                </span>
+                <span class="drawer-filter__category__checkbox__label__text">{{
+                  "onlyUrgent" | translate
+                }}</span>
+              </label>
+              <span class="filter__count">{{ filterCount.immediately }}</span>
+            </div>
+
+            <div class="filter-with-count">
+              <label class="drawer-filter__category__checkbox__label">
+                <input type="checkbox" formControlName="type" />
+                <span class="check-custom-mark">
+                  <img src="./assets/images/check-filter.png" alt="icon" />
+                </span>
+                <span class="drawer-filter__category__checkbox__label__text">
+                  {{ "privateApplications" | translate }}</span
+                >
+              </label>
+              <span class="filter__count">{{ filterCount.private }}</span>
+            </div>
+
+            <!--!!TODO  -->
+            <div class="filter-with-count">
+              <label class="drawer-filter__category__checkbox__label">
+                <input type="checkbox" formControlName="status" />
+                <span class="check-custom-mark">
+                  <img src="./assets/images/check-filter.png" alt="icon" />
+                </span>
+                <span class="drawer-filter__category__checkbox__label__text">
+                  {{ "privateApplications.expired" | translate }}</span
+                >
+              </label>
+              <span class="filter__count">{{
+                filterCount.private_archive
+              }}</span>
+            </div>
+            <!-- ========= -->
+
+            <div class="filter-with-count" *ngIf="!isMyApplication">
+              <label class="filter__category__checkbox__label">
+                <input type="checkbox" formControlName="response_status" />
+                <span class="check-custom-mark">
+                  <img src="./assets/images/check-filter.png" alt="icon" />
+                </span>
+                <span class="filter__category__checkbox__label__text">{{
+                  "youResponded" | translate
+                }}</span>
+              </label>
+              <span class="filter__count">{{ filterCount.response }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter__category radio-status" *ngIf="myOrderApplication">
+          <h5 class="filter__title">{{ "status" | translate }}</h5>
+          <div class="filter__category__checkbox">
+            <label
+              *ngFor="let radio of myOrderApplication"
+              class="filter__category__checkbox__label"
+            >
+              <input
+                type="radio"
+                [value]="radio.value"
+                formControlName="status"
+              />
+              <span class="check-custom-mark">
+                <img src="./assets/images/check-filter.png" alt="icon" />
+              </span>
+              <span class="filter__category__checkbox__label__text">{{
+                radio.label | translate
+              }}</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="drawer-filter__btn finish">
+          <button (click)="submit()">{{ "apply" | translate }}</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</ng-container>

@@ -1,0 +1,201 @@
+@import "../../../../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+
+.support {
+  padding-top: 30px;
+  padding-bottom: 60px;
+  border-top: 2px solid #000;
+
+  &__title {
+    font-size: 32px;
+    line-height: 41px;
+    font-family: Agrofont-Bold;
+    margin-bottom: 24px;
+
+    @media (max-width: 575px) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 24px;
+    line-height: 31px;
+    margin-bottom: 9px;
+    font-family: Agrofont-Medium;
+  }
+
+  &__text {
+    font-size: 18px;
+    line-height: 23px;
+    color: #242533;
+    font-family: Agrofont-Regular;
+    max-width: 850px;
+    width: 100%;
+    margin-bottom: 36px;
+  }
+}
+
+.chat {
+  &__info {
+    display: flex;
+    padding: 20px;
+    background: #282828;
+    border-radius: 8px;
+    align-items: center;
+
+    @media (max-width: 575px) {
+      padding: 10px;
+    }
+
+    &__avatar {
+      display: flex;
+      align-items: center;
+      
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      // overflow: hidden;
+      margin-right: 24px;
+
+      @media (max-width: 575px) {
+        width: 50px;
+        height: 50px;
+        margin-right: 12px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__text {
+      font-size: 24px;
+      line-height: 30px;
+      color: #fff;
+      font-family: Agrofont-Medium;
+
+      @media (max-width: 575px) {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  &__input {
+    background: #edeff5;
+    border-radius: 8px;
+    padding: 21px;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 575px) {
+      padding: 10px;
+    }
+
+    &__attach {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+
+    &__textarea {
+      flex-grow: 1;
+
+      textarea {
+        resize: none;
+      }
+    }
+
+    &__send {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+  }
+
+  &__window {
+    display: flex;
+    align-items: flex-end;
+    padding: 30px 0;
+
+    @media (max-width: 575px) {
+      padding: 10px 0;
+    }
+
+    &__list {
+      height: 400px;
+      margin: 0;
+      padding: 0;
+      flex: 100%;
+      flex-grow: 1;
+      overflow: auto;
+      .scroll();
+
+      &.empty {
+        height: 50px;
+      }
+    }
+
+    &__item {
+      list-style: none;
+      padding: 20px;
+      background: #edeff5;
+      border-radius: 8px;
+      max-width: max-content;
+      margin-bottom: 16px;
+
+      @media (max-width: 575px) {
+        padding: 10px;
+      }
+
+      &.isOwner {
+        margin-left: auto;
+        background: rgba(60, 75, 220, 0.2);
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: no-clip;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.message__date {
+  background: #f4f6ff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  width: max-content;
+  position: sticky;
+  top: 0;
+  margin: auto;
+  z-index: 99;
+}
+
+.attach-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.img-message {
+  max-width: 200px;
+  width: 100%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

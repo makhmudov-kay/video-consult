@@ -1,0 +1,15 @@
+<div class="user">
+  <div class="user__img">
+    <nz-avatar
+      [nzShape]="'square'"
+      [nzSrc]="user.photo"
+      [nzSize]="200"
+      nzIcon="user"
+    ></nz-avatar>
+  </div>
+  <div class="user__name">
+    <span>{{ "showedName" | translate }}</span>
+    <h5>{{ user.l_name + " " + user.f_name }}</h5>
+    <a (click)="navigateToAgroId()">{{ "changeOnAgroId" | translate }}</a>
+  </div>
+</div>

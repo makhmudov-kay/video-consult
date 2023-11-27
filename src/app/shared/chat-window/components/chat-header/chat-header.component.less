@@ -1,0 +1,192 @@
+.chat__header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 24px;
+
+  &__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f5f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    cursor: pointer;
+
+    &.mobileDevice {
+      display: none;
+    }
+  }
+
+  @media (max-width: 575px) {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 475px) {
+    position: relative;
+  }
+}
+
+.video {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  @media (max-width: 475px) {
+    position: fixed;
+    right: 42px;
+    top: 99px;
+    z-index: 100;
+  }
+}
+
+.video-call {
+  display: flex;
+  align-items: center;
+  border-radius: 24px;
+  background: #2b4cff;
+  border: none;
+  outline: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  @media (max-width: 575px) {
+    border-radius: 50%;
+    padding: 6px;
+  }
+
+  span.text {
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 14px;
+    font-family: Agrofont-Regular;
+    color: #fff;
+
+    @media (max-width: 575px) {
+      display: none;
+    }
+  }
+
+  ::ng-deep {
+    svg {
+      path {
+        stroke: #fff;
+      }
+
+      circle {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &:hover {
+    background: darken(#2b4cff, 5%);
+  }
+
+  &.disabled {
+    background: #f5f5f7;
+    cursor: no-drop;
+
+    span {
+      color: #130f26;
+    }
+
+    ::ng-deep {
+      svg {
+        path {
+          stroke: #130f26;
+        }
+
+        circle {
+          stroke: #130f26;
+        }
+      }
+    }
+  }
+
+  &.invite-btn {
+    background: #36c756;
+    height: 36px;
+
+    span {
+      color: #fff;
+    }
+  }
+
+  &:disabled {
+    background: #b1b1f7;
+    cursor: no-drop;
+
+    &:hover {
+      background: #b1b1f7;
+    }
+  }
+}
+
+.mobile-invite {
+  display: none;
+
+  @media (max-width: 575px) {
+    display: block;
+    width: 30px;
+  }
+}
+
+.partner-busy {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: Agrofont-Medium;
+
+  &__desktop {
+    margin-right: 10px;
+
+    @media (max-width: 575px) {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    display: none;
+
+    @media (max-width: 575px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2b4cff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+  }
+}
+
+.mobile-ready {
+  @media (max-width: 575px) {
+    margin-left: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mobile-invite {
+      font-size: 21px;
+    }
+  }
+}
+
+.permissions {
+  border: 1px solid #ffbb00ab;
+  background: rgba(255, 234, 0, 0.082);
+  margin-bottom: 10px;
+  border-radius: 12px;
+  padding: 16px;
+  color: #130f26;
+  font-family: Agrofont-Regular;
+}

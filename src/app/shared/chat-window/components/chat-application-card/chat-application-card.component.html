@@ -1,0 +1,26 @@
+<div
+  class="chat__application"
+  [routerLink]="['../../applications', application.application_id]"
+  [fragment]="isMobileDevice ? 'mobile' : ''"
+>
+  <div class="chat__application__info">
+    <div class="chat__application__info__title">
+      {{ application.application.title }}
+    </div>
+    <ng-container *ngIf="!application.application.is_free; else free">
+      <div class="chat__application__info__price">
+        {{
+          application.application.price_from
+            ? (application.application.price_from | number) + " - "
+            : ""
+        }}
+        {{ application.application.price_to | number }} сум
+      </div>
+    </ng-container>
+    <ng-template #free>
+      <div class="chat__application__info__price">
+        {{ "free" | translate }}
+      </div>
+    </ng-template>
+  </div>
+</div>

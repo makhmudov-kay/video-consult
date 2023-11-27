@@ -1,0 +1,49 @@
+<div class="applications">
+  <div class="applications__search mb-1">
+    <div class="applications__search__input">
+      <az-search-input></az-search-input>
+    </div>
+    <button class="applications__search__btn" (click)="open()">
+      <img src="./assets/images/icons/filter.svg" alt="icon" />
+    </button>
+  </div>
+  <div class="applications__list">
+    <div
+      class="applications__list__content"
+      *ngIf="data.data && data.data.length; else empty"
+    >
+      <az-application-card-list
+        *ngFor="let item of data.data"
+        [status]="true"
+        [application]="item"
+      ></az-application-card-list>
+    </div>
+    <ng-template #empty>
+      <div class="applications__list__content">
+        <az-empty-application></az-empty-application>
+      </div>
+    </ng-template>
+    <div class="applications__list__filter">
+      <az-application-filter
+        (filterParams)="searchByFilter($event)"
+        [categoryList]="categoryList"
+      ></az-application-filter>
+    </div>
+  </div>
+</div>
+
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="bottom"
+  (nzOnClose)="close()"
+  nzHeight="75%"
+>
+  <ng-container *nzDrawerContent>
+    <az-application-filter
+      (filterParams)="searchByFilter($event)"
+      [isDrawer]="true"
+      [categoryList]="categoryList"
+    ></az-application-filter>
+  </ng-container>
+</nz-drawer>

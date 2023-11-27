@@ -1,0 +1,216 @@
+<div class="header" (window:resize)="onResize($event)">
+  <div class="container">
+    <div class="header__content">
+      <!-- LOGO -->
+      <div class="header__logo">
+        <az-logo-consultant></az-logo-consultant>
+      </div>
+      <!-- ---------------------------- -->
+      <!-- MENU -->
+      <div class="header__menu">
+        <!-- LINKS -->
+        <div class="header__menu__links">
+          <az-links></az-links>
+        </div>
+        <!-- ---------------------------- -->
+
+        <!-- USER INFO -->
+        <div class="header__menu__info">
+          <!-- SERVICES -->
+          <div class="header__services">
+            <az-eco-system class="eco-system"></az-eco-system>
+          </div>
+          <!-- --------------------------- -->
+          <!-- NOTIFICATION -->
+          <div
+            class="header__menu__info__notification header__menu__info__btn"
+            *ngIf="isUserAuthetificate"
+          >
+            <ng-container *ngIf="!isMobileSize; else mobile">
+              <button
+                nz-popover
+                nzPopoverTrigger="click"
+                [(nzPopoverVisible)]="visibleNotificationPopover"
+                [nzPopoverContent]="notificationPopoverContent"
+                nzPopoverPlacement="bottom"
+              >
+                <nz-badge
+                  *ngIf="messagePack"
+                  [nzOffset]="[2, -4]"
+                  [nzCount]="notificationCount"
+                >
+                  <az-svg-notification></az-svg-notification>
+                </nz-badge>
+              </button>
+              <ng-template #notificationPopoverContent>
+                <az-notifications
+                  [messagePack]="messagePack"
+                  [notificationCount]="notificationCount"
+                  (handleNotificationCount)="handleNotificationCount($event)"
+                  [(visibleNotificationPopover)]="visibleNotificationPopover"
+                  (clearNotificationHandler)="clearNotification()"
+                  [clientNotifications]="clientNotifications"
+                  [consultantNotifications]="consultantNotifications"
+                ></az-notifications>
+              </ng-template>
+            </ng-container>
+            <ng-template #mobile>
+              <button (click)="opennotificationDrawer()">
+                <nz-badge
+                  *ngIf="messagePack"
+                  [nzOffset]="[2, -4]"
+                  [nzCount]="notificationCount"
+                >
+                  <az-svg-notification></az-svg-notification>
+                </nz-badge>
+              </button>
+
+              <!-- DRAWER -->
+              <nz-drawer
+                [nzClosable]="false"
+                [nzVisible]="notificateionDrawerVisible"
+                nzPlacement="right"
+                nzWidth="100%"
+                (nzOnClose)="closeNotificationDrawer()"
+              >
+                <ng-container *nzDrawerContent>
+                  <az-notifications
+                    [messagePack]="messagePack"
+                    (closeDrawer)="closeNotificationDrawer()"
+                    (clearNotificationHandler)="clearNotification()"
+                    [(visibleNotificationPopover)]="visibleNotificationPopover"
+                    [clientNotifications]="clientNotifications"
+                    [consultantNotifications]="consultantNotifications"
+                  ></az-notifications>
+                </ng-container>
+              </nz-drawer>
+            </ng-template>
+          </div>
+
+          <!-- ---------------------------- -->
+          <!-- LANGUAGE -->
+          <div class="header__menu__info__language header__menu__info__btn">
+            <az-language-custom></az-language-custom>
+          </div>
+          <!-- ---------------------------- -->
+          <!-- USER -->
+          <div
+            class="header__menu__info__user header__menu__info__btn"
+            [ngClass]="{ enterBtn: !isUserAuthetificate }"
+          >
+            <ng-container *ngIf="isUserAuthetificate; else login">
+              <ng-container *ngIf="!isMobileSize; else mobileUser">
+                <div
+                  nz-popover
+                  [(nzPopoverVisible)]="visiblePopover"
+                  nzPopoverTrigger="click"
+                  [nzPopoverContent]="contentTemplate"
+                  nzPopoverPlacement="bottomRight"
+                  class="header__auth"
+                >
+                  <div class="header__menu__info__user__avatar">
+                    <nz-avatar
+                      [nzSrc]="(authorizedUser$ | async)?.photo"
+                      nzIcon="user"
+                    ></nz-avatar>
+                  </div>
+                  <div class="header__menu__info__user__name">
+                    <span class="header__menu__info__user__name__text">{{
+                      (authorizedUser$ | async)?.f_name
+                    }}</span>
+                    <span class="header__menu__info__user__name__arrow">
+                      <az-svg-arrow-down></az-svg-arrow-down>
+                    </span>
+                  </div>
+                  <!-- USER POPOVER -->
+                  <ng-template #contentTemplate
+                    ><az-popover-content
+                      [user]="authorizedUser$"
+                      (visiblePopover)="visiblePopover = false"
+                      [profileId]="profileId"
+                    ></az-popover-content>
+                  </ng-template>
+                  <!-- ---------------------------- -->
+                </div>
+              </ng-container>
+
+              <ng-template #mobileUser>
+                <div
+                  (click)="openUserDrawer()"
+                  nzPopoverPlacement="bottomRight"
+                  class="header__auth"
+                >
+                  <div class="header__menu__info__user__avatar">
+                    <nz-avatar
+                      [nzSrc]="(authorizedUser$ | async)?.photo"
+                      nzIcon="user"
+                    ></nz-avatar>
+                  </div>
+                  <div class="header__menu__info__user__name">
+                    <span class="header__menu__info__user__name__text">{{
+                      (authorizedUser$ | async)?.f_name
+                    }}</span>
+                    <span class="header__menu__info__user__name__arrow">
+                      <az-svg-arrow-down></az-svg-arrow-down>
+                    </span>
+                  </div>
+                </div>
+
+                <nz-drawer
+                  [nzClosable]="false"
+                  [nzVisible]="userDrawerVisible"
+                  nzPlacement="right"
+                  nzWidth="100%"
+                  (nzOnClose)="closeUserDrawer()"
+                >
+                  <ng-container *nzDrawerContent>
+                    <az-popover-content
+                      [isDrawer]="true"
+                      (visibleDrawer)="closeUserDrawer()"
+                      [user]="authorizedUser$"
+                      (visiblePopover)="visiblePopover = false"
+                      [profileId]="profileId"
+                    ></az-popover-content>
+                  </ng-container>
+                </nz-drawer>
+              </ng-template>
+            </ng-container>
+
+            <ng-template #login>
+              <button class="header__auth__btn" (click)="navigateToSignIn()">
+                <i nz-icon nzType="user" nzTheme="outline"></i>
+                <span class="login-text">{{ "toComeIn" | translate }}</span>
+              </button>
+            </ng-template>
+          </div>
+          <!-- ---------------------------- -->
+          <!-- BURGER -->
+          <div class="header__menu__burger">
+            <button class="header__menu__burger__btn" (click)="openDrawer()">
+              <az-svg-burger class="d-flex"></az-svg-burger>
+            </button>
+          </div>
+          <!-- ---------------------------- -->
+        </div>
+        <!-- ---------------------------- -->
+      </div>
+      <!-- ---------------------------- -->
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="drawerVisible"
+  nzPlacement="bottom"
+  (nzOnClose)="closeDrawer()"
+  [nzHeight]="isUserAuthetificate ? '90%' : '50%'"
+>
+  <ng-container *nzDrawerContent>
+    <az-drawer-content
+      (closeDrawer)="closeDrawer()"
+      [isUserAuthetificate]="isUserAuthetificate"
+    ></az-drawer-content>
+  </ng-container>
+</nz-drawer>

@@ -1,0 +1,344 @@
+@import "../../../dist/ngx-az-core/assets/styles/_general-imports.less";
+@import "./assets/styles/text.less";
+@import url("../../../node_modules/froala-editor/css/froala_editor.pkgd.min.css");
+
+@import "~swiper/less";
+@import "~swiper/less/effect-fade";
+
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.bubble.css";
+
+@primary-color: #2b4cff;
+@border-radius-base: 8px;
+
+@font-face {
+  font-family: Mont-Bold;
+  src: url(./assets/fonts/ALSAgrofont-Medium.ttf);
+}
+
+@font-face {
+  font-family: Mont-ExtraLight;
+  src: url(./assets/fonts/ALSAgrofont-Regular.ttf);
+}
+
+@font-face {
+  font-family: Mont-Light;
+  src: url(./assets/fonts/ALSAgrofont-Regular.ttf);
+}
+
+@font-face {
+  font-family: Mont-Regular;
+  src: url(./assets/fonts/ALSAgrofont-Regular.ttf);
+}
+
+@font-face {
+  font-family: Mont-SemiBold;
+  src: url(./assets/fonts/ALSAgrofont-Medium.ttf);
+}
+
+@font-face {
+  font-family: Mont-SemiBoldI;
+  src: url(./assets/fonts/ALSAgrofont-Medium.ttf);
+}
+
+.agora_video_player {
+  object-fit: cover !important;
+  height: 100% !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 0px !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+
+  @media (max-width: 576px) {
+    height: auto !important;
+    width: 100% !important;
+    top: 50% !important;
+    left: 0 !important;
+    transform: translateX(0) !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1320px;
+  width: 100%;
+  margin: auto;
+  padding: 0 15px;
+}
+
+.ant-popover-inner {
+  border-radius: 8px;
+}
+
+.primary-color {
+  color: #2b4cff;
+}
+
+.primary-bg {
+  background: #2b4cff;
+  &:hover {
+    background: lighten(#2b4cff, 10%);
+  }
+
+  &:active {
+    background: darken(#2b4cff, 10%);
+  }
+}
+
+.title {
+  font-size: 28px;
+  line-height: 36px;
+  font-family: Agrofont-Medium;
+  color: #11253d;
+  margin-bottom: 24px;
+
+  @media (max-width: 575px) {
+    margin-bottom: 16px;
+  }
+}
+
+.pagination {
+  .ant-pagination-item-active {
+    border: none !important;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 16px;
+    font-family: Agrofont-Medium;
+    background: #5193d5;
+    border-radius: 50%;
+
+    a {
+      color: #fff;
+      line-height: 24px;
+    }
+  }
+
+  .ant-pagination.mini .ant-pagination-item {
+    margin: 0 16px;
+    font-size: 12px;
+    font-family: Agrofont-Medium;
+
+    @media (max-width: 575px) {
+      margin: 0 8px;
+    }
+
+    @media (max-width: 475px) {
+      margin: 0;
+
+      a {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.ant-modal-body {
+  padding: 48px;
+
+  @media (max-width: 767px) {
+    padding: 14px 20px;
+  }
+}
+
+.ant-modal-content {
+  border-radius: 16px;
+}
+
+.drawer {
+  border-radius: 16px 16px 0px 0px;
+  overflow: hidden;
+
+  .ant-drawer-body {
+    padding: 16px 24px;
+  }
+}
+
+.ant-badge-dot {
+  width: 10px;
+  height: 10px;
+}
+
+.cabinet__menu__list {
+  border-right: none;
+
+  .ant-menu,
+  .ant-menu-sub.ant-menu-inline,
+  .ant-menu-submenu > .ant-menu {
+    background: none !important;
+  }
+
+  .ant-menu-item {
+    padding-left: 8px !important;
+    font-size: 14px;
+    line-height: 17px;
+    font-family: Mont-Bold;
+
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    &::after {
+      border: none;
+    }
+  }
+
+  .ant-menu-item-selected {
+    background: linear-gradient(
+      90deg,
+      rgba(57, 106, 252, 0.05) 0%,
+      rgba(41, 72, 255, 0.05) 100%
+    );
+    border-radius: 4px;
+
+    svg {
+      path {
+        stroke: @primary-color;
+      }
+    }
+  }
+
+  .ant-menu-submenu-title {
+    background: linear-gradient(
+      90deg,
+      rgba(57, 106, 252, 0.05) 0%,
+      rgba(41, 72, 255, 0.05) 100%
+    );
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: Mont-Bold;
+    line-height: 18px;
+    margin-bottom: 16px;
+  }
+}
+
+.settings {
+  .ant-menu,
+  .ant-menu-sub.ant-menu-inline,
+  .ant-menu-submenu > .ant-menu {
+    background: none !important;
+  }
+
+  .ant-menu-item {
+    padding-left: 16px;
+    font-size: 12px;
+    line-height: 17px;
+    font-family: Mont-Bold;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-menu-item-selected {
+    background: linear-gradient(
+      90deg,
+      rgba(57, 106, 252, 0.05) 0%,
+      rgba(41, 72, 255, 0.05) 100%
+    );
+    border-radius: 4px;
+
+    svg {
+      path {
+        stroke: @primary-color;
+      }
+
+      circle {
+        stroke: @primary-color;
+      }
+    }
+  }
+}
+
+.header__menu {
+  .menu__item {
+    font-family: Mont-Bold;
+  }
+
+  .ant-menu-sub.ant-menu-inline {
+    background: none;
+
+    a {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Regular;
+
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.sum {
+  font-family: Agrofont-BExpanded !important;
+}
+
+.view__description,
+.consultant__description__about {
+  .fr-view {
+    font-size: 24px !important;
+    line-height: 30px !important;
+    color: #242533 !important;
+    font-family: Agrofont-Regular !important;
+
+    strong {
+      font-size: 24px !important;
+      line-height: 30px !important;
+      color: #242533 !important;
+      font-family: Agrofont-Regular !important;
+    }
+
+    span {
+      font-size: 24px !important;
+      line-height: 30px !important;
+      color: #242533 !important;
+      font-family: Agrofont-Regular !important;
+    }
+  }
+}
+
+.quill {
+  width: 100%;
+}
+
+.view__description {
+  .ql-editor {
+    padding: 0;
+  }
+}
+
+.ql-editor {
+  font-size: 24px;
+  line-height: 30px;
+  font-family: Agrofont-Regular;
+  color: #242533;
+  p {
+    font-size: 24px;
+    line-height: 30px;
+    font-family: Agrofont-Regular;
+    color: #242533;
+  }
+}
+
+.consultant__description__about {
+  .ql-editor {
+    padding: 0;
+  }
+}

@@ -1,0 +1,148 @@
+@import "../../../../../../../../assets/styles/text.less";
+
+.content {
+  padding: 48px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05), 0px 0px 24px rgba(0, 0, 0, 0.04);
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 575px) {
+    padding: 16px;
+  }
+
+  &__title {
+    .text(36px, 46px, #0c1933, Mont-Bold);
+    margin-bottom: 48px;
+  }
+
+  .barrier {
+    position: absolute;
+    backdrop-filter: blur(4px); /* Размываем фон */
+    background: #0000003d;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding: 20px;
+
+    p {
+      max-width: 500px;
+      width: 100%;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin: auto;
+    }
+  }
+}
+
+.footer {
+  padding: 24px 0;
+}
+
+.ant-modal-body {
+  padding: 48px;
+}
+
+.payment-card {
+  padding: 48px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05), 0px 0px 24px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  @media (max-width: 1100px) {
+    align-items: center;
+  }
+
+  @media (max-width: 575px) {
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 745px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  &__description {
+    max-width: 750px;
+    width: 100%;
+
+    @media (max-width: 1100px) {
+      max-width: 500px;
+    }
+
+    @media (max-width: 850px) {
+      max-width: 400px;
+    }
+
+    @media (max-width: 745px) {
+      max-width: initial;
+      text-align: center;
+    }
+
+    h4 {
+      font-size: 24px;
+      line-height: 24px;
+      color: #000;
+      font-family: Agrofont-Medium;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 16px;
+      font-family: Agrofont-Regular;
+      line-height: 20px;
+      color: #000;
+    }
+  }
+
+  &__btn {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__logo {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 14px;
+      font-family: Agrofont-Regular;
+      line-height: 18px;
+      color: #000;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border-radius: 8px;
+      background: #3056ff;
+      color: #fff;
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Medium;
+      border: none;
+      outline: none;
+      padding: 14px 47px;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background: lighten(#3056ff, 5%);
+      }
+
+      &:active {
+        background: darken(#3056ff, 3%);
+      }
+    }
+  }
+}

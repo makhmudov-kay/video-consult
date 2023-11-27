@@ -1,0 +1,133 @@
+<nz-modal
+  [(nzVisible)]="isVisibleAccept"
+  (nzOnCancel)="closeAcceptModal()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <form [formGroup]="form">
+      <div class="view" *ngIf="fileSrc">
+        <ng-container [ngSwitch]="type">
+          <!-- IMAGE -->
+          <div class="image block" *ngSwitchCase="'img'">
+            <div class="view__img">
+              <img [src]="fileSrc" alt="file" />
+              <div class="view__img__delete" (click)="deleteFile()">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+              </div>
+            </div>
+            <p class="text">
+              {{ fileName }}
+            </p>
+            <div class="image__size">
+              <p class="success">{{ "uploadImgLimit" | translate }}</p>
+              <p [ngClass]="limitImgSize > fileSize ? 'success' : 'danger'">
+                {{ "yourImg" | translate }} {{ fileSize | number : "1.1-2" }}mb
+              </p>
+            </div>
+          </div>
+
+          <!-- VIDEO -->
+          <div class="video block" *ngSwitchCase="'video'">
+            <div class="view__img">
+              <div class="video__wrapper" (click)="playAndPauseVideo()">
+                <video [src]="fileSrc" loop #screenVideo></video>
+                <div
+                  class="video__wrapper__layer"
+                  *ngIf="handleVideoAction === false"
+                >
+                  <az-svg-play></az-svg-play>
+                </div>
+              </div>
+              <span class="delete-text" (click)="deleteFile()">{{
+                "delete" | translate
+              }}</span>
+              <p class="text">
+                {{ fileName }}
+              </p>
+              <div class="image__size">
+                <p class="success">{{ "uploadVideoLimit" | translate }}</p>
+                <p [ngClass]="limitVideoSize > fileSize ? 'success' : 'danger'">
+                  {{ "yourVideo" | translate }}
+                  {{ fileSize | number : "1.1-2" }}mb
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- DOC -->
+          <div class="doc block" *ngSwitchCase="'doc'">
+            <div class="doc__view">
+              <az-svg-attach-doc></az-svg-attach-doc>
+              <span class="delete-text" (click)="deleteFile()">{{
+                "delete" | translate
+              }}</span>
+            </div>
+            <p class="text">
+              {{ fileName }}
+            </p>
+          </div>
+          <!-- --- -->
+        </ng-container>
+      </div>
+      <div class="files">
+        <div class="files__image files__btn">
+          <button
+            (click)="inputImg.click()"
+            [nzTooltipTitle]="'supportImg' | translate"
+            nzTooltipPlacement="bottom"
+            nz-tooltip
+          >
+            <az-svg-attach-img></az-svg-attach-img>
+            <p>{{ "photo" | translate }}</p>
+          </button>
+          <input
+            type="file"
+            [hidden]="true"
+            #inputImg
+            accept="image/png, image/jpeg"
+            (change)="handleFileInput($event, 'img')"
+          />
+        </div>
+        <div class="files__video files__btn">
+          <button
+            (click)="inputVideo.click()"
+            [nzTooltipTitle]="'supportVideo' | translate"
+            nzTooltipPlacement="bottom"
+            nz-tooltip
+          >
+            <az-svg-attach-video></az-svg-attach-video>
+            <p>{{ "video" | translate }}</p>
+          </button>
+          <input
+            type="file"
+            [hidden]="true"
+            #inputVideo
+            accept="video/mp4,video/x-m4v,video/*"
+            (change)="handleFileInput($event, 'video')"
+          />
+        </div>
+        <div class="files__file files__btn">
+          <button
+            (click)="inputFile.click()"
+            [nzTooltipTitle]="'supportDocument' | translate"
+            nzTooltipPlacement="bottom"
+            nz-tooltip
+          >
+            <az-svg-attach-doc></az-svg-attach-doc>
+            <p>{{ "document" | translate }}</p>
+          </button>
+          <input
+            type="file"
+            [hidden]="true"
+            #inputFile
+            accept="application/pdf,application/doc,application/xls"
+            (change)="handleFileInput($event, 'doc')"
+          />
+        </div>
+      </div>
+      <button nz-button nzType="primary" class="send" [nzLoading]="isLoading" *ngIf="fileSrc" (click)="sendFile()">
+        {{ "send" | translate }}
+      </button>
+    </form>
+  </ng-container>
+</nz-modal>

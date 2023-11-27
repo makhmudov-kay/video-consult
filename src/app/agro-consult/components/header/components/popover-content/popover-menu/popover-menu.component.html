@@ -1,0 +1,234 @@
+<ul nz-menu nzMode="inline" *ngIf="!isDrawer; else mobile">
+  <li
+    nz-submenu
+    [nzTitle]="'cabinet.client' | translate"
+    class="menu__item"
+    style="padding-left: 0"
+    [(nzOpen)]="openMap['sub1']"
+    (nzOpenChange)="openHandler('sub1')"
+  >
+    <ul>
+      <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'client', 'applications']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-my-applications></az-my-applications>
+          </span>
+          {{ "myApplications" | translate }}</a
+        >
+      </li>
+      <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'client', 'chat']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-svg-chats></az-svg-chats>
+          </span>
+          {{ "chat.STATUS_DEFAULT" | translate }}</a
+        >
+      </li>
+      <!-- <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'client', 'payment']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-svg-payment></az-svg-payment>
+          </span>
+          {{ "paymentMethod" | translate }}</a
+        >
+      </li> -->
+    </ul>
+  </li>
+  <li
+    [(nzOpen)]="openMap['sub2']"
+    (nzOpenChange)="openHandler('sub2')"
+    nz-submenu
+    [nzTitle]="'cabinet.consultant' | translate"
+    class="menu__item"
+    style="padding-left: 0"
+  >
+    <ul>
+      <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'consultant', 'search']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-svg-search></az-svg-search>
+          </span>
+          {{ "applicationsSearch" | translate }}</a
+        >
+      </li>
+      <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'consultant', 'applications']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-my-applications></az-my-applications>
+          </span>
+          {{ "orders" | translate }}</a
+        >
+      </li>
+      <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'consultant', 'chat']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-svg-chats></az-svg-chats>
+          </span>
+          {{ "chat.STATUS_DEFAULT" | translate }}</a
+        >
+      </li>
+      <!-- <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'consultant', 'payment']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-svg-payment></az-svg-payment>
+          </span>
+          {{ "paymentMethod" | translate }}</a
+        >
+      </li> -->
+      <li nz-menu-item nzMatchRouter style="padding-left: 16px">
+        <a
+          [routerLink]="['./cabinet', 'consultant', 'resume']"
+          (click)="visiblePopover.emit()"
+        >
+          <span nz-icon>
+            <az-svg-resume></az-svg-resume>
+          </span>
+          {{ "myResumes" | translate }}</a
+        >
+      </li>
+    </ul>
+  </li>
+  <nz-divider style="margin: 8px 0px;"></nz-divider>
+  <li nz-menu-item style="padding-left: 16px; ">
+    <a
+      [routerLink]="['./cabinet', 'client', 'payment']"
+      (click)="visiblePopover.emit()"
+      style="display: flex; align-items: center;"
+    >
+      <span nz-icon style="margin-right: 10px;">
+        <az-svg-payment class="d-flex"></az-svg-payment>
+      </span>
+      {{ "paymentMethod" | translate }}</a
+    >
+  </li>
+</ul>
+
+<!-- MOBILE VERSION -->
+<ng-template #mobile>
+  <h4 class="menu-title">{{ "cabinet.client" | translate }}</h4>
+
+  <ul class="drawer-menu">
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        [routerLink]="['./cabinet', 'client', 'applications']"
+        routerLinkActive="active"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-my-applications></az-my-applications>
+        </span>
+        {{ "myApplications" | translate }}</a
+      >
+    </li>
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        routerLinkActive="active"
+        [routerLink]="['./cabinet', 'client', 'chat']"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-svg-chats></az-svg-chats>
+        </span>
+        {{ "chat.STATUS_DEFAULT" | translate }}</a
+      >
+    </li>
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        [routerLink]="['./cabinet', 'client', 'payment']"
+        routerLinkActive="active"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-svg-payment></az-svg-payment>
+        </span>
+        {{ "paymentMethod" | translate }}</a
+      >
+    </li>
+  </ul>
+  <nz-divider></nz-divider>
+
+  <h4 class="menu-title">{{ "cabinet.consultant" | translate }}</h4>
+  <ul class="drawer-menu">
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        [routerLink]="['./cabinet', 'consultant', 'search']"
+        routerLinkActive="active"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-svg-search></az-svg-search>
+        </span>
+        {{ "applicationsSearch" | translate }}</a
+      >
+    </li>
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        [routerLink]="['./cabinet', 'consultant', 'applications']"
+        routerLinkActive="active"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-my-applications></az-my-applications>
+        </span>
+        {{ "orders" | translate }}</a
+      >
+    </li>
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        [routerLink]="['./cabinet', 'consultant', 'chat']"
+        routerLinkActive="active"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-svg-chats></az-svg-chats>
+        </span>
+        {{ "chat.STATUS_DEFAULT" | translate }}</a
+      >
+    </li>
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        [routerLink]="['./cabinet', 'consultant', 'payment']"
+        routerLinkActive="active"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-svg-payment></az-svg-payment>
+        </span>
+        {{ "paymentMethod" | translate }}</a
+      >
+    </li>
+    <li class="drawer-menu__item" nzMatchRouter style="padding-left: 16px">
+      <a
+        [routerLink]="['./cabinet', 'consultant', 'resume']"
+        routerLinkActive="active"
+        (click)="visibleDrawer.emit()"
+      >
+        <span nz-icon>
+          <az-svg-resume></az-svg-resume>
+        </span>
+        {{ "myResumes" | translate }}</a
+      >
+    </li>
+  </ul>
+</ng-template>

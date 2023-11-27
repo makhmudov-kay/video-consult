@@ -1,0 +1,55 @@
+.feedback {
+  padding-top: 80px;
+
+  @media (max-width: 991px) {
+    padding-top: 50px;
+  }
+  @media (max-width: 575px) {
+    padding-top: 30px;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-size: 32px;
+      line-height: 40px;
+
+      @media (max-width: 575px) {
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+
+    &__raiting {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 32px;
+        line-height: 40px;
+        font-family: Agrofont-Medium;
+
+        @media (max-width: 575px) {
+          font-size: 24px;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
+  &__count {
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    margin-bottom: 30px;
+
+    @media (max-width: 575px) {
+      font-size: 14px;
+      line-height: 20px;
+      text-align: left;
+    }
+  }
+}

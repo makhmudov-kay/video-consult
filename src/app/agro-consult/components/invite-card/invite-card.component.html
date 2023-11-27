@@ -1,0 +1,53 @@
+<div class="call-wrapper">
+  <div [@bounce] class="call" *ngFor="let invite of invites; let idx = index">
+    <div [ngSwitch]="invite.type">
+      <!-- INVITE -->
+      <div *ngSwitchCase="'invite'">
+        <div class="invite-header">
+          <h3 class="call__title">
+            {{ "inviteToChat.notification" | translate }}
+          </h3>
+          <button (click)="closeNotice(idx)">
+            <span nz-icon nzType="close" nzTheme="outline"></span>
+          </button>
+        </div>
+        <nz-divider></nz-divider>
+        <p class="call__text">{{ invite.text }}</p>
+        <nz-divider></nz-divider>
+        <div class="call__btn">
+          <button
+            class="call__btn__danger"
+            (click)="cancelInvite(invite.chat_id)"
+          >
+            {{ "notNow" | translate }}
+          </button>
+          <button
+            class="call__btn__success"
+            (click)="navigateToChat(invite.chat_id, invite.is_consultant)"
+          >
+            {{ "goOver" | translate }}
+          </button>
+        </div>
+      </div>
+      <!-- NOTICE -->
+      <div *ngSwitchCase="'remember'">
+        <div class="invite-header">
+          <h3 class="call__title">{{ "notification" | translate }}</h3>
+          <button (click)="closeNotice(idx)">
+            <span nz-icon nzType="close" nzTheme="outline"></span>
+          </button>
+        </div>
+        <nz-divider></nz-divider>
+        <p
+          class="call__text"
+          [innerHTML]="
+            'notification.text'
+              | translate
+                : { application: '<strong>' + invite.text + '</strong>' }
+          "
+        ></p>
+        <nz-divider></nz-divider>
+      </div>
+    </div>
+  </div>
+</div>

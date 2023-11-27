@@ -1,0 +1,107 @@
+<div [ngSwitch]="notification.data.status">
+  <div *ngSwitchCase="1">
+    <div
+      class="notification-wrapper"
+      [ngClass]="{ border: !isLast }"
+      (click)="
+        handleNavigateResume({
+          resumeId: notification.link,
+          id: notification.id
+        })
+      "
+    >
+      <div class="notification-wrapper__left">
+        <span class="notification-wrapper__left__time">{{
+          notification.created_at | formatDateFns | async
+        }}</span>
+        <span
+          class="notification-wrapper__left__unread"
+          *ngIf="!notification.showed"
+          ><span class="notification-wrapper__left__unread__badge"></span>
+          {{ "unreaded" | translate }}</span
+        >
+        <div class="notification-wrapper__left__title">
+          {{ "resumeOnModerate" | translate }}
+        </div>
+        <p class="notification-wrapper__left__text">
+          {{ "resumeModerateMessage" | translate }}
+        </p>
+      </div>
+      <div class="notification-wrapper__right">
+        <span nz-icon>
+          <img src="./assets/images/icons/Time_duotone_line.svg" alt="icon" />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div *ngSwitchCase="2">
+    <div
+      class="notification-wrapper"
+      [ngClass]="{ border: !isLast }"
+      (click)="
+        handleNavigateResume({
+          resumeId: notification.link,
+          id: notification.id
+        })
+      "
+    >
+      <div class="notification-wrapper__left">
+        <span class="notification-wrapper__left__time">{{
+          notification.created_at | formatDateFns | async
+        }}</span>
+        <span
+          class="notification-wrapper__left__unread"
+          *ngIf="!notification.showed"
+          ><span class="notification-wrapper__left__unread__badge"></span>
+          {{ "unreaded" | translate }}</span
+        >
+        <div class="notification-wrapper__left__title">
+          {{ "resumeChecked" | translate }}
+        </div>
+        <p class="notification-wrapper__left__text">
+          {{ "resumeCheckedFirst" | translate }}
+        </p>
+      </div>
+      <div class="notification-wrapper__right">
+        <span nz-icon>
+          <img src="./assets/images/icons/success.svg" alt="icon" />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div *ngSwitchCase="3">
+    <div
+      class="notification-wrapper"
+      [ngClass]="{ border: !isLast }"
+      (click)="
+        handleNavigateResume({
+          resumeId: notification.link,
+          id: notification.id
+        })
+      "
+    >
+      <div class="notification-wrapper__left">
+        <span class="notification-wrapper__left__time">{{
+          notification.created_at | formatDateFns | async
+        }}</span>
+        <span
+          class="notification-wrapper__left__unread"
+          *ngIf="!notification.showed"
+          ><span class="notification-wrapper__left__unread__badge"></span>
+          {{ "unreaded" | translate }}</span
+        >
+        <div class="notification-wrapper__left__title">
+          {{ "resumeNotPassed" | translate }}
+        </div>
+        <p class="notification-wrapper__left__text">
+          {{ notification.data.reason_inactive }}
+        </p>
+      </div>
+      <div class="notification-wrapper__right">
+        <span nz-icon>
+          <img src="./assets/images/icons/Close_round_fill.svg" alt="icon" />
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

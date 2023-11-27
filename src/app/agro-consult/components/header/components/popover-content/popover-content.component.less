@@ -1,0 +1,61 @@
+.header__user-popover {
+  width: 248px;
+  border-radius: 8px;
+
+  &.is-drawer {
+    width: 100%;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #cfd3d8;
+    margin-right: 16px;
+  }
+
+  &__info {
+    &__name {
+      font-size: 16px;
+      font-family: Agrofont-Bold;
+      line-height: 24px;
+    }
+
+    &__logout {
+      a {
+        font-size: 14px;
+        line-height: 14px;
+        font-family: Agrofont-Regular;
+        color: #b7bcca;
+
+        &:hover {
+          color: #2b4cff;
+        }
+      }
+    }
+  }
+}
+
+.drawer-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__close {
+    width: 32px;
+    height: 32px;
+    background: #2b4cff;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    color: #fff;
+
+    &:active {
+      background: darken(#2b4cff, 4%);
+    }
+  }
+}

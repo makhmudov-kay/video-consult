@@ -1,0 +1,26 @@
+<div class="breadcrumb">
+  <nz-breadcrumb [nzAutoGenerate]="true" [nzSeparator]="separator">
+    <nz-breadcrumb-item
+      *ngFor="
+        let bcElement of breadcrumbs$ | async;
+        let last = last;
+        let first = first
+      "
+    >
+      <a class="breadcrumb__link" *ngIf="!last" [routerLink]="bcElement.url">{{
+        bcElement.name | translate
+      }}</a>
+      <a class="breadcrumb__link" [ngClass]="{ active: !first }" *ngIf="last">{{
+        bcElement.name | translate
+      }}</a>
+    </nz-breadcrumb-item>
+
+    <ng-template #separator>
+      <img
+        class="breadcrumb__separator"
+        src="./assets/images/bc-separator.svg"
+        alt="separator"
+      />
+    </ng-template>
+  </nz-breadcrumb>
+</div>

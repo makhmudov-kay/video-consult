@@ -1,0 +1,66 @@
+.create-application {
+  padding: 16px 0 64px 0;
+  height: calc(100vh - 62px - 108px);
+  min-height: 700px;
+
+  @media (max-width: 575px) {
+    padding: 16px 0 37px 0;
+    min-height: 650px;
+    max-height: 850px;
+    overflow: auto;
+  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__content {
+    &__title {
+      font-size: 64px;
+      line-height: 82px;
+      font-family: Agrofont-Medium;
+      margin-bottom: 16px;
+      color: #282828;
+
+      @media (max-width: 991px) {
+        font-size: 48px;
+        line-height: 61px;
+      }
+
+      @media (max-width: 575px) {
+        font-size: 32px;
+        line-height: 40px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
+
+.modal-success {
+  display: block;
+  width: 100%;
+  padding: 24px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #2A4AFF;
+  color: #fff;
+  font-size: 24px;
+  line-height: 24px;
+  font-family: Agrofont-Medium;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background: lighten(#2A4AFF, 5%);
+  }
+
+  &:active {
+    background: darken(#2A4AFF, 1%);
+  }
+
+  @media (max-width: 575px) {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}

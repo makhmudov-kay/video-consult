@@ -1,0 +1,456 @@
+// @import "../../../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+@import "../../../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+
+.chat__content {
+  &__window {
+    position: relative;
+    padding-top: 25px;
+
+    &__date {
+      position: absolute;
+      text-align: center;
+      top: 0px;
+      width: 100%;
+      left: 0;
+      font-size: 10px;
+      line-height: 12px;
+      color: #707c8b;
+      font-family: Agrofont-Regular;
+    }
+
+    &__list {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      // flex-direction: column-reverse;
+      flex-direction: column;
+
+      height: 330px;
+      overflow: auto;
+
+      padding-right: 10px;
+      .scroll();
+      position: relative;
+    }
+
+    li {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    &__message {
+      max-width: 600px;
+      width: 100%;
+
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+
+      @media (max-width: 575px) {
+        max-width: 400px;
+      }
+
+      @media (max-width: 500px) {
+        max-width: 300px;
+      }
+      @media (max-width: 400px) {
+        max-width: 250px;
+      }
+
+      .message-text {
+        max-width: 600px;
+        width: max-content;
+        background: #f5f5f7;
+        padding: 8px;
+        padding-bottom: 6px;
+        border-radius: 4px;
+
+        @media (max-width: 575px) {
+          max-width: 400px;
+        }
+
+        @media (max-width: 500px) {
+          max-width: 300px;
+        }
+        @media (max-width: 400px) {
+          max-width: 250px;
+        }
+      }
+
+      .time {
+        font-size: 10px;
+        line-height: 14px;
+        display: block;
+        color: #7e7e7e;
+        width: max-content;
+        margin-left: auto;
+      }
+
+      &__title {
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        color: #242533;
+        font-family: Agrofont-Bold;
+        margin-bottom: 8px;
+      }
+
+      &__text {
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        font-family: Agrofont-Regular;
+        color: #242533;
+      }
+
+      &.owner {
+        margin-left: auto;
+
+        .message-text {
+          width: max-content;
+          background: #f4f6ff;
+          padding: 8px;
+          padding-bottom: 6px;
+          border-radius: 4px;
+          margin-left: auto;
+        }
+
+        .message-call {
+          margin-left: auto;
+        }
+
+        .time {
+          margin-left: 0;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+
+  &__options {
+    padding: 16px 0;
+
+    &__btn {
+      padding: 12px 24px;
+      border-radius: 24px;
+      border: 1px solid #2c4eff;
+      outline: none;
+      cursor: pointer;
+      margin-right: 16px;
+      background: none;
+      color: #2c4eff;
+      transition: 0.3s;
+
+      &:hover {
+        background: #2c4eff;
+        color: #fff;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      @media (max-width: 575px) {
+        margin-right: 8px;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__textarea {
+    padding: 14px 24px;
+    border-radius: 10px;
+    background: #f1f4fa;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 575px) {
+      padding: 10px 12px;
+      padding-right: 0;
+    }
+
+    &__send {
+      button {
+        background: none;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        ::ng-deep {
+          svg {
+            path {
+              stroke: rgba(65, 68, 253, 0.432);
+              transition: 0.3s;
+            }
+          }
+
+          &:hover {
+            svg {
+              path {
+                stroke: rgba(65, 68, 253, 0.829);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__addicon {
+      margin-right: 12px;
+    }
+
+    &__input {
+      flex-grow: 1;
+
+      textarea {
+        resize: none;
+        border-left: 1px solid rgba(6, 21, 43, 0.48);
+        border-radius: 0;
+      }
+    }
+
+    &__smile {
+      margin: 0 14px;
+    }
+  }
+}
+
+.message__date {
+  font-size: 12px;
+  line-height: 14px;
+  color: #707c8b;
+  font-family: Mont-SemiBold;
+  position: sticky;
+  top: 0;
+  background: rgb(243, 243, 243);
+  width: max-content;
+  margin: 16px auto;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.waiting {
+  color: #2c4eff;
+  border: 1px solid #2c4eff;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  background: lighten(#2c4eff, 35%);
+  font-size: 14px;
+  line-height: 18px;
+  font-family: Agrofont-Regular;
+}
+
+.payed {
+  color: green;
+  border: 1px solid green;
+  background: rgb(222, 241, 222);
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: Agrofont-Regular;
+  border-radius: 8px;
+}
+
+.completed {
+  border: 1px solid #22a33f;
+  padding: 25px;
+  border-radius: 8px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+
+  span {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: Agrofont-Regular;
+    margin-left: 10px;
+  }
+}
+
+.image {
+  display: block;
+  max-width: 200px;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.attach-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background: #2c4eff;
+  color: #fff;
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.skeleton {
+  height: 435px;
+}
+
+.input-file {
+  position: absolute;
+  visibility: hidden;
+}
+
+// .files {
+//   background: #f1f4fa;
+//   padding: 24px;
+//   border-radius: 8px;
+//   margin-bottom: 5px;
+// }
+
+.video-tag {
+  display: block;
+  height: 300px;
+  max-width: 300px;
+  width: 100%;
+
+  video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.document {
+  display: flex;
+  align-items: center;
+
+  a {
+    margin-left: 5px;
+    font-family: Agrofont-Regular;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+.message-call {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background: #f4f6ff;
+  padding: 8px;
+  padding-bottom: 6px;
+  max-width: 600px;
+  width: max-content;
+
+  &-text {
+    margin-left: 10px;
+
+    h5 {
+      font-size: 14px;
+      line-height: 16px;
+      font-family: Agrofont-Medium;
+    }
+  }
+
+  &-info {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.response-cancel {
+  border: 1px solid #2c4eff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 18px;
+  line-height: 24px;
+  color: #2c4eff;
+}
+
+
+.payment {
+  &__title {
+    // font-size: 20px;
+    // line-height: 26px;
+    // color: #282828;
+    // font-family: Agrofont-Medium;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: Agrofont-Regular;
+    color: #242533;
+    margin-top: 24px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    color: #86898c;
+    font-family: Agrofont-Regular;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  &__reciever {
+    padding: 24px 0;
+    border-bottom: 1px solid #d9d9d9;
+
+    &__user {
+      font-size: 20px;
+      line-height: 26px;
+      font-family: Agrofont-Regular;
+      color: #242533;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__price {
+    font-size: 20px;
+    line-height: 26px;
+    color: #242533;
+    font-family: Agrofont-Regular;
+  }
+
+  &__btn {
+    padding-top: 24px;
+
+    button {
+      background: #2c4eff;
+      color: #fff;
+      border: none;
+      outline: none;
+      display: block;
+      width: 100%;
+      padding: 16px 0;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Medium;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background: lighten(#2c4eff, 5%);
+      }
+    }
+  }
+}

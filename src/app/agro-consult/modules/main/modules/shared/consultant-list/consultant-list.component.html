@@ -1,0 +1,106 @@
+<div class="options">
+  <div class="options__input">
+    <nz-input-group
+      [nzPrefix]="suffixIconSearch"
+      [nzSuffix]="inputClearTpl"
+      nzSize="large"
+    >
+      <input
+        type="text"
+        nz-input
+        [placeholder]="'findConsultantPlaceholder' | translate"
+        nzSize="large"
+        [(ngModel)]="searchValue"
+        (keydown.enter)="submitSearch()"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <span nz-icon nzType="search"></span>
+    </ng-template>
+    <ng-template #inputClearTpl>
+      <span
+        nz-icon
+        class="ant-input-clear-icon"
+        nzTheme="fill"
+        nzType="close-circle"
+        *ngIf="searchValue"
+        (click)="resetInput()"
+      ></span>
+    </ng-template>
+  </div>
+  <div class="options__sort">
+    <span>{{ "sortBy" | translate }} </span>
+    <nz-select
+      nzBorderless
+      [(ngModel)]="sort"
+      (ngModelChange)="submitSearch()"
+      [nzDropdownMatchSelectWidth]="false"
+    >
+      <nz-option nzValue="new" [nzLabel]="'byNew' | translate"></nz-option>
+      <nz-option
+        nzValue="rating"
+        [nzLabel]="'byRating' | translate"
+      ></nz-option>
+      <nz-option
+        nzValue="applications_count"
+        [nzLabel]="'byApplicationCount' | translate"
+      ></nz-option>
+    </nz-select>
+  </div>
+</div>
+
+<div *ngIf="isLoaded; else skeletonCards">
+  <div class="consultants" *ngIf="data.data.length; else emptyList">
+    <h6 class="consultants__count" *ngIf="isLoaded">
+      {{ data.total }} {{ "specialist" | translate }}
+    </h6>
+    <div nz-row [nzGutter]="[24, 24]" class="center">
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="12"
+        nzMd="10"
+        nzLg="8"
+        nzXl="6"
+        *ngFor="let consultant of data.data"
+      >
+        <az-consultant-card [consultant]="consultant"></az-consultant-card>
+      </div>
+    </div>
+    <div class="pagination" *ngIf="data.total > 12">
+      <az-pagination
+        [pageSize]="query.pageSize"
+        [total]="data.total"
+        [pageIndex]="query.pageIndex"
+        (pageIndexChange)="paginate($event)"
+      ></az-pagination>
+    </div>
+  </div>
+
+  <ng-template #emptyList>
+    <div class="empty">
+      <p>{{ "emptyResumeByCategory" | translate }}</p>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #skeletonCards>
+  <div class="consultants">
+    <h6 class="consultants__count">
+      {{ "loadingData" | translate }}
+    </h6>
+    <div nz-row [nzGutter]="[24, 24]" class="center">
+      <div
+        nz-col
+        nzXs="24"
+        nzSm="12"
+        nzMd="10"
+        nzLg="8"
+        nzXl="6"
+        *ngFor="let skeletonCards of [].constructor(12)"
+      >
+        <az-consultant-card [isSkeleton]="true"></az-consultant-card>
+      </div>
+    </div>
+  </div>
+</ng-template>

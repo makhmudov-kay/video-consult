@@ -1,0 +1,65 @@
+.help {
+    min-height: 600px;
+    padding: 30px 0;
+    border-top: 2px solid #000;
+  
+    &__title {
+      font-size: 32px;
+      line-height: 41px;
+      color: #000;
+      font-family: Agrofont-Bold;
+    }
+  
+    &__collapse {
+      &__title {
+        font-size: 26px;
+        line-height: 34px;
+        font-family: Agrofont-Medium;
+  
+        @media (max-width: 575px) {
+          font-size: 20px;
+          line-height: 25px;
+        }
+      }
+  
+      &__text {
+        font-size: 18px;
+        line-height: 23px;
+        font-family: Agrofont-Regular;
+        padding-bottom: 30px;
+  
+        @media (max-width: 575px) {
+          font-size: 16px;
+          line-height: 20px;
+          padding-bottom: 24px;
+        }
+      }
+    }
+  }
+  
+  :host ::ng-deep {
+    .ant-collapse
+      > .ant-collapse-item.ant-collapse-no-arrow
+      > .ant-collapse-header {
+      padding-left: 0;
+      padding-top: 50px;
+      padding-bottom: 30px;
+  
+      @media (max-width: 575px) {
+        padding-top: 32px;
+      }
+    }
+  
+    .pannel {
+      border-bottom: 1px solid #cfd3d8;
+    }
+  }
+  
+  .icon {
+    font-size: 48px;
+  
+    @media (max-width: 575px) {
+      font-size: 32px;
+    }
+  }
+  

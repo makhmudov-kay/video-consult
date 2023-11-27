@@ -1,0 +1,102 @@
+/* DRAWER */
+.drawer-menu {
+  &__links {
+    &__menu {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 1px solid #d9d9d9;
+
+      &__item {
+        list-style: none;
+        margin-bottom: 36px;
+
+        a {
+          font-size: 16px;
+          line-height: 20px;
+          color: #282828;
+          font-family: Mont-Bold;
+        }
+      }
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 26px;
+    color: #000;
+    font-family: Mont-Bold;
+    margin-bottom: 16px;
+  }
+
+  &__client {
+    padding: 24px 0;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  &__consultant {
+    padding: 24px 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+      width: 160px;
+      height: 160px;
+      background: #f4f6ff;
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 19px;
+      margin-right: 16px;
+      margin-bottom: 16px;
+
+      @media (max-width: 575px) {
+        width: 120px;
+        height: 120px;
+        padding: 14px 16px;
+      }
+
+      @media (max-width: 360px) {
+        &:nth-of-type(even) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.eco-system-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+:host ::ng-deep {
+  .az-drawer__text {
+    font-size: 16px !important;
+    font-family: Mont-Bold;
+  }
+
+  az-eco-system-mobile {
+    svg {
+      circle {
+        fill: #22a33f;
+      }
+
+      rect {
+        fill: #fff;
+      }
+
+      path {
+        fill: #22a33f;
+      }
+    }
+  }
+}

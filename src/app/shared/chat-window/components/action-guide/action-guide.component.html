@@ -1,0 +1,143 @@
+<div class="message-status" *ngIf="message.action_status">
+  <div [ngSwitch]="message.action_status">
+    <!-- ACTION STATUS 1 -->
+    <div *ngSwitchCase="1">
+      <ng-container *ngIf="isClient; else isConsultant">
+        <div class="message-status-info message-status-block">
+          <az-svg-info-message class="d-flex"></az-svg-info-message>
+          <ng-container
+            *ngIf="profileId !== message.from_profile_id; else clientSended"
+          >
+            <p [innerHTML]="'guide.status.one.clientSide' | translate"></p>
+          </ng-container>
+          <ng-template #clientSended>
+            <p [innerHTML]="'guide.status.two.clientSide' | translate"></p>
+          </ng-template>
+        </div>
+      </ng-container>
+      <ng-template #isConsultant>
+        <div class="message-status-info message-status-block">
+          <az-svg-info-message class="d-flex"></az-svg-info-message>
+          <ng-container
+            *ngIf="profileId !== message.from_profile_id; else consultantSended"
+          >
+            <p [innerHTML]="'guide.status.one.consultant' | translate"></p>
+          </ng-container>
+          <ng-template #consultantSended>
+            <p>
+              {{ "guide.status.one.consultant.two" | translate }}
+            </p>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+    <!-- --------- -->
+    <!-- ACTION STATUS 2 -->
+    <div *ngSwitchCase="2">
+      <ng-container *ngIf="isClient; else isConsultantAccept">
+        <div class="message-status-success message-status-block">
+          <az-svg-accept class="d-flex"></az-svg-accept>
+          <p *ngIf="profileId === message.from_profile_id">
+            {{
+              isFreeApplication
+                ? ("getFreeConsult" | translate)
+                : ("getPayment" | translate)
+            }}
+            <button
+              class="video-call"
+              *ngIf="joinedUser && status !== 4 && !isStreaming && isOnline; else invite"
+              (click)="startVideoCall()"
+            >
+              {{ "startVideoConference" | translate }}
+            </button>
+            <ng-template #invite>
+              <button
+                class="video-call"
+                *ngIf="status !== 4 && !isStreaming && isOnline"
+                (click)="inviteToChat()"
+              >
+                {{ "inviteToChat" | translate }}
+              </button>
+            </ng-template>
+          </p>
+        </div>
+      </ng-container>
+      <ng-template #isConsultantAccept>
+        <div class="message-status-success message-status-block">
+          <az-svg-accept class="d-flex"></az-svg-accept>
+          <p *ngIf="profileId !== message.from_profile_id">
+            {{
+              isFreeApplication
+                ? ("isFreeAppliactionClient" | translate)
+                : ("clientPayed" | translate)
+            }}
+            <button
+              *ngIf="joinedUser && status !== 4 && !isStreaming && isOnline; else invite"
+              class="video-call"
+              (click)="startVideoCall()"
+            >
+              {{ "startVideoConference" | translate }}
+            </button>
+            <ng-template #invite>
+              <button
+                class="video-call"
+                *ngIf="status !== 4 && !isStreaming && isOnline"
+                (click)="inviteToChat()"
+              >
+                {{ "inviteToChat" | translate }}
+              </button>
+            </ng-template>
+          </p>
+        </div>
+      </ng-template>
+    </div>
+    <!-- -------- -->
+    <!-- ACTION STATUS 3 -->
+    <div *ngSwitchCase="3">
+      <ng-container *ngIf="isClient; else isConsultantWait">
+        <div class="message-status-info message-status-block">
+          <az-svg-info-message class="d-flex"></az-svg-info-message>
+          <ng-container
+            *ngIf="profileId !== message.from_profile_id; else isClientWait"
+          >
+            <p [innerHTML]="'consultantAccepted' | translate"></p>
+          </ng-container>
+          <ng-template #isClientWait>
+            <p [innerHTML]="'clientAccepted' | translate"></p>
+          </ng-template>
+        </div>
+      </ng-container>
+      <ng-template #isConsultantWait>
+        <div class="message-status-info message-status-block">
+          <az-svg-info-message class="d-flex"></az-svg-info-message>
+          <p *ngIf="profileId === message.from_profile_id; else clientAccepted">
+            {{ "consultantWait" | translate }}
+          </p>
+
+          <ng-template #clientAccepted>
+            <p>
+              {{ "clientWait" | translate }}
+            </p>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+    <div *ngSwitchCase="4">
+      <div class="message-status-info message-status-block danger">
+        <az-svg-info-message
+          [danger]="true"
+          class="d-flex"
+        ></az-svg-info-message>
+        <p *ngIf="profileId === message.from_profile_id; else clientDenied">
+          {{ "you.deny" | translate }}
+        </p>
+
+        <ng-template #clientDenied>
+          <p>
+            {{ "partner.deny" | translate }}
+          </p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,171 @@
+<ng-container *ngIf="categoryList">
+  <div
+    class="category"
+    [ngClass]="customClassName"
+    *ngIf="categoryList.length"
+  >
+    <h4 class="title">
+      {{
+        consultantResume
+          ? ("consultantCategory" | translate)
+          : ("allCategory" | translate)
+      }}
+    </h4>
+    <div class="category__content">
+      <ul
+        nz-row
+        class="category__list"
+        [nzGutter]="[{ xs: 0, sm: 15, md: 20, lg: 30 }, 16]"
+      >
+        <ng-container *ngIf="consultantResume; else create">
+          <li
+            nz-col
+            nzXs="24"
+            nzSm="12"
+            nzMd="8"
+            nzLg="8"
+            nzXl="6"
+            *ngFor="
+              let category of showCategory
+                ? categoryList
+                : (categoryList | slice : 0 : 15)
+            "
+            [ngClass]="{
+              invisible: consultantResume.category_id !== category.id
+            }"
+          >
+            <input
+              *ngIf="consultantResume; else create"
+              type="radio"
+              [value]="category.id"
+              [(ngModel)]="selectedCategory"
+              name="category"
+              [checked]="selectedCategory === category.id"
+              [id]="'checkBox_' + category.id"
+            />
+
+            <ng-template #create>
+              <input
+                type="radio"
+                [value]="category.id"
+                [(ngModel)]="selectedCategory"
+                name="category"
+                [checked]="selectedCategory === category.id"
+                [id]="'checkBox_' + category.id"
+              />
+            </ng-template>
+
+            <label
+              class="category__label"
+              (click)="onSelectCategory(category)"
+              [for]="'checkBox_' + category.id"
+            >
+              <div class="category__list__item">
+                <div class="category__list__item__img">
+                  <img [src]="category.icon" alt="category-icon" />
+                </div>
+                <span class="category__list__item__text">{{
+                  category.name
+                }}</span>
+              </div>
+
+              <span class="check-custom-mark">
+                <img src="./assets/images/check.svg" alt="icon" />
+              </span>
+            </label>
+          </li>
+        </ng-container>
+
+        <ng-template #create>
+          <li *ngIf="!isCreateApplication" nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="8" nzXl="6">
+            <input
+              type="radio"
+              [value]="0"
+              [(ngModel)]="selectedCategory"
+              name="category"
+              [checked]="selectedCategory === 0"
+              [id]="'checkBox_' + 0"
+            />
+
+            <label
+              class="category__label all-views"
+              (click)="onSelectCategory()"
+              [for]="'checkBox_' + 0"
+            >
+              <div class="category__list__item">
+                <div class="category__list__item__img svg-icon">
+                  <!-- <img [src]="category.icon" alt="category-icon" /> -->
+                  <az-svg-widget class="d-flex"></az-svg-widget>
+                </div>
+                <span class="category__list__item__text">{{
+                  "all" | translate
+                }}</span>
+              </div>
+
+              <span class="check-custom-mark">
+                <img src="./assets/images/check.svg" alt="icon" />
+              </span>
+            </label>
+          </li>
+
+          <li
+            nz-col
+            nzXs="24"
+            nzSm="12"
+            nzMd="8"
+            nzLg="8"
+            nzXl="6"
+            *ngFor="
+              let category of showCategory
+                ? categoryList
+                : (categoryList | slice : 0 : 15)
+            "
+          >
+            <input
+              type="radio"
+              [value]="category.id"
+              [(ngModel)]="selectedCategory"
+              name="category"
+              [checked]="selectedCategory === category.id"
+              [id]="'checkBox_' + category.id"
+            />
+
+            <label
+              class="category__label"
+              (click)="onSelectCategory(category)"
+              [for]="'checkBox_' + category.id"
+            >
+              <div class="category__list__item">
+                <div class="category__list__item__img">
+                  <img [src]="category.icon" alt="category-icon" />
+                </div>
+                <span class="category__list__item__text">{{
+                  category.name
+                }}</span>
+              </div>
+
+              <span class="check-custom-mark">
+                <img src="./assets/images/check.svg" alt="icon" />
+              </span>
+            </label>
+          </li>
+        </ng-template>
+
+        <li
+          nz-col
+          nzXs="24"
+          nzSm="12"
+          nzMd="8"
+          nzLg="8"
+          nzXl="6"
+          *ngIf="categoryList.length > 15 && !showCategory"
+        >
+          <div class="category__list__else" (click)="showMoreCategory()">
+            <img src="./assets/images/dots.svg" alt="icon" />
+            <span>{{ "elsePositions" | translate }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>

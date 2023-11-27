@@ -1,0 +1,81 @@
+<div class="grid-block">
+  <div class="consultant-chat">
+    <div class="consultant-chat__top">
+      <div class="consultant-chat__search mb-1 input">
+        <az-search-input (searchText)="searchText($event)"></az-search-input>
+      </div>
+      <button (click)="open()">
+        <img src="./assets/images/icons/filter.svg" alt="icon" />
+      </button>
+    </div>
+
+    <div class="consultant-chat__messages mb-1">
+      <ng-container *ngIf="clientChatList$ | async as chatList; else skeleton">
+        <ul
+          class="consultant-chat__messages__list"
+          *ngIf="chatList.length; else empty"
+        >
+          <li
+            *ngFor="let chat of chatList"
+            [routerLink]="[chat.messages.chat_id]"
+          >
+            <az-chat-item [isClient]="true" [card]="chat"></az-chat-item>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #empty>
+        <az-empty-application></az-empty-application>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="filter">
+    <az-filter
+      *ngIf="applicationsList$ | async as applicationsList; else filterSkelet"
+      [applicationsList]="applicationsList"
+      [clientApplicationRadioOptions]="clientApplicationRadioOptions"
+      (applicationId)="handleApplicationChange($event)"
+      (statusId)="filterByStatus($event)"
+      [form]="form"
+    ></az-filter>
+  </div>
+</div>
+
+<!-- FILTER DRAWER -->
+<az-drawer
+  [visible]="visible"
+  (closeDrawer)="close($event)"
+  [height]="'50%'"
+  [placement]="'bottom'"
+>
+  <div class="drawer__filter">
+    <div class="close" (click)="close(false)">
+      <span nz-icon nzType="close" nzTheme="outline"></span>
+    </div>
+    <az-filter
+      *ngIf="applicationsList$ | async as applicationsList"
+      [applicationsList]="applicationsList"
+      [clientApplicationRadioOptions]="clientApplicationRadioOptions"
+      (applicationId)="handleApplicationChange($event)"
+      (statusId)="filterByStatus($event)"
+      [form]="form"
+    ></az-filter></div
+></az-drawer>
+
+<!-- SKELETON -->
+<ng-template #skeleton>
+  <div class="skeleton" *ngFor="let skelet of [].constructor(4)">
+    <nz-skeleton
+      [nzAvatar]="true"
+      [nzTitle]="true"
+      [nzParagraph]="{ rows: 2 }"
+    ></nz-skeleton>
+  </div>
+</ng-template>
+
+<!-- FILTER SKELETON -->
+<ng-template #filterSkelet>
+  <div class="skeleton" *ngFor="let skelet of [].constructor(1)">
+    <nz-skeleton [nzTitle]="true" [nzParagraph]="{ rows: 8 }"></nz-skeleton>
+  </div>
+</ng-template>

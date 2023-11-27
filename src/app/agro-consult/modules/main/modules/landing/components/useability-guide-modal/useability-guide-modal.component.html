@@ -1,0 +1,224 @@
+<ng-container *ngIf="isVisibleModal; else drawer">
+  <nz-modal
+    [(nzVisible)]="isVisibleGuide"
+    [nzFooter]="null"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+    [nzClosable]="false"
+    [nzMaskClosable]="false"
+    nzWidth="944px"
+    [nzBodyStyle]="{ padding: '24px', borderRadius: '16px' }"
+    class="guide-modal"
+  >
+    <ng-container *nzModalContent>
+      <ng-container>
+        <div class="guide-modal__header">
+          <div class="guide-modal__header__lang">
+            <az-language
+              [nzShowArrow]="true"
+              [nzDropdownStyle]="{ width: '50px', top: '5px' }"
+              [label]="'short_name'"
+            ></az-language>
+          </div>
+          <div class="guide-modal__middle">
+            <h3 class="guide-modal__header__title">
+              {{ "howToUse" | translate }}
+            </h3>
+            <div
+              nz-typography
+              nzCopyable
+              class="copy"
+              [nzCopyIcons]="['link', 'check']"
+              [nzCopyText]="copableGuideLink"
+              [nzCopyTooltips]="['copy' | translate, 'copied' | translate]"
+            ></div>
+          </div>
+          <div class="guide-modal__header__close">
+            <button (click)="handleCancel()">
+              <az-svg-close-guid-icon class="d-flex"></az-svg-close-guid-icon>
+            </button>
+          </div>
+        </div>
+        <nz-divider></nz-divider>
+        <!-- USER TYPE -->
+        <az-user-type
+          [type]="type"
+          (typeChanger)="chooseGuideType($event)"
+        ></az-user-type>
+        <nz-divider></nz-divider>
+
+        <div class="guide-modal__content">
+          <swiper
+            [slidesPerView]="1"
+            (slideChange)="swiperEventListener()"
+            class="mySwiper"
+            #swiper
+          >
+            <ng-template
+              swiperSlide
+              *ngFor="
+                let guide of ($guide | async)! | azSort : 'position' : false;
+                let index = index
+              "
+            >
+              <span class="guide-modal__content__step">{{
+                index + 1 + " из " + ($guide | async)?.length
+              }}</span>
+              <h3 class="guide-modal__content__title">{{ guide.title }}</h3>
+              <p class="guide-modal__content__description">
+                {{ guide.description }}
+              </p>
+              <div class="guide-modal__content__video">
+                <video [src]="guide.videos" controls></video>
+              </div>
+            </ng-template>
+          </swiper>
+          <button
+            [hidden]="swiper.swiperRef && swiper.swiperRef.isBeginning"
+            class="guide-modal__content__prev guide-modal__content__btn"
+            (click)="pre()"
+          >
+            <span nz-icon nzType="left" nzTheme="outline"></span>
+          </button>
+          <button
+            [hidden]="swiper.swiperRef && swiper.swiperRef.isEnd"
+            class="guide-modal__content__next guide-modal__content__btn"
+            (click)="next()"
+          >
+            <span nz-icon nzType="right" nzTheme="outline"></span>
+          </button>
+        </div>
+        <nz-divider></nz-divider>
+        <div class="guide-modal__action">
+          <div
+            class="guide-modal__action__btn"
+            [hidden]="swiper.swiperRef && swiper.swiperRef.isEnd"
+          >
+            <button (click)="handleOk()">{{ "skipGuide" | translate }}</button>
+          </div>
+          <div
+            class="guide-modal__action__btn"
+            [hidden]="swiper.swiperRef && !swiper.swiperRef.isEnd"
+          >
+            <button class="next" (click)="handleOk()">
+              {{ "understand" | translate }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </nz-modal></ng-container
+>
+
+<!-- DRAWER -->
+<ng-template #drawer>
+  <nz-drawer
+    [nzClosable]="false"
+    [(nzVisible)]="visibleGuideDrawer"
+    nzPlacement="bottom"
+    (nzOnClose)="handleCancel()"
+    [nzMaskClosable]="false"
+    [nzHeight]="current < 1 ? 370 : 560"
+    [nzBodyStyle]="{ padding: '16px' }"
+  >
+    <ng-container *nzDrawerContent>
+      <div class="steps-content" [hidden]="index !== 'first'">
+        <h3 class="guide-modal__header__title">{{ "howToUse" | translate }}</h3>
+        <nz-divider style="margin: 16px 0"></nz-divider>
+        <!-- USER TYPE -->
+        <az-user-type
+          [type]="type"
+          (typeChanger)="chooseGuideType($event)"
+        ></az-user-type>
+      </div>
+
+      <div class="steps-content" [hidden]="index !== 'second'">
+        <div class="guide-modal__content">
+          <swiper
+            [slidesPerView]="1"
+            (slideChange)="swiperEventListener()"
+            class="mySwiper"
+            #swiper
+          >
+            <ng-template
+              swiperSlide
+              *ngFor="
+                let guide of ($guide | async)! | azSort : 'position' : false;
+                let index = index
+              "
+            >
+              <span class="guide-modal__content__step">{{
+                index + 1 + " из " + ($guide | async)?.length
+              }}</span>
+              <h3 class="guide-modal__content__title drawer">
+                {{ guide.title }}
+              </h3>
+              <p class="guide-modal__content__description">
+                {{ guide.description }}
+              </p>
+              <div class="guide-modal__content__video">
+                <video [src]="guide.videos" controls></video>
+              </div>
+            </ng-template>
+          </swiper>
+          <ng-container *ngIf="swiper && swiper.swiperRef">
+            <button
+              [hidden]="swiper.swiperRef.isBeginning"
+              class="guide-modal__content__prev guide-modal__content__btn drawer"
+              (click)="pre()"
+            >
+              <span nz-icon nzType="left" nzTheme="outline"></span>
+            </button>
+            <button
+              [hidden]="swiper.swiperRef.isEnd"
+              class="guide-modal__content__next guide-modal__content__btn drawer"
+              (click)="next()"
+            >
+              <span nz-icon nzType="right" nzTheme="outline"></span>
+            </button>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="steps-action">
+        <button
+          (click)="preStep()"
+          *ngIf="current > 0"
+          class="steps-action__btn skip"
+        >
+          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+          {{ "back" | translate }}
+        </button>
+        <button
+          (click)="nextStep()"
+          *ngIf="current < 1"
+          class="steps-action__btn"
+        >
+          {{ "go" | translate }}
+          <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
+        </button>
+        <button
+          (click)="handleOk()"
+          *ngIf="swiper && swiper?.swiperRef && swiper.swiperRef.isEnd"
+          class="steps-action__btn skip"
+        >
+          {{ "skip" | translate }}
+          <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
+        </button>
+
+        <button
+          (click)="handleOk()"
+          *ngIf="
+            swiper &&
+            swiper?.swiperRef &&
+            !swiper.swiperRef.isEnd &&
+            current >= 0
+          "
+          class="steps-action__btn drawer"
+        >
+          {{ "understand" | translate }}
+        </button>
+      </div>
+    </ng-container>
+  </nz-drawer>
+</ng-template>

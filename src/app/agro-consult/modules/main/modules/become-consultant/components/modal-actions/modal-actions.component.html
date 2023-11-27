@@ -1,0 +1,52 @@
+<div class="limit" *ngIf="resumeCount === 3">
+  <nz-alert
+    nzType="info"
+    [nzMessage]="'resume.limitTitle' | translate"
+    [nzDescription]="'resume.limitText' | translate"
+    nzShowIcon
+  ></nz-alert>
+</div>
+
+<div class="limit" *ngIf="isError">
+  <nz-alert
+    nzType="error"
+    [nzMessage]="'serverError' | translate"
+    [nzDescription]="'serverError.serverError' | translate"
+    nzShowIcon
+  ></nz-alert>
+</div>
+
+<div class="action">
+  <button class="action__btn" (click)="pre()" *ngIf="current === 1">
+    {{ "back" | translate }}
+  </button>
+  <button class="action__btn" (click)="navigateTo()" *ngIf="current == 0">
+    {{ "back" | translate }}
+  </button>
+  <button
+    class="action__btn next"
+    [disabled]="disableBtn"
+    (click)="next()"
+    *ngIf="current < 1"
+  >
+    {{ "go" | translate }}
+  </button>
+  <button class="action__btn next" (click)="create()" *ngIf="current === 1">
+    <span *ngIf="isLoading; else template" nz-icon [nzType]="'loading'"></span>
+    <ng-template #template>
+      <span *ngIf="edit; else create">{{ "changeResume" | translate }}</span>
+      <ng-template #create>
+        <span *ngIf="resumeCount < 3">
+          {{ "createResume" | translate }}
+        </span></ng-template
+      >
+    </ng-template>
+  </button>
+  <button
+    class="action__btn next"
+    (click)="navigateToMyResume()"
+    *ngIf="current === 1 && resumeCount >= 3"
+  >
+    {{ "myResumes" | translate }}
+  </button>
+</div>

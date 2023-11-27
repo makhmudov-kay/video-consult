@@ -1,0 +1,88 @@
+<div class="landing">
+  <div class="landing__header">
+    <div [ngSwitch]="logo">
+      <div *ngSwitchCase="'consultant'">
+        <az-logo-consultant></az-logo-consultant>
+      </div>
+      <div *ngSwitchCase="'uzimizniki'">
+        <az-logo-uzimizniki></az-logo-uzimizniki>
+      </div>
+    </div>
+
+    <div
+      class="header__right d-flex align-items-center justify-content-space-between"
+    >
+      <div>
+        <span class="text">Телефон службы поддержки:</span>
+        <a class="text--16" style="color: black" href="tel:998993709694"
+          >+998 (99) <span class="phone">370-96-94</span></a
+        >
+      </div>
+
+      <div *ngIf="telegrambot">
+        <span class="text">Телеграм Бот:</span>
+        <a
+          href="tg:@agrozamin_help_bot"
+          class="text--16"
+          style="text-decoration: underline"
+          >@agrozamin_help_bot</a
+        >
+      </div>
+
+      <div>
+        <app-language></app-language>
+      </div>
+    </div>
+  </div>
+  <swiper
+    #swiper
+    [slidesPerView]="1"
+    [effect]="'fade'"
+    [pagination]="{
+      clickable: true
+    }"
+    [autoplay]="{
+      delay: 3000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true
+    }"
+    [loop]="true"
+  >
+    <ng-template swiperSlide *ngFor="let banner of bannerData">
+      <div>
+        <div [innerHTML]="banner.innerHTML"></div>
+        <button
+          *ngIf="consultant"
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          class="mt-40"
+          [routerLink]="['/']"
+        >
+          {{ "becomeConsultant" | translate }}
+        </button>
+        <div *ngIf="uzimizniki" class="socials">
+          <div class="socials__bot">
+            <button nz-button>Перейти на вебсайт</button>
+            <button nz-button>Телеграм бот</button>
+          </div>
+          <div class="socials__store">
+            <h5>Наше приложение</h5>
+            <img src="./assets/images/app-store.png" alt="appStore" />
+            <img src="./assets/images/google-play.png" alt="google" />
+          </div>
+          <div class="socials__app">
+            <h5>Наши соцсети</h5>
+            <img src="./assets/images/Telegram.png" alt="telegram" />
+            <img src="./assets/images/Insta.png" alt="Instagram" />
+            <img src="./assets/images/Facebook (1).png" alt="Facebook" />
+            <img src="./assets/images/youtube (1).png " alt="youtube" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <img [src]="banner.image" alt="banner title" />
+      </div>
+    </ng-template>
+  </swiper>
+</div>

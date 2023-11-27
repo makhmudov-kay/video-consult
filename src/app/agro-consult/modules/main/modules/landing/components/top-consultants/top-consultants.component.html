@@ -1,0 +1,49 @@
+<section class="container">
+  <div class="top-consultant">
+    <div class="top-consultant__header">
+      <h3 class="top-consultant__title">{{ "topConsultants" | translate }}</h3>
+      <a routerLink="../../find-consultant">{{ "seeAll" | translate }}</a>
+    </div>
+
+    <div
+      class="top-consultant__list"
+      *ngIf="topConsulatantsList$ | async as consultantsList"
+    >
+      <swiper
+        [slidesPerView]="1.1"
+        [spaceBetween]="10"
+        [breakpoints]="{
+          '575': {
+            slidesPerView: 1.8,
+            spaceBetween: 20
+          },
+          '640': {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          '768': {
+            slidesPerView: 2.3,
+            spaceBetween: 20
+          },
+          '992': {
+            slidesPerView: 3,
+            spaceBetween: 20
+          },
+          '1024': {
+            slidesPerView: 3.2,
+            spaceBetween: 24
+          },
+          '1250': {
+            slidesPerView: 4,
+            spaceBetween: 24
+          }
+        }"
+        class="mySwiper"
+      >
+        <ng-template swiperSlide *ngFor="let consultant of consultantsList">
+          <az-consultant-card [consultant]="consultant"></az-consultant-card>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</section>

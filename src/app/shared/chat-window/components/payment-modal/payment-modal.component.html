@@ -1,0 +1,123 @@
+<nz-modal [(nzVisible)]="isVisiblePayment" [nzFooter]="null" [nzWidth]="600">
+  <ng-container *nzModalContent>
+    <div [ngSwitch]="index">
+      <!-- FIRST STEP -->
+      <div *ngSwitchCase="0">
+        <div class="payment__title">Совершите оплату</div>
+        <div class="payment__reciever">
+          <span class="payment__subtitle">Получатель</span>
+          <div class="payment__reciever__user">
+            <nz-avatar
+              [nzSize]="24"
+              nzIcon="user"
+              nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVssXCYX.png"
+            ></nz-avatar>
+            <span>Иван Рыжов</span>
+          </div>
+        </div>
+        <div class="payment__reciever">
+          <span class="payment__subtitle">Сумма перевода</span>
+          <p class="payment__price">75 000 сум</p>
+        </div>
+        <div class="payment__reciever">
+          <div class="payment__subtitle title">Карты</div>
+          <div class="payment__list">
+            <!-- CARD -->
+            <label>
+              <input
+                type="radio"
+                name="card"
+                value="1"
+                [(ngModel)]="selectedCard"
+              />
+              <div class="payment__card">
+                <div class="payment__card__triangles">
+                  <div class="top"></div>
+                  <div class="bootom"></div>
+                </div>
+                <div class="payment__card__info">
+                  <div class="payment__card__info__type">HUMO</div>
+                  <div class="payment__card__info__name">AgroBank</div>
+                  <div class="payment__card__info__balance">
+                    531 527 523 сум
+                  </div>
+                  <div class="payment__card__info__number">
+                    8600 96** **** **74
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            <div class="payment__add-card">
+              <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+              <p>Добавить карту</p>
+            </div>
+          </div>
+        </div>
+        <div class="payment__btn">
+          <button (click)="next()">Оплатить</button>
+        </div>
+      </div>
+
+      <!-- SECOND STEP -->
+      <div *ngSwitchCase="1">
+        <div class="payment__title">Добавьте карту</div>
+        <div class="payment__add-new-card">
+          <form>
+            <div class="payment__subtitle title">Укажите данные карты</div>
+            <div class="payment__card-number">
+              <label for="cardName">Номер карты</label>
+              <input nz-input type="text" id="cardName" nzSize="large" />
+            </div>
+            <div class="payment__card-date">
+              <label for="cardmonth">Дата использования</label>
+              <div class="payment__card-date__block">
+                <input nz-input type="text" id="cardmonth" nzSize="large" />
+                <span>/</span>
+                <input nz-input type="text" id="cardyear" nzSize="large" />
+              </div>
+            </div>
+            <div class="payment__add-new-card__btn">
+              <button class="payment__card__btn__back">Назад</button>
+              <button class="payment__card__btn__add">Добавить карту</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- THIRD STEP -->
+      <div *ngSwitchCase="2">
+        <div class="payment__title">Успех!</div>
+        <div class="payment__text">
+          <p class="payment__success">Поздаравляем, оплата прошла успешно!</p>
+          <p class="payment__safe">
+            Безопасная сделка — услуга для консультантов и заказчиков, благодаря
+            которой они могут не беспокоиться о финансовых рисках во время
+            сеанса
+          </p>
+          <p class="payment__safe-desc">
+            С безопасной сделкой сумма к оплате списывается с карты заказчика на
+            специальный счет у нашего финансового партнера перед началом сеанса
+            и переводится на карту консультанту в случае ее успешного завершения
+            Если проект не был выполнен, сумма гарантированно возвращается
+            заказчику
+          </p>
+        </div>
+        <div class="payment__btn"><button (click)="done()">Готово</button></div>
+      </div>
+      <div *ngSwitchDefault>output2</div>
+    </div>
+
+    <!-- <div class="steps-action">
+      <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+        <span>Previous</span>
+      </button>
+      <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+        <span>Next</span>
+      </button>
+      <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
+        <span>Done</span>
+      </button>
+    </div> -->
+  </ng-container>
+</nz-modal>

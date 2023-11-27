@@ -1,0 +1,41 @@
+<section class="container">
+  <div class="reviews">
+    <h4 class="reviews__title">{{ "respondsOurClients" | translate }}</h4>
+    <swiper
+      [slidesPerView]="1"
+      [spaceBetween]="10"
+      [autoplay]="{
+        delay: 2500,
+        disableOnInteraction: false
+      }"
+      [breakpoints]="{
+        '300': {
+          slidesPerView: 1.15,
+          spaceBetween: 20
+        },
+        '575': {
+          slidesPerView: 1.5,
+          spaceBetween: 20
+        },
+        '640': {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        '768': {
+          slidesPerView: 2.5,
+          spaceBetween: 24
+        },
+        '1024': {
+          slidesPerView: 3,
+          spaceBetween: 24
+        }
+      }"
+      class="mySwiper"
+      *ngIf="reviews$ | async as reviews"
+    >
+      <ng-template swiperSlide *ngFor="let review of reviews"
+        ><az-review-card [review]="review"></az-review-card
+      ></ng-template>
+    </swiper>
+  </div>
+</section>

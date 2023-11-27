@@ -1,0 +1,21 @@
+<ng-container *ngIf="userInfo">
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    (nzOnCancel)="handleCancel()"
+    [nzFooter]="null"
+  >
+    <ng-container *nzModalContent>
+      <az-proposal-content
+        (cancelHandler)="handleCancel($event)"
+        (okHandler)="handleOk($event)"
+        [form]="form"
+        [userInfo]="userInfo"
+        [myResumeList]="myResumeList"
+        [private]="private"
+        [isLoading]="isLoading"
+        [isFree]="isFree"
+        (setFreeConsult)="freeConsult($event)"
+      ></az-proposal-content>
+    </ng-container>
+  </nz-modal>
+</ng-container>

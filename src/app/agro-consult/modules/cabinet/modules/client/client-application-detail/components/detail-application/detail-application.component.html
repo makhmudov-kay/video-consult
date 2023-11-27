@@ -1,0 +1,98 @@
+<div class="detail" *ngIf="application">
+  <nz-alert
+    *ngIf="application.status === 5"
+    nzType="error"
+    [nzMessage]="
+      ('blockedApplication' | translate) + ' ' + application.reason_inactive
+    "
+  ></nz-alert>
+  <div class="detail__header">
+    <div class="detail__header__title">
+      <button *ngIf="!mobileWebView" (click)="navigateToApplicationList()">
+        <az-svg-arrow-left class="d-flex"></az-svg-arrow-left>
+      </button>
+      <h4>{{ application.title }}</h4>
+    </div>
+  </div>
+
+  <div class="detail__status">
+    <div class="detail__status__switcher">
+      <nz-switch
+        [nzLoading]="isLoading"
+        [(ngModel)]="application.is_visible"
+        (ngModelChange)="updateVisible($event)"
+      ></nz-switch>
+      <span>{{
+        application.is_visible === true
+          ? ("publicApplication" | translate)
+          : ("closedApplication" | translate)
+      }}</span>
+    </div>
+    <span
+      class="detail__header__delete"
+      nz-popconfirm
+      [nzPopconfirmTitle]="'confirmDelete' | translate"
+      (nzOnConfirm)="confirm()"
+      nzPopconfirmPlacement="bottomRight"
+      [nzCancelText]="'cancellation' | translate"
+    >
+      <az-svg-delete class="d-flex"></az-svg-delete>
+    </span>
+  </div>
+  <div class="detail__description">
+    <div class="detail__description__date">
+      <div class="date-text">
+        {{ "created_at" | translate }}
+        {{ application.created_at | formatDateFns | async }}
+      </div>
+    </div>
+
+    <div class="detail__price">
+      {{
+        application.price_from ? (application.price_from | number) + " - " : ""
+      }}
+      {{
+        !application.is_free
+          ? (application.price_to | number) + "сум"
+          : ("free" | translate)
+      }}
+    </div>
+
+    <div class="detail__category">
+      <span>{{ application.category }}</span>
+    </div>
+
+    <p>
+      {{ application.description }}
+    </p>
+    <div class="detail__files">
+      <ng-container *ngIf="application.files?.length">
+        <div class="detail__files__cards">
+          <div
+            *ngFor="let image of application.files"
+            class="detail__files__img"
+          >
+            <img nz-image [nzSrc]="image" alt="image" />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="detail__time">
+    <div>
+      <span class="detail__time__icon">
+        <img src="./assets/images/card-time.png" alt="image" />
+      </span>
+      <span class="detail__time__text">{{
+        application.when_date
+          ? application.when_date
+          : ("comfortTime" | translate)
+      }}</span>
+    </div>
+
+    <div class="detail__status__view">
+      <app-svg-views class="d-flex"></app-svg-views>
+      <span>{{ application.views }}</span>
+    </div>
+  </div>
+</div>

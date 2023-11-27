@@ -1,0 +1,70 @@
+@import "../../../assets/styles/text.less";
+
+.response-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__text {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 12px;
+    background: #f4f6ff;
+    border-radius: 8px;
+    align-items: center;
+
+    p {
+      .text(14px, 18px, #707c8b, Agrofont-Regular);
+    }
+
+    span {
+      .text(10px, 12px, #707c8b, Agrofont-Regular);
+      padding-left: 10px;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+
+    &__info {
+      margin-left: 12px;
+
+      &__name {
+        .text(16px, 16px, #292d32, Agrofont-Medium);
+        margin-bottom: 8px;
+      }
+
+      &__status {
+        .text(14px, 14px, #333333, Agrofont-Regular);
+      }
+    }
+  }
+
+  &__badge {
+    .text(10px, 12px, #fff, Agrofont-Medium);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2b4cff;
+  }
+}
+
+.amount {
+  color: #2b4cff;
+  font-size: 20px;
+  line-height: 23px;
+  padding-right: 5px;
+}

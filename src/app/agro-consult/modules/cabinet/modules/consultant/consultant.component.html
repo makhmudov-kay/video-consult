@@ -1,0 +1,8 @@
+<div class="consultant" [ngClass]="{isMobileDevice}">
+  <!-- <div class="consultant__menu" *ngIf="isVisibleMenu">
+    <az-menu></az-menu>
+  </div> -->
+  <div class="consultant__content" [ngClass]="{isMobileDevice}">
+    <router-outlet></router-outlet>
+  </div>
+</div>

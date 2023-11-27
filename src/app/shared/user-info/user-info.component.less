@@ -1,0 +1,42 @@
+.user {
+  display: flex;
+  align-items: center;
+
+  &__info {
+    margin-left: 12px;
+
+    &__name {
+      font-size: 20px;
+      line-height: 20px;
+      font-family: Agrofont-Medium;
+      color: #292d32;
+      margin-bottom: 8px;
+
+      &.chat {
+        font-size: 14px;
+        line-height: 14px;
+        color: #292d32;
+        font-family: Agrofont-Medium;
+        margin-bottom: 4px;
+      }
+    }
+
+    &__status {
+      font-size: 12px;
+      line-height: 12px;
+      color: #25d36b;
+      font-family: Mont-Bold;
+
+      &.chat {
+        font-family: Mont-SemiBold;
+      }
+      &.green {
+        color: #25d36b;
+      }
+
+      &.grey {
+        color: rgb(197, 197, 197);
+      }
+    }
+  }
+}

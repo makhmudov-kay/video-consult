@@ -1,0 +1,50 @@
+<div class="consultant__description">
+  <div class="consultant__description__yourself">
+    <h4 class="title">{{ "aboutConsultant" | translate }}</h4>
+    <!-- <p class="text">
+      {{ consultantInfo.about }}
+    </p> -->
+    <div class="consultant__description__about">
+      <!-- <div [froalaView]="consultantInfo.about"></div> -->
+      <quill-view-html [content]="consultantInfo.about"></quill-view-html>
+    </div>
+  </div>
+
+  <div class="consultant__description__specialization">
+    <h4 class="title">{{ "category" | translate }}</h4>
+    <ul>
+      <li class="text">{{ consultantInfo.category }}</li>
+    </ul>
+  </div>
+  <div class="consultant__description__specialization">
+    <h4 class="title">{{ "specialization" | translate }}</h4>
+    <ul>
+      <li class="text">{{ consultantInfo.position }}</li>
+    </ul>
+  </div>
+  <!-- <div class="consultant__description__specialization">
+    <h4 class="title">{{ "mainSkills" | translate }}</h4>
+    <ul class="skills">
+      <li class="text skills__item" *ngFor="let skill of consultantInfo.skills">
+        {{ skill }}
+      </li>
+    </ul>
+  </div> -->
+  <div class="consultant__description__specialization">
+    <h4 class="title">{{ "consultLanguage" | translate }}</h4>
+    <ul class="skills">
+      <li
+        class="text skills__item"
+        *ngFor="let language of consultantInfo.language"
+      >
+        {{ language }}
+      </li>
+    </ul>
+  </div>
+  <nz-divider class="divider"></nz-divider>
+  <!-- <div class="consultant__description__btn" *ngIf="profileId !== consultantInfo.profile_id">
+    <button [routerLink]="['../../create-application', consultantInfo.id]">
+      {{ "submitApplication" | translate }}
+    </button>
+  </div> -->
+</div>

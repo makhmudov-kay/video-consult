@@ -1,0 +1,79 @@
+.guide {
+  padding: 80px 0;
+
+  &__title {
+    font-size: 36px;
+    line-height: 46px;
+    font-family: Agrofont-Bold;
+    color: #0c1933;
+    margin-bottom: 48px;
+
+    @media (max-width: 575px) {
+      font-size: 24px;
+      line-height: 31px;
+      font-family: Agrofont-Bold;
+      color: #0c1933;
+      margin-bottom: 36px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    @media (max-width: 992px) {
+      justify-content: space-evenly;
+    }
+
+    @media (max-width: 767px) {
+      justify-content: center;
+    }
+
+    &__step {
+      max-width: 310px;
+      width: 100%;
+
+      @media (max-width: 450px) {
+        text-align: center;
+        margin: auto;
+      }
+
+      h3 {
+        color: #2b4cff;
+        font-size: 96px;
+        line-height: 123px;
+        font-family: Agrofont-Bold;
+        margin-bottom: 16px;
+      }
+
+      span {
+        font-size: 24px;
+        line-height: 31px;
+        font-family: Agrofont-Bold;
+        color: #0c1933;
+        margin-bottom: 48px;
+        display: block;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 21px;
+        font-family: Agrofont-Regular;
+        color: #0c1933;
+      }
+    }
+  }
+}
+
+.wrap {
+  display: flex;
+  // align-items: center;
+  height: 100%;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}

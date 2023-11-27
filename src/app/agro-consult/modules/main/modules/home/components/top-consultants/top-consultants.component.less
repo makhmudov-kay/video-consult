@@ -1,0 +1,22 @@
+.top-consultant {
+  padding: 48px 0 20px;
+  &__content {
+    overflow: hidden;
+    padding: 25px;
+    margin: -25px;
+
+    @media (max-width: 1400px) {
+        overflow: initial;
+        padding: 0;
+        margin: 0; 
+    }
+
+    &__swiper {
+      overflow: visible;
+
+      @media (max-width: 1400px) {
+        overflow: hidden;
+      }
+    }
+  }
+}

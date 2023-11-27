@@ -1,0 +1,119 @@
+<div class="card" *ngIf="application?.id" [routerLink]="[application.id]">
+  <div class="card__info">
+    <h3 class="card__info__title">{{ application.title }}</h3>
+    <div class="card__user">
+      <div class="card__user__name">
+        <nz-avatar
+          [nzSize]="'small'"
+          nzIcon="user"
+          [nzSrc]="application.user.avatar"
+        ></nz-avatar>
+        <span class="card__user__text">{{ application.user.fullname }}</span>
+      </div>
+      <div
+        class="card__user__date"
+        *ngIf="application.created_at | formatDateFns | async as date"
+      >
+        {{ date | translate }}
+      </div>
+    </div>
+    <p class="card__info__category">{{ application.category }}</p>
+    <span class="card__info__price" *ngIf="!application.is_free; else free"
+      >{{
+        application.price_from ? (application.price_from | number) + " - " : ""
+      }}
+      {{ application.price_to | number }} сум</span
+    >
+    <ng-template #free>
+      <span class="card__info__price">
+        {{ "free" | translate }}
+      </span>
+    </ng-template>
+  </div>
+  <div class="card__time">
+    <div class="card__time__block">
+      <span class="card__time__text">{{
+        application.when_date
+          ? ("urgently" | translate) +
+            " " +
+            (application.when_date | date : "dd.MM.yy")
+          : ("consultantComfortable" | translate)
+      }}</span>
+    </div>
+    <div class="card__status-block">
+      <div *ngIf="status" class="card__status">
+        <div [ngSwitch]="application.status">
+          <div *ngSwitchCase="1"></div>
+          <div *ngSwitchCase="2">
+            <span class="card__status__badge inProgress">{{
+              "waitingToDo" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchCase="3">
+            <span class="card__status__badge archive">{{
+              "statusArchive" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchCase="4">
+            <span class="card__status__badge respond">{{
+              "finished" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchCase="5">
+            <span class="card__status__badge deactivated">{{
+              "notActive" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchCase="6">
+            <span class="card__status__badge rejected">{{
+              "canceled" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchDefault></div>
+        </div>
+      </div>
+      <div *ngIf="application.response_status" class="card__status">
+        <div [ngSwitch]="application.response_status">
+          <div *ngSwitchCase="1">
+            <span class="card__status__badge send">{{
+              "youResponded" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchCase="2">
+            <span class="card__status__badge inProgress">{{
+              "accepted" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchCase="3">
+            <span class="card__status__badge archive">{{
+              "canceled" | translate
+            }}</span>
+          </div>
+          <div *ngSwitchDefault></div>
+        </div>
+      </div>
+      <div class="card__private" *ngIf="application.type === 'private'">
+        <ng-container *ngIf="application.status === 3; else private">
+          <span class="card__status__badge expired"
+            ><span><az-svg-clock></az-svg-clock></span
+            ><span class="private__text">{{
+              "private.expired" | translate
+            }}</span></span
+          >
+        </ng-container>
+
+        <ng-template #private>
+          <span class="card__status__badge private"
+            ><span
+              ><img
+                src="./assets/images/icons/private-icon.svg"
+                alt="icon" /></span
+            ><span class="private__text">{{
+              "privateApplication" | translate
+            }}</span></span
+          >
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

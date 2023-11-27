@@ -1,0 +1,70 @@
+<section class="container">
+  <div class="guide">
+    <h3 class="guide__title">{{ "howIsItWork" | translate }}</h3>
+    <div class="guide__info">
+      <swiper
+        [slidesPerView]="1"
+        [spaceBetween]="10"
+        [pagination]="{
+          clickable: true
+        }"
+        [breakpoints]="{
+          '450': {
+            slidesPerView: 1.5,
+            spaceBetween: 20
+          },
+          '640': {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          '768': {
+            slidesPerView: 3,
+            spaceBetween: 40
+          },
+          '1024': {
+            slidesPerView: 3,
+            spaceBetween: 50
+          }
+        }"
+        class="mySwiper"
+      >
+        <ng-template swiperSlide>
+          <div class="wrap">
+            <div class="guide__info__step">
+              <h3>01</h3>
+              <span>{{ "createApplicationGuid" | translate }}</span>
+              <p>
+                {{ "chooseConsultGuid" | translate }}
+              </p>
+            </div>
+            <div class="icon">
+              <az-svg-guide-arrow class="d-flex"></az-svg-guide-arrow>
+            </div>
+          </div> </ng-template
+        ><ng-template swiperSlide>
+          <div class="wrap">
+            <div class="guide__info__step">
+              <h3>02</h3>
+              <span>{{ "getConsult" | translate }}</span>
+              <p>
+                {{ "getConsult.text" | translate }}
+              </p>
+            </div>
+            <div class="icon">
+              <az-svg-guide-arrow class="d-flex"></az-svg-guide-arrow>
+            </div></div></ng-template
+        ><ng-template swiperSlide>
+          <div class="wrap">
+            <div class="guide__info__step">
+              <h3>03</h3>
+              <span>{{ "markConsult" | translate }}</span>
+              <p>
+                {{ "markConsult.text" | translate }}
+              </p>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</section>

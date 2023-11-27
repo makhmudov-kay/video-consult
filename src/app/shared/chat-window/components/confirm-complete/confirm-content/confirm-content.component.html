@@ -1,0 +1,14 @@
+<div class="confirm-complete">
+  <h3 class="confirm-complete__title">
+    {{ "completeApplication" | translate }}
+  </h3>
+  <p class="confirm-complete__text">
+    {{ "confirmComplete" | translate }}
+  </p>
+  <div class="confirm-complete__btn">
+    <button (click)="closeModal()">{{ "back" | translate }}</button>
+    <button class="danger" (click)="handleOk()">
+      {{ "toComplete" | translate }}
+    </button>
+  </div>
+</div>

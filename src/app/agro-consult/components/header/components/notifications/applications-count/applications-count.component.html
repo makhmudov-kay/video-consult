@@ -1,0 +1,31 @@
+<div
+  class="notification-wrapper"
+  [ngClass]="{ border: !isLast }"
+  (click)="handleNavigateToSearchApplications(notification.id)"
+>
+  <div class="notification-wrapper__left">
+    <span class="notification-wrapper__left__time">{{
+      notification.created_at | formatDateFns | async
+    }}</span>
+    <span
+      class="notification-wrapper__left__unread"
+      *ngIf="!notification.showed"
+      ><span class="notification-wrapper__left__unread__badge"></span>
+      {{ "unreaded" | translate }}</span
+    >
+    <div class="notification-wrapper__left__message">
+      {{ notification.data.category }}
+    </div>
+    <div class="notification-wrapper__left__message">
+      <span>{{ notification.link }}</span>
+      {{
+        notification.link > 1
+          ? ("newApplicationByCatPlural" | translate)
+          : ("newApplicationByCat" | translate)
+      }}
+    </div>
+  </div>
+  <div class="notification-wrapper__right">
+    <span nz-icon nzType="right" nzTheme="outline"></span>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="drawer-menu">
+  <!-- SERVICE BUTTON -->
+
+  <div class="eco-system-mobile">
+    <az-eco-system-mobile [index]="1100"></az-eco-system-mobile>
+  </div>
+
+  <!-- MENU LINKS -->
+  <div class="drawer-menu__links">
+    <ul class="drawer-menu__links__menu">
+      <li class="drawer-menu__links__menu__item" (click)="closeDrawer.emit()">
+        <a routerLink="./main/find-consultant">{{
+          "findConsultant" | translate
+        }}</a>
+      </li>
+      <li class="drawer-menu__links__menu__item" (click)="closeDrawer.emit()">
+        <a routerLink="./main/support">{{ "support" | translate }}</a>
+      </li>
+      <li class="drawer-menu__links__menu__item" (click)="closeDrawer.emit()">
+        <a routerLink="./main/become-consultant">{{
+          "becomeConsultant" | translate
+        }}</a>
+      </li>
+    </ul>
+  </div>
+  <!-- ------------------ -->
+  <!-- CLIENT CABINET -->
+  <div class="drawer-menu__client" *ngIf="isUserAuthetificate">
+    <h4 class="drawer-menu__title">{{ "cabinet.client" | translate }}</h4>
+    <div class="drawer-menu__list">
+      <div
+        class="drawer-menu__list__item my-applications"
+        routerLink="./cabinet/client/applications"
+        (click)="closeDrawer.emit()"
+      >
+        <span class="icon">
+          <az-my-applications></az-my-applications>
+        </span>
+        <span class="text">{{ "myApplications" | translate }}</span>
+      </div>
+      <div
+        class="drawer-menu__list__item chat"
+        routerLink="./cabinet/client/chat"
+        (click)="closeDrawer.emit()"
+      >
+        <span class="icon">
+          <az-svg-chats></az-svg-chats>
+        </span>
+        <span class="text">{{ "chat.STATUS_DEFAULT" | translate }}</span>
+      </div>
+      <div
+        class="drawer-menu__list__item payment"
+        (click)="closeDrawer.emit()"
+        routerLink="./cabinet/client/payment"
+      >
+        <span class="icon">
+          <az-svg-payment></az-svg-payment>
+        </span>
+        <span class="text">{{ "paymentMethod" | translate }}</span>
+      </div>
+    </div>
+  </div>
+  <!-- -------------------- -->
+  <!-- CONSULTANT CABINET -->
+  <div class="drawer-menu__consultant" *ngIf="isUserAuthetificate">
+    <h4 class="drawer-menu__title">{{ "cabinet.consultant" | translate }}</h4>
+    <div class="drawer-menu__list">
+      <div
+        class="drawer-menu__list__item search-applications"
+        routerLink="./cabinet/consultant/search"
+        (click)="closeDrawer.emit()"
+      >
+        <span class="icon">
+          <az-svg-search></az-svg-search>
+        </span>
+        <span class="text">{{ "applicationsSearch" | translate }}</span>
+      </div>
+      <div
+        class="drawer-menu__list__item my-applications"
+        routerLink="./cabinet/consultant/applications"
+        (click)="closeDrawer.emit()"
+      >
+        <span class="icon">
+          <az-my-applications></az-my-applications>
+        </span>
+        <span class="text">{{ "orders" | translate }}</span>
+      </div>
+      <div
+        class="drawer-menu__list__item responds"
+        routerLink="./cabinet/consultant/chat"
+        (click)="closeDrawer.emit()"
+      >
+        <span class="icon">
+          <az-svg-chats></az-svg-chats>
+        </span>
+        <span class="text">{{ "chat.STATUS_DEFAULT" | translate }}</span>
+      </div>
+      <div
+        class="drawer-menu__list__item payment"
+        routerLink="./cabinet/consultant/payment"
+        (click)="closeDrawer.emit()"
+      >
+        <span class="icon">
+          <az-svg-payment></az-svg-payment>
+        </span>
+        <span class="text">{{ "paymentMethod" | translate }}</span>
+      </div>
+      <div
+        class="drawer-menu__list__item chat"
+        routerLink="./cabinet/consultant/resume"
+        (click)="closeDrawer.emit()"
+      >
+        <span class="icon">
+          <az-svg-resume></az-svg-resume>
+        </span>
+        <span class="text">{{ "myResumes" | translate }}</span>
+      </div>
+    </div>
+  </div>
+  <!-- ------------------------ -->
+</div>

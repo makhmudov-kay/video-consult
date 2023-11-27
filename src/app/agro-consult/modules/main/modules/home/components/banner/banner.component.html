@@ -1,0 +1,26 @@
+<div class="banner">
+  <div class="banner__info">
+    <div class="banner__info__content-block">
+      <h3 class="banner__info__title">{{ "findConsultant" | translate }}</h3>
+      <p class="banner__info__subtitle">
+        {{ "consultant.count" | translate }}
+      </p>
+    </div>
+    <button class="primary-bg banner__info__btn" (click)="isVisible = true">
+      <span class="banner__info__btn__text">{{
+        "creatingApplication" | translate
+      }}</span>
+      <img src="./assets/images/plus-square.svg" alt="icon" />
+    </button>
+  </div>
+
+  <div class="banner__img">
+    <div class="banner__img__block">
+      <img src="./assets/images/banner-image.png" alt="image" />
+    </div>
+  </div>
+</div>
+
+<az-application-type-modal
+  [(isVisible)]="isVisible"
+></az-application-type-modal>

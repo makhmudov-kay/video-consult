@@ -1,0 +1,40 @@
+<div
+  class="notification-wrapper"
+  [ngClass]="{ border: !isLast }"
+  (click)="
+  navigateToPrivate({
+      link: notification.link,
+      id: notification.id
+    })
+  "
+>
+  <div class="notification-wrapper__left">
+    <span class="notification-wrapper__left__time">{{
+      notification.created_at | formatDateFns | async
+    }}</span>
+    <span
+      class="notification-wrapper__left__unread"
+      *ngIf="!notification.showed"
+      ><span class="notification-wrapper__left__unread__badge"></span>
+      {{ "unreaded" | translate }}</span
+    >
+    <div
+      class="notification-wrapper__left__title"
+    >
+        {{ "privateApplication.ignoreTitle" | translate }}
+    </div>
+    <p
+      class="notification-wrapper__left__text"
+    >
+        {{ "privateApplication.ignoreText" | translate }}
+    </p>
+  </div>
+  <div class="notification-wrapper__right">
+    <span nz-icon>
+      <img
+        src="./assets/images/icons/Time_duotone_line.svg"
+        alt="icon"
+      />
+    </span>
+  </div>
+</div>

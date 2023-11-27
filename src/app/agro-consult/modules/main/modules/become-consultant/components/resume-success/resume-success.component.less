@@ -1,0 +1,64 @@
+@import "../../../../../../../../assets/styles/text.less";
+
+.success {
+  border-radius: 16px;
+  text-align: center;
+
+  img {
+    margin-bottom: 36px;
+
+    @media (max-width: 575px) {
+      margin-bottom: 24px;
+      padding-top: 10px;
+    }
+  }
+
+  &__title {
+    .text(36px, 48px, #1e1e1e, Agrofont-Medium);
+    margin-bottom: 48px;
+
+    @media (max-width: 575px) {
+      .text(24px, 32px, #1e1e1e, Agrofont-Medium);
+      margin-bottom: 24px;
+    }
+  }
+
+  &__subtitle {
+    .text(24px, 32px, #000, Agrofont-Regular);
+    padding: 24px 32px;
+    border: 2px solid #22a33f;
+    background: rgba(34, 163, 63, 0.16);
+    border-radius: 8px;
+    margin-bottom: 48px;
+
+    @media (max-width: 575px) {
+      .text(18px, 26px, #000, Agrofont-Regular);
+      padding: 18px 24px;
+    }
+  }
+
+  &__btn {
+    .text(24px, 24px, #fff, Agrofont-Medium);
+    padding: 24px 0;
+    background: #2a4aff;
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    @media (max-width: 575px) {
+      .text(18px, 24px, #fff, Agrofont-Medium);
+      padding: 18px 0;
+    }
+
+    &:hover {
+      background: lighten(#2a4aff, 5%);
+    }
+
+    &:active {
+      background: darken(#2a4aff, 10%);
+    }
+  }
+}

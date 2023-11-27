@@ -1,0 +1,76 @@
+<div class="attached" *ngIf="consultantInfo.files.length > 0">
+  <ng-container *ngIf="consultantInfo.files.length > 0">
+    <h5 class="title">{{ "attachImg.view" | translate }}</h5>
+    <div class="attached__files">
+      <swiper
+        [slidesPerView]="2.3"
+        [spaceBetween]="8"
+        [pagination]="{
+          clickable: true
+        }"
+        [breakpoints]="{
+          '360': {
+            slidesPerView: 2.7,
+            spaceBetween: 8
+          },
+          '480': {
+            slidesPerView: 3.4,
+            spaceBetween: 8
+          },
+          '520': {
+            slidesPerView: 3.8,
+            spaceBetween: 8
+          },
+          '600': {
+            slidesPerView: 4,
+            spaceBetween: 8
+          },
+          '640': {
+            slidesPerView: 5,
+            spaceBetween: 8
+          },
+          '768': {
+            slidesPerView: 5.7,
+            spaceBetween: 8
+          },
+          '1024': {
+            slidesPerView: 8,
+            spaceBetween: 8
+          },
+          '1100': {
+            slidesPerView: 8.8,
+            spaceBetween: 8
+          },
+          '1200': {
+            slidesPerView: 9.5,
+            spaceBetween: 8
+          }
+        }"
+        class="mySwiper"
+      >
+        <ng-template swiperSlide *ngFor="let image of consultantInfo.files">
+          <div class="attached__files__img">
+            <img nz-image [nzSrc]="image" alt="file" />
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="consultantInfo.attached_files.length > 0">
+    <div class="attached__documents">
+      <h5 class="title">{{ "attachedFiles" | translate }}</h5>
+      <div class="attached__docs">
+        <a
+          class="attached__files__docs"
+          *ngFor="let doc of consultantInfo.attached_files"
+          [href]="doc.file"
+          download
+          target="_blank"
+        >
+          <span>{{ doc.name }}</span>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+</div>

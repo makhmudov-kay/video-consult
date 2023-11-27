@@ -1,0 +1,24 @@
+.radio {
+  display: flex;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  label {
+    border-radius: 24px;
+    margin-right: 8px;
+    border: none;
+    margin-bottom: 8px;
+
+    &::before {
+      content: none;
+    }
+  }
+}
+
+.label {
+  display: block;
+  width: max-content;
+}

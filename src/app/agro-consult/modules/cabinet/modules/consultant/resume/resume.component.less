@@ -1,0 +1,116 @@
+.resume {
+  &__list {
+    padding: 0;
+    margin: 0;
+    &__item {
+      list-style: none;
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+
+      display: flex;
+      justify-content: space-between;
+
+      .right {
+        display: flex;
+        // flex-direction: column;
+        justify-content: flex-end;
+        align-items: end;
+
+        &__btn {
+          cursor: pointer;
+
+          svg {
+            path {
+              transition: 0.3s;
+            }
+          }
+
+          &.delete {
+            &:hover {
+              svg {
+                path {
+                  stroke: tomato;
+                }
+              }
+            }
+          }
+          &.edit {
+            &:hover {
+              svg {
+                path {
+                  stroke: rgb(71, 129, 255);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 26px;
+        color: #282828;
+        font-family: Agrofont-Medium;
+        margin-bottom: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: max-content;
+
+        &:hover {
+          color: #2b4cff;
+        }
+      }
+
+      &__switcher {
+        display: flex;
+        align-items: center;
+
+        .text {
+          margin-left: 8px;
+          display: block;
+          font-size: 12px;
+          line-height: 15px;
+          color: #86898c;
+          font-family: Agrofont-Regular;
+        }
+      }
+    }
+  }
+
+  &__btn {
+    padding: 14px 0;
+    background: rgba(48, 86, 255, 0.06);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: Agrofont-Medium;
+    color: #2b4cff;
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background: rgba(48, 86, 255, 0.09);
+    }
+
+    &:active {
+      background: rgba(48, 86, 255, 0.2);
+    }
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.empty {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 30px 0;
+}

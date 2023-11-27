@@ -1,0 +1,62 @@
+<div class="application">
+  <az-detail-application
+    *ngIf="application$ | async as application"
+    [application]="application"
+    (removeApplicationId)="removeApplication($event)"
+    (onChangeVisibility)="handleVsisbleApplication($event)"
+    [isLoading]="isLoading"
+    [mobileWebView]="mobileWebView"
+  ></az-detail-application>
+  <div class="application__respond" *ngIf="application$ | async as application">
+    <div
+      class="application__respond__count"
+      *ngIf="application.type !== 'private'"
+    >
+      {{ application.response_count }} {{ "respond" | translate }}
+    </div>
+    <div class="application__respond__cards">
+      <ul *ngIf="application.response.length; else empty">
+        <li
+          *ngFor="let card of application.response"
+          [routerLink]="['../../chat', card.chat_id]"
+          [fragment]="mobileWebView ? mobileWebView : ''"
+        >
+          <az-chat-response-card [response]="card"></az-chat-response-card>
+        </li>
+      </ul>
+      <ng-template #empty>
+        <div class="empty" *ngIf="application.type !== 'private'">
+          <h4>{{ "nobodyRespond" | translate }}</h4>
+        </div>
+      </ng-template>
+    </div>
+
+    <div
+      class="canceled"
+      *ngIf="application.status === 6 && application.type === 'private'"
+    >
+      <p>{{ "consultIsCanceled" | translate }}</p>
+    </div>
+    <div
+      class="private-chat"
+      *ngIf="application.type === 'private' && application.chat.length"
+    >
+      <div class="private-chat__avatar">
+        <nz-avatar
+          nzIcon="user"
+          [nzSrc]="application.chat[0].profile.avatar"
+        ></nz-avatar>
+        <p>{{ application.chat[0].profile.fullname }}</p>
+      </div>
+      <div class="private-chat__button">
+        <a
+          nz-button
+          nzType="primary"
+          [routerLink]="['../../chat', application.chat[0].id]"
+          [fragment]="mobileWebView ? mobileWebView : ''"
+          >{{ "goToChat" | translate }}</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

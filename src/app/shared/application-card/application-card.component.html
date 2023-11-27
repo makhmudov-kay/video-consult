@@ -1,0 +1,44 @@
+<div class="application__card">
+  <h5 class="application__card__title">
+    {{ form.controls["title"].value }}
+  </h5>
+
+  <p class="application__card__price">
+    {{
+      form.controls["price_from"].value
+        ? (form.controls["price_from"].value | number) + " - "
+        : ""
+    }}
+    {{
+      !form.controls["is_free"].value
+        ? (form.controls["price_to"].value | number) + " сум"
+        : ("free" | translate)
+    }}
+  </p>
+
+  <p
+    class="application__card__description"
+    nz-typography
+    nzEllipsis
+    nzEllipsisRows="4"
+  >
+    {{ form.controls["description"].value }}
+  </p>
+
+  <ng-container *ngIf="imageSrc.length">
+    <div class="application__card__img">
+      <div *ngFor="let image of imageSrc" class="application__card__img__block">
+        <img [src]="image.file ? image.file : image" alt="image" />
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="application__card__pickedtime">
+    <img src="./assets/images/calendar.svg" alt="icon" />
+    <span>{{
+      form.controls["when_date"].value
+        ? (form.controls["when_date"].value | date : "dd.MM.yyyy")
+        : ("consultantComfortable" | translate)
+    }}</span>
+  </div>
+</div>

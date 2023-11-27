@@ -1,0 +1,70 @@
+<div class="footer" [hidden]="hidden">
+  <div class="container">
+    <div class="footer__blocks">
+      <!-- BLOCK FIRST -->
+      <div class="footer__main block">
+        <div class="footer__main__logo">
+          <img src="./assets/images/agrobank-logo.png" alt="logo" />
+        </div>
+        <ul class="footer__main__social">
+          <li class="social">
+            <a target="_blank" href="https://www.instagram.com/agrozamin.uz/">
+              <img src="./assets/images/icons/instagram.svg" alt="instagram" />
+            </a>
+          </li>
+          <li class="social">
+            <a target="_blank" href="https://t.me/agrozamin_uz">
+              <img src="./assets/images/icons/tg.svg" alt="tg" />
+            </a>
+          </li>
+        </ul>
+        <p class="footer__main__rights">
+          2021–2022 © {{ "allRightReserved" | translate }}
+          {{ "allServicesLicensed" | translate }}
+        </p>
+      </div>
+      <!-- BLOCK SECOND -->
+      <div class="footer__apps block">
+        <div class="footer__apps__img">
+          <img src="./assets/images/google.png" alt="googleplay" />
+        </div>
+        <div class="footer__apps__img">
+          <img src="./assets/images/apple.png" alt="googleplay" />
+        </div>
+      </div>
+      <!-- BLOCK THIRD -->
+      <div class="footer__links block">
+        <h5 class="footer__links__title">{{ "usefulLinks" | translate }}</h5>
+        <ul class="footer__links__menu">
+          <li class="footer__links__menu__item">
+            <a routerLink="./main/support">{{ "support" | translate }}</a>
+          </li>
+          <li class="footer__links__menu__item">
+            <a routerLink="./main/become-consultant">{{
+              "becomeConsultant" | translate
+            }}</a>
+          </li>
+        </ul>
+      </div>
+      <!-- BLOCK FOURTH -->
+      <div class="footer__info block">
+        <div class="footer__info__call">
+          <h5>{{ "callCentre" | translate }}:</h5>
+          <a style="display: block" href="tel:998993709693"
+            >+998 (99) 370-96-93</a
+          >
+          <a style="display: block" href="tel:998993709694"
+            >+998 (99) 370-96-94</a
+          >
+          <a style="display: block" href="tel:998993709695"
+            >+998 (99) 370-96-95</a
+          >
+        </div>
+        <div class="footer__info__call">
+          <h5>Telegram Bot</h5>
+          <a href="tg:@agrozamin_help_bot">@agrozamin_help_bot</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

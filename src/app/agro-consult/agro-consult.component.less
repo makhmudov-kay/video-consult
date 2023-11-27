@@ -1,0 +1,47 @@
+.wrapper {
+  position: relative;
+  &__header {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+
+    &.isMobileDevice {
+      display: none;
+    }
+  }
+
+  &__content {
+    padding-top: 108px;
+    min-height: 100vh;
+    height: 100%;
+
+    @media (max-width: 767px) {
+      padding-top: 98px;
+    }
+    @media (max-width: 575px) {
+      padding-top: 74px;
+    }
+    @media (max-width: 475px) {
+      padding-top: 58px;
+    }
+
+    &.is_mobile {
+      padding-top: 0;
+    }
+  }
+
+  &__tg-bot {
+    position: fixed;
+    z-index: 5;
+    right: 3vw;
+    bottom: 10vh;
+  }
+}
+
+.isCabinet {
+  background: #f5f5f7;
+}

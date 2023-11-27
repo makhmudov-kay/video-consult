@@ -1,0 +1,222 @@
+.consultant-about {
+  border-top: 2px solid #282828;
+  padding: 48px 0;
+
+  @media (max-width: 767px) {
+    padding: 32px 0;
+  }
+
+  @media (max-width: 575px) {
+    padding: 18px 0;
+  }
+
+  &__user {
+    &__avatar {
+      height: 360px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: zoom-in;
+
+      @media (max-width: 767px) {
+        height: 310px;
+      }
+
+      @media (max-width: 575px) {
+        max-width: 260px;
+        height: 260px;
+        margin: auto;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      nz-skeleton-element {
+        width: 100%;
+        height: 100%;
+
+        ::ng-deep {
+          .ant-skeleton-image {
+            width: 100%;
+            height: 100%;
+
+            svg {
+              width: 80px;
+              height: 80px;
+            }
+          }
+        }
+      }
+    }
+
+    &__block {
+      nz-skeleton-element {
+        ::ng-deep {
+          .ant-skeleton-input {
+            max-width: 335px;
+            width: 100%;
+            display: block;
+
+            @media (max-width: 576px) {
+              margin: auto;
+            }
+          }
+        }
+      }
+
+      @media (max-width: 991px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      @media (max-width: 767px) {
+        justify-content: center;
+      }
+    }
+
+    &__name {
+      font-size: 64px;
+      line-height: 82px;
+      font-family: Agrofont-Bold;
+      margin-bottom: 24px;
+
+      @media (max-width: 991px) {
+        font-size: 40px;
+        line-height: 51px;
+      }
+
+      @media (max-width: 767px) {
+        margin-bottom: 0;
+        font-size: 30px;
+        line-height: 38px;
+      }
+
+      @media (max-width: 575px) {
+        margin-bottom: 18px;
+        font-size: 36px;
+        line-height: 38px;
+        text-align: center;
+      }
+    }
+
+    &__status {
+      font-size: 24px;
+      line-height: 30px;
+      font-family: Mont-SemiBold;
+      color: #86898c;
+      margin-bottom: 24px;
+
+      @media (max-width: 767px) {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 14px;
+      }
+
+      @media (max-width: 575px) {
+        margin-bottom: 18px;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+      }
+    }
+
+    &__rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 28px;
+
+      @media (max-width: 575px) {
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+
+      &_info {
+        margin-right: 16px;
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: 4px;
+        }
+
+        span {
+          font-size: 24px;
+          line-height: 30px;
+          font-family: Mont-SemiBold;
+          color: #000;
+
+          @media (max-width: 767px) {
+            font-size: 16px;
+            line-height: 20px;
+          }
+
+          @media (max-width: 575px) {
+            font-size: 24px;
+            line-height: 30px;
+          }
+        }
+      }
+    }
+
+    &__btn {
+      @media (max-width: 575px) {
+        display: none;
+      }
+
+      button {
+        padding: 16px 36px;
+        border-radius: 8px;
+        background: #2b4cff;
+        border: none;
+        font-size: 20px;
+        line-height: 26px;
+        color: #fff;
+        transition: 0.3s;
+        cursor: pointer;
+        font-family: Mont-Bold;
+
+        &:hover {
+          background: lighten(#2b4cff, 10%);
+        }
+        &:active {
+          background: darken(#2b4cff, 10%);
+        }
+
+        @media (max-width: 767px) {
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.divider {
+  display: none;
+  @media (max-width: 575px) {
+    margin: 18px 0;
+    display: block;
+  }
+}
+
+.isOnline {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 575px) {
+    justify-content: center;
+  }
+}
+
+.online {
+  width: 12px;
+  height: 12px;
+  display: block;
+  border-radius: 50%;
+  background: rgb(0, 177, 0);
+  margin-right: 5px;
+}

@@ -1,0 +1,133 @@
+.landing {
+  max-width: 1410px;
+  margin: 0 auto;
+  width: 100%;
+
+  &__header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  ::ng-deep {
+    .swiper-pagination {
+      position: absolute;
+      right: 0 !important;
+      z-index: 2;
+      top: 50%;
+      width: initial;
+      left: initial;
+
+      &-bullet {
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 10px;
+        background: #b7bbbf;
+        margin-top: 8px;
+        transition: all 0.3s ease-in-out;
+
+        &-active {
+          background: #2b4cff;
+          height: 16px;
+        }
+      }
+    }
+
+    .swiper-slide {
+      background-color: white;
+      margin-top: 75px;
+      display: flex;
+      gap: 30px;
+
+      h1 {
+        font-size: 60px;
+        line-height: 125%;
+      }
+
+      .mt-40 {
+        margin-top: 40px;
+      }
+
+      .mt-25 {
+        margin-top: 25px;
+      }
+
+      p {
+        font-size: 18px;
+
+        span {
+          color: #2b4cff;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.header__right {
+  width: 600px;
+}
+
+.text {
+  font-size: 14px;
+  color: #9fa2a6;
+  display: block;
+}
+
+.text--16 {
+  font-size: 16px;
+}
+
+.phone {
+  font-weight: 700;
+  color: #2b4cff;
+  font-size: 18px;
+}
+
+.socials {
+  margin-top: 32px;
+  &__bot {
+    margin-bottom: 32px;
+    button {
+      cursor: pointer;
+      margin-right: 16px;
+      background: #00cd69;
+      color: #fff;
+      &:active {
+        background: #00b25b;
+      }
+      &:hover {
+        background: #00b25b;
+      }
+    }
+  }
+  &__store {
+    h5 {
+      font-size: 16px;
+      font-family: Agrofont-BExpanded;
+      margin-bottom: 16px;
+    }
+    img {
+      width: 170px;
+      height: 60px;
+      margin-right: 16px;
+      cursor: pointer;
+    }
+  }
+  &__app {
+    margin-top: 20px;
+    h5 {
+      font-size: 16px;
+      font-family: Agrofont-BExpanded;
+      margin-bottom: 16px;
+    }
+    img {
+      width: 50px;
+      height: 50px;
+      margin-right: 16px;
+      cursor: pointer;
+    }
+  }
+}

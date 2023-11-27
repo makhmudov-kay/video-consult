@@ -1,0 +1,176 @@
+<!-- VIDEO CALL -->
+<div
+  class="video-block"
+  [ngClass]="{ small: smallScreen, minimal: minimalScreen }"
+  id="video-row"
+  [hidden]="!isStreaming"
+>
+  <div class="video-block__container">
+    <div class="not-device" *ngIf="videoCallParams.callAccepted">
+      <div class="device-not-found">
+        <nz-avatar [nzSize]="84" nzIcon="user" [nzSrc]="avatar"></nz-avatar>
+        <h4>{{ fullname }}</h4>
+      </div>
+    </div>
+
+    <div [hidden]="minimalScreen" id="local-player" class="user-video"></div>
+    <ng-container *ngIf="videoCallParams.callAccepted; else calling">
+      <div id="remote-player" class="partner-video"></div>
+    </ng-container>
+    <ng-template #calling>
+      <div *ngIf="callPartner" class="partner-video calling">
+        <div class="column items-center q-pt-xl">
+          <div class="text-center">
+            <nz-avatar
+              [nzSize]="64"
+              nzIcon="user"
+              [nzSrc]="avatar"
+              style="margin-bottom: 8px"
+            ></nz-avatar>
+            <p>
+              <strong class="calling-partner">{{ callPartner }}</strong>
+            </p>
+            <p class="calling-subtext">{{ "calling" | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+      <div class="controls__small">
+        <button (click)="minimize()">
+          <az-svg-back
+            class="d-flex"
+            [minimalScreen]="minimalScreen"
+          ></az-svg-back>
+        </button>
+      </div>
+      <div class="controls__settings">
+        <button class="fill" (click)="screenCapture()">
+          <svg-screen-capture class="d-flex"></svg-screen-capture>
+        </button>
+        <button class="fill" (click)="resize()" *ngIf="!minimalScreen">
+          <az-svg-resize-video class="d-flex"></az-svg-resize-video>
+        </button>
+        <button (click)="toggleMuteVideo()" *ngIf="!minimalScreen">
+          <az-svg-video-camera
+            *ngIf="!mutedVideo; else muted"
+            class="d-flex"
+          ></az-svg-video-camera>
+          <ng-template #muted>
+            <az-svg-muted-video class="d-flex"></az-svg-muted-video>
+          </ng-template>
+        </button>
+        <button (click)="toggleMuteAudio()" *ngIf="!minimalScreen">
+          <az-svg-mic
+            *ngIf="!mutedAudio; else mutedaudio"
+            class="d-flex"
+          ></az-svg-mic>
+
+          <ng-template #mutedaudio>
+            <az-svg-muted-audio class="d-flex"></az-svg-muted-audio>
+          </ng-template>
+        </button>
+      </div>
+    </div>
+    <div class="controls-bottom">
+      <div class="controls-bottom__btn" *ngIf="!minimalScreen">
+        <button (click)="clickEndCall()">
+          <az-svg-square-close class="d-flex"></az-svg-square-close>
+        </button>
+      </div>
+      <div
+        class="video-info"
+        *ngIf="videoCallParams.callAccepted && !deviceNotFound"
+      >
+        <h4>{{ callPartner ? callPartner : fullname }}</h4>
+      </div>
+    </div>
+
+    <div class="controls-bottom__md">
+      <div class="controls-bottom__md__btns">
+        <div *ngIf="!minimalScreen" class="md-btns">
+          <button (click)="clickEndCall()" class="danger">
+            <az-svg-square-close class="d-flex"></az-svg-square-close>
+          </button>
+          <button (click)="resize()">
+            <az-svg-resize-video class="d-flex"></az-svg-resize-video>
+          </button>
+          <button (click)="toggleMuteVideo()">
+            <az-svg-video-camera
+              *ngIf="mutedVideo === false; else muted"
+              class="d-flex"
+            ></az-svg-video-camera>
+            <ng-template #muted>
+              <az-svg-muted-video class="d-flex"></az-svg-muted-video>
+            </ng-template>
+          </button>
+          <button (click)="toggleMuteAudio()">
+            <az-svg-mic
+              *ngIf="mutedAudio === false; else mutedaudio"
+              class="d-flex"
+            ></az-svg-mic>
+
+            <ng-template #mutedaudio>
+              <az-svg-muted-audio class="d-flex"></az-svg-muted-audio>
+            </ng-template>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="reconnect" *ngIf="connectionError">
+      <h4>{{ "lostConnection" | translate }}</h4>
+      <span>{{ "lostConnection.text" | translate }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Incoming Call  -->
+<div
+  class="incoming"
+  *ngIf="videoCallParams.receivingCall && videoCallParams.caller !== authuserid"
+>
+  <div class="incoming__info">
+    <nz-avatar
+      class="text-center"
+      [nzSize]="64"
+      [nzSrc]="partnerAvatar"
+      nzIcon="user"
+      style="margin-bottom: 8px"
+    ></nz-avatar>
+    <p class="text-center">
+      <strong class="calling-partner">{{ partnerFullName }}</strong>
+    </p>
+    <p class="calling-subtext text-center">
+      {{ "incomingCallFrom" | translate }}
+    </p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-danger" (click)="declineCall()">
+        <!-- {{ "decline" | translate }} -->
+        <az-svg-square-close class="d-flex"></az-svg-square-close>
+      </button>
+      <button type="button" class="btn btn-success ml-5" (click)="acceptCall()">
+        <!-- {{ "accept" | translate }} -->
+        <az-svg-accept-call class="d-flex"></az-svg-accept-call>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SOUNDS FOR VIDEO CHAT -->
+<div class="sounds">
+  <audio
+    src="./assets/sounds/04335.mp3"
+    *ngIf="!videoCallParams.callAccepted"
+    #waitingCall
+    loop
+  ></audio>
+  <audio
+    src="./assets/sounds/Skype.mp3"
+    *ngIf="!videoCallParams.callAccepted"
+    #incomingCall
+    loop
+  ></audio>
+</div>

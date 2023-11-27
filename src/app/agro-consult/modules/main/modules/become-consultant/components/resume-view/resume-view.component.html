@@ -1,0 +1,70 @@
+<div class="view">
+  <div class="view__user">
+    <div class="view__user__ava">
+      <nz-avatar
+        [nzShape]="'square'"
+        [nzSize]="64"
+        [nzIcon]="'user'"
+        [nzSrc]="user.photo"
+      ></nz-avatar>
+    </div>
+    <div class="view__user__name">{{ user.l_name + " " + user.f_name }}</div>
+  </div>
+  <div class="view__attached" *ngIf="imageSrc.length">
+    <h4 class="view__title">{{ "attachImg.view" | translate }}</h4>
+    <div class="view__attached__block">
+      <div class="view__attached__img" *ngFor="let img of imageSrc">
+        <img [src]="img.file ? img.file : img" alt="attached img" />
+      </div>
+    </div>
+  </div>
+
+  <div class="view__attached" *ngIf="docsSrc.length">
+    <h4 class="view__title">{{ "attachedFiles" | translate }}</h4>
+    <div class="view__attached__block">
+      <div class="view__attached__img" *ngFor="let doc of docsSrc">
+        <div class="docs__element">
+          <p>
+            {{ doc.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="view__description">
+    <h4 class="view__title">{{ "aboutHimself" | translate }}</h4>
+
+    <!-- <p class="view__text">
+      {{ form.controls["about"].value }}
+    </p> -->
+    <!-- <div [froalaView]="form.get('about')?.value"></div> -->
+    <quill-view-html [content]="form.get('about.ru')?.value"></quill-view-html>
+  </div>
+  <div class="view__specialization">
+    <h4 class="view__title">{{ "category" | translate }}</h4>
+    <span class="view__text">
+      {{ selectedValues.category.name }}
+    </span>
+  </div>
+  <div class="view__specialization">
+    <h4 class="view__title">{{ "specialization" | translate }}</h4>
+    <span class="view__text">
+      {{ form.get("position.ru")?.value }}
+    </span>
+  </div>
+  <!-- <div class="view__skills">
+    <h4 class="view__title">{{ "mainSkills" | translate }}</h4>
+    <span class="view__text some" *ngFor="let skill of selectedValues.skills">{{
+      skill.name
+    }}</span>
+  </div> -->
+  <div class="view__language">
+    <h4 class="view__title">{{ "consultLanguage" | translate }}</h4>
+    <div
+      class="view__language__list"
+      *ngFor="let lang of form.controls['language'].value"
+    >
+      <span class="view__text">{{ lang }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.language {
+  padding: 0;
+  margin: 0;
+  display: flex;
+
+  li {
+    list-style-type: none;
+    padding: 0 12px;
+    font-size: 16px;
+    color: #9fa2a6;
+    cursor: pointer;
+
+    &.active {
+      color: #2b4cff;
+    }
+  }
+
+  :not(:last-child) {
+    border-right: 1px solid #b7bbbf;
+  }
+}

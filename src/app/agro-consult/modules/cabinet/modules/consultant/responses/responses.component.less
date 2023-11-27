@@ -1,0 +1,52 @@
+.applications {
+  &__search {
+    display: flex;
+    &__input {
+      flex-grow: 1;
+    }
+
+    &__btn {
+      background: #3056ff;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-left: 16px;
+      display: none;
+
+      @media (max-width: 767px) {
+        display: block;
+      }
+
+      @media (max-width: 575px) {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__filter {
+    margin: 16px 0;
+  }
+
+  &__list {
+    display: flex;
+
+    &__content {
+      flex: 2;
+      margin-right: 30px;
+      padding-bottom: 48px;
+
+      @media (max-width: 767px) {
+        margin: 0;
+      }
+    }
+
+    &__filter {
+      flex: 1;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+    }
+  }
+}
+

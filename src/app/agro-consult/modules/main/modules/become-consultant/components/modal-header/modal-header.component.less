@@ -1,0 +1,29 @@
+@import "../../../../../../../../assets/styles/text.less";
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: none;
+  align-items: center;
+  padding-bottom: 24px;
+
+  &__title {
+    .text( 20px, 26px, #282828, Agrofont-Medium);
+    margin-bottom: 0;
+
+    img {
+      margin-right: 16px;
+      cursor: pointer;
+    }
+  }
+
+  &__step {
+    .text( 14px, 18px, #242533, Mont-Regular);
+
+    @media (max-width: 575px) {
+      display: block;
+      width: 80px;
+      text-align: right;
+    }
+  }
+}

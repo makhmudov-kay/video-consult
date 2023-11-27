@@ -1,0 +1,75 @@
+.chat-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  &__application {
+    font-size: 18px;
+    line-height: 18px;
+    color: #292d32;
+    font-family: Agrofont-Medium;
+    margin-bottom: 12px;
+  }
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    .count {
+      font-size: 12px;
+      line-height: 12px;
+      background: #2b4cff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+
+    &__info {
+      margin-left: 8px;
+
+      &__name {
+        font-size: 16px;
+        line-height: 16px;
+        color: #292d32;
+        font-family: Agrofont-Medium;
+      }
+
+      &__position {
+        font-size: 12px;
+        line-height: 16px;
+        color: #707c8b;
+        font-family: Agrofont-Regular;
+      }
+    }
+  }
+
+  &__text {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 12px;
+    background: #f4f6ff;
+    border-radius: 8px;
+    height: 33px;
+    overflow: hidden;
+    max-width: 612px;
+    width: 100%;
+
+    span {
+      margin-left: 10px;
+      font-size: 12px;
+      color: #707c8b;
+    }
+  }
+}

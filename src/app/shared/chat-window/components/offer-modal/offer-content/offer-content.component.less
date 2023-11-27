@@ -1,0 +1,76 @@
+.proposal {
+  &__price {
+    padding: 12px 0;
+  }
+
+  &__text {
+    padding: 12px 0;
+  }
+
+  &__title {
+    font-size: 16px;
+    line-height: 20px;
+    color: #242533;
+    font-family: Mont-Bold;
+    margin-bottom: 8px;
+
+    &.mb {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    color: #86898c;
+    font-family: Agrofont-Regular;
+    margin-bottom: 16px;
+  }
+
+  &__actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+
+    &__btn {
+      padding: 16px 0;
+      width: 49%;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Medium;
+      cursor: pointer;
+
+      &.back {
+        color: #282828;
+
+        @media (max-width: 575px) {
+          display: none;
+        }
+      }
+
+      &.request {
+        background: #2c4eff;
+        color: #fff;
+
+        @media (max-width: 575px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__select {
+    padding: 24px 0;
+
+    .proposal__title {
+      margin-bottom: 16px;
+    }
+
+    .select {
+      width: 100%;
+    }
+  }
+}

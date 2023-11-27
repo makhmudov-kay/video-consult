@@ -1,0 +1,8 @@
+<div class="container" [hidden]="hidden">
+  <div class="breadcrumb">
+    <az-breadcrumb></az-breadcrumb>
+  </div>
+</div>
+<div [ngClass]="{ content: !hidden }" class="whiteBackground">
+  <router-outlet></router-outlet>
+</div>

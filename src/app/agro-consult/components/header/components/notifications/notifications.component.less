@@ -1,0 +1,372 @@
+@import "../../../../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+
+.notification {
+  width: 340px;
+  padding: 15px 0px;
+
+  @media (max-width: 575px) {
+    padding: 5px 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      cursor: pointer;
+      color: #2b4cff;
+      text-decoration: underline;
+    }
+  }
+
+  h4 {
+    font-size: 16px;
+    line-height: 20px;
+    color: #212121;
+    font-family: Agrofont-Bold;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    max-height: 220px;
+    overflow: auto;
+    .scroll(3px);
+    display: flex;
+    flex-direction: column;
+    // gap: 5px;
+
+    @media (max-width: 575px) {
+      max-height: 85vh;
+    }
+
+    li {
+      list-style: none;
+      // padding-right: 20px;
+      // padding-left: 20px;
+      // cursor: pointer;
+      // transition: 0.3s;
+      // border-radius: 8px;
+
+      // @media (max-width: 575px) {
+      //   padding: 0;
+      // }
+
+      // &.viewed {
+      //   background: #fff;
+      //   color: #a8a8a8;
+      // }
+
+      // &:hover {
+      //   background: #f4f6ff;
+      // }
+
+      &:last-of-type {
+        // border-bottom: none;
+        // padding-bottom: 0;
+      }
+
+      .type-message {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid #d9d9d9;
+        padding: 15px 0;
+
+        h5 {
+          font-size: 14px;
+          line-height: 18px;
+          font-family: Agrofont-Medium;
+
+          &.showed {
+            color: #cbcbcb;
+          }
+        }
+
+        &__text {
+          display: block;
+          flex: 100%;
+          width: 100%;
+        }
+      }
+
+      .type-private {
+        border-bottom: 1px solid #d9d9d9;
+      }
+
+      .type-application {
+        border-bottom: 1px solid #d9d9d9;
+        padding: 24px 0;
+
+        &__title {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-size: 22px;
+          }
+        }
+
+        h5 {
+          font-size: 16px;
+          line-height: 20px;
+          color: #282828;
+          font-family: Agrofont-Medium;
+          margin-bottom: 12px;
+
+          &.showed {
+            color: #cbcbcb;
+          }
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 22px;
+          color: #212121;
+          font-family: Agrofont-Regular;
+
+          &.showed {
+            color: #cbcbcb;
+          }
+        }
+      }
+
+      .type-private {
+        padding: 24px 0;
+
+        &__title {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          span[nz-icon] {
+            font-size: 24px;
+          }
+
+          h5 {
+            font-size: 14px;
+            line-height: 18px;
+            color: #212121;
+            font-family: Agrofont-Medium;
+          }
+
+          .showed {
+            color: #cbcbcb;
+          }
+        }
+
+        .response {
+          font-family: Agrofont-Regular;
+        }
+      }
+    }
+  }
+
+  .close-drawer {
+    display: none;
+
+    @media (max-width: 575px) {
+      display: inline-block;
+      background: #2a4aff;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-left: 10px;
+
+      span {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.notification-time {
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  font-size: 10px;
+  line-height: 10px;
+  font-family: Agrofont-Regular;
+}
+
+h5 {
+  font-size: 16px;
+  line-height: 20px;
+  color: #282828;
+  font-family: Agrofont-Medium;
+  margin-bottom: 12px;
+
+  &.showed {
+    color: #cbcbcb;
+  }
+}
+
+p {
+  font-size: 14px;
+  line-height: 22px;
+  color: #212121;
+  font-family: Agrofont-Regular;
+
+  &.showed {
+    color: #cbcbcb;
+  }
+}
+
+.delete-notification {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: auto;
+  display: block;
+
+  &:hover {
+    color: #2a4aff;
+  }
+
+  &.message {
+    padding-top: 10px;
+  }
+}
+
+.notification-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 10px;
+  padding: 16px 0;
+  margin-right: 16px;
+  cursor: pointer;
+
+  &.border {
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  &__left {
+    &__time {
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 5%;
+      font-family: Agrofont-Medium;
+      color: #bfbfbf;
+      display: block;
+    }
+
+    &__unread {
+      font-size: 10px;
+      line-height: 10px;
+      font-family: Agrofont-Regular;
+      letter-spacing: 5%;
+      color: #2b4cff;
+
+      &__badge {
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        display: inline-block;
+        background: #2b4cff;
+        margin-right: 4px;
+      }
+    }
+
+    &__message {
+      padding: 9px 0;
+      font-size: 20px;
+      line-height: 26px;
+      font-family: Agrofont-Medium;
+      color: #282828;
+      display: flex;
+      align-items: center;
+      gap: 0 8px;
+
+      span {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #2b4cff;
+        color: #fff;
+        font-size: 10px;
+        line-height: 13px;
+        font-family: Agrofont-Regular;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__text {
+      font-size: 14px;
+      line-height: 22px;
+      color: #212121;
+      font-family: Agrofont-Regular;
+      letter-spacing: 5%;
+
+      &__title {
+        font-family: Agrofont-Medium;
+      }
+    }
+  }
+
+  &__right {
+    [nz-icon] {
+      color: #bfbfbf;
+    }
+  }
+}
+
+.counter {
+  margin-left: 10px;
+  width: 25px;
+  height: 25px;
+  background: #2b4cff;
+  color: #fff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+::ng-deep {
+  .ant-tabs-top > .ant-tabs-nav::before {
+    content: none;
+  }
+
+  .ant-tabs-nav-list {
+    width: 100%;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #f5f5f7;
+  }
+
+  .ant-tabs-ink-bar {
+    display: none;
+  }
+
+  .ant-tabs-tab {
+    flex: 50%;
+    justify-content: center;
+    border-radius: 50px;
+    padding: 6px 0;
+  }
+
+  .ant-tabs-tab + .ant-tabs-tab {
+    margin: 0;
+  }
+
+  .ant-tabs-tab-active {
+    background: #2b4cff;
+
+    .counter {
+      background: #fff;
+      color: #2b4cff;
+    }
+  }
+
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #fff;
+  }
+}

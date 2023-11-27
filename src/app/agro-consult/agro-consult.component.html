@@ -1,0 +1,22 @@
+<az-invite-card></az-invite-card>
+
+<div class="wrapper">
+  <header [ngClass]="{isMobileDevice}" class="wrapper__header">
+    <az-header></az-header>
+  </header>
+
+  <main
+    [@animation]="runFadeIn ? 'go' : ''"
+    class="wrapper__content"
+    [ngClass]="{ isCabinet: isCabinet, is_mobile: isMobileDevice }"
+  >
+    <router-outlet></router-outlet>
+  </main>
+  <footer>
+    <az-footer></az-footer>
+  </footer>
+
+  <div class="wrapper__tg-bot">
+    <az-tg-bot-link [ellipse]="true"></az-tg-bot-link>
+  </div>
+</div>

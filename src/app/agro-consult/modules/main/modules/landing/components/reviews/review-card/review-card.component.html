@@ -1,0 +1,12 @@
+<div class="review-card">
+  <p class="review-card__text" nz-typography nzEllipsis [nzEllipsisRows]="8">
+    {{ review.text }}
+  </p>
+  <div class="review-card__info">
+    <div class="review-card__info__name">
+      <h5>{{ review.fullname }}</h5>
+      <nz-rate [ngModel]="review.rating" nzDisabled></nz-rate>
+    </div>
+    <nz-avatar nzIcon="user" [nzSize]="45" [nzSrc]="review.file"></nz-avatar>
+  </div>
+</div>

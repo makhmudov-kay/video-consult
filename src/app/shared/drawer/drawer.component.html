@@ -1,0 +1,12 @@
+<!-- FILTER DRAWER -->
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  [nzPlacement]="placement"
+  (nzOnClose)="close()"
+  [nzHeight]="height"
+>
+  <ng-container *nzDrawerContent>
+    <ng-content></ng-content>
+  </ng-container>
+</nz-drawer>

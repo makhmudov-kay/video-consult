@@ -1,0 +1,41 @@
+<az-step-header
+  [step]="step"
+  [title]="'whenConsultation' | translate"
+></az-step-header>
+<form nz-form [formGroup]="form">
+  <div class="step__radio">
+    <label class="step__radio__label">
+      <input
+        type="radio"
+        value="today"
+        name="date"
+        [ngModel]="consultantTime"
+        (ngModelChange)="changePickerValue($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <span class="check-custom-mark"><span></span></span>{{ "urgently" | translate }}
+    </label>
+    <div class="step__date" *ngIf="date">
+      <p class="step__date__text">{{ "expiredDate" | translate }}</p>
+      <nz-date-picker
+        formControlName="when_date"
+        [nzPlaceHolder]="'selectDate' | translate"
+        (ngModelChange)="disableHandler($event)"
+        [nzDisabledDate]="disablePreviousDate"
+      ></nz-date-picker>
+    </div>
+    <nz-divider></nz-divider>
+    <label class="step__radio__label">
+      <input
+        type="radio"
+        name="date"
+        value="flexible"
+        [ngModel]="consultantTime"
+        (ngModelChange)="changePickerValue($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <span class="check-custom-mark"><span></span></span
+      >{{ "consultantComfortable" | translate }}
+    </label>
+  </div>
+</form>

@@ -1,0 +1,60 @@
+<ng-container *ngIf="uploadImage; else file">
+  <div class="upload">
+    <input
+      type="file"
+      [hidden]="true"
+      #input
+      accept="image/png, image/jpeg"
+      (change)="handleFileInput($event)"
+    />
+    <ng-container *ngIf="imageSrc && imageSrc.length">
+      <div *ngFor="let image of imageSrc; let i = index" class="upload__view">
+        <img [src]="image.file ? image.file : image" alt="image" />
+        <div class="upload__view__layout">
+          <button (click)="deleteNotUploadedImage(i, image)">
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <button
+      *ngIf="imageSrc.length < limit && fileSizeValue < 10"
+      (click)="input.click()"
+      class="upload__btn"
+    >
+      <span nz-icon nzType="plus" nzTheme="outline"></span>
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #file>
+  <div class="upload">
+    <input
+      type="file"
+      [hidden]="true"
+      #input
+      accept="application/pdf,application/doc,application/docx,application/xls"
+      (change)="handleFileInput($event)"
+    />
+    <ng-container *ngIf="docsSrc && docsSrc.length">
+      <div *ngFor="let doc of docsSrc; let i = index" class="upload__view">
+        <div class="docs__element">
+          <p class="docs__name">
+            {{ doc.name }}
+          </p>
+        </div>
+        <div class="upload__view__layout">
+          <button (click)="deleteNotUploadedImage(i, doc)">
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <button
+      *ngIf="docsSrc.length < limit && docSizeValue < 10"
+      (click)="input.click()"
+      class="upload__btn"
+    >
+      <span nz-icon nzType="plus" nzTheme="outline"></span>
+    </button></div
+></ng-template>

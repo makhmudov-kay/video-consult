@@ -1,0 +1,67 @@
+@import "../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+
+.commentary-list {
+  max-height: 540px;
+  overflow: auto;
+
+  .scroll(3px, 0, #f1f2f5, #b7bbbf, #b7bbbf, 8px 0 16px, 8px);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+
+  &__name {
+    font-size: 20px;
+    line-height: 26px;
+    font-family: Mont-Bold;
+    color: #333333;
+    margin-right: 20px;
+
+    @media (max-width: 575px) {
+      font-size: 14px;
+      line-height: 18px;
+      margin-right: 12px;
+    }
+  }
+
+  &__mark {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Regular;
+      color: #333333;
+      margin-left: 8px;
+    }
+  }
+
+  &__comment {
+    font-size: 20px;
+    line-height: 25px;
+    font-family: Agrofont-Regular;
+    color: #333333;
+
+    @media (max-width: 575px) {
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  &__datetime {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 18px;
+    color: #86898c;
+    font-family: Agrofont-Regular;
+    padding-top: 4px;
+    margin-left: 10px;
+
+    @media (max-width: 575px) {
+      padding-top: 2px;
+    }
+  }
+}

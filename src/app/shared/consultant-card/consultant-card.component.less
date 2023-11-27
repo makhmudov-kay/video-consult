@@ -1,0 +1,119 @@
+.card {
+  padding: 16px;
+  border-radius: 24px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: 0.3s;
+  cursor: pointer;
+  background: #fff;
+
+  &__category {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: Agrofont-Regular;
+    margin-bottom: 12px;
+    color: #333;
+
+    &.position {
+      height: 36px;
+    }
+  }
+
+  &.swiper-card:hover {
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  &__img {
+    width: 100%;
+    height: 252px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__title {
+    &__user {
+      margin-bottom: 8px;
+      &__title {
+        font-size: 30px;
+        line-height: 40px;
+        color: #292d32;
+        font-family: Agrofont-Bold;
+        margin-bottom: 4px;
+        --line-height: 40px;
+        height: calc(var(--line-height) * 2);
+      }
+
+      &__status {
+        font-size: 12px;
+        line-height: 15px;
+        color: #86898c;
+        font-family: Mont-SemiBold;
+      }
+    }
+
+    &__rating {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 14px;
+        line-height: 18px;
+        color: #000;
+        font-family: Mont-SemiBold;
+      }
+
+      img {
+        margin-right: 4px;
+      }
+
+      &__marks {
+        display: flex;
+        align-items: center;
+        margin-right: 16px;
+      }
+
+      &__review {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  &__description {
+    margin-top: 16px;
+
+    height: 108px;
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+
+    &__text {
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Mont-SemiBold;
+      font-weight: 600;
+      margin-bottom: 0;
+      color: #333333;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .ant-skeleton-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ant-skeleton-input {
+    width: 100%;
+    height: 100%;
+  }
+}

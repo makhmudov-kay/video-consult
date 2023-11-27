@@ -1,0 +1,81 @@
+@import "../../../../../../../../assets/styles/text.less";
+
+.action {
+  display: flex;
+  justify-content: space-between;
+
+  .done {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    width: 48%;
+    .text(14px, 18px, #242533, Mont-Bold);
+    padding: 16px 32px;
+    border-radius: 8px;
+    border: 1px solid #cfd3d8;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+
+    &.next {
+      background: #396afc;
+      color: #fff;
+
+      @media (max-width: 575px) {
+        margin-left: auto;
+      }
+
+      &:hover {
+        background: lighten(#396afc, 5%);
+      }
+      &:active {
+        background: darken(#396afc, 10%);
+        color: #fff;
+      }
+
+      &:disabled {
+        background: #cfd3d8;
+        cursor: not-allowed;
+
+        &:hover {
+          background: #cfd3d8;
+        }
+        &:active {
+          background: #cfd3d8;
+        }
+      }
+    }
+
+    &.prev {
+      margin-right: 24px;
+      border: none;
+
+      svg {
+        margin-right: 8px;
+        path {
+          transition: 0.3s;
+        }
+      }
+
+      &:hover {
+        color: #396afc;
+
+        svg {
+          path {
+            fill: #396afc;
+          }
+        }
+      }
+    }
+  }
+}
+
+.limit {
+  margin-bottom: 15px;
+}

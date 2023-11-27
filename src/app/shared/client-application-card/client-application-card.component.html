@@ -1,0 +1,72 @@
+<div class="card" [ngStyle]="{ background: isCabinet ? '#fff' : '#F5F5F7' }">
+  <div class="card__time" [ngClass]="{paddingRight: cardInfo.type == 'private'}">
+    {{ cardInfo.created_at | formatDateFns | async }}
+  </div>
+  <div class="card__title">
+    <h4>{{ cardInfo.title }}</h4>
+    <div class="card__user__avatar">
+      <nz-avatar-group>
+        <nz-avatar
+          *ngFor="let consultant of cardInfo.response | slice : 0 - 5"
+          nzIcon="user"
+          [nzSrc]="consultant.user.avatar"
+          [nzSize]="'small'"
+          nz-tooltip
+          [nzTooltipTitle]="consultant.user.fullname"
+        ></nz-avatar>
+      </nz-avatar-group>
+      <span *ngIf="cardInfo.response_count > 0">{{
+        cardInfo.response_count
+      }}</span>
+    </div>
+  </div>
+  <div class="card__bottom">
+    <div class="card__status">
+      <img src="./assets/images/green-arrow.svg" alt="icon" />
+      <span>
+        {{
+          cardInfo.is_visible
+            ? ("publicApplication" | translate)
+            : ("closedApplication" | translate)
+        }}</span
+      >
+      <div [ngSwitch]="status">
+        <div *ngSwitchCase="1">
+          <span class="app-status info">{{
+            "userStatus.active" | translate
+          }}</span>
+        </div>
+        <div *ngSwitchCase="2">
+          <span class="app-status info">{{
+            "STATUS_IN_PROCESS" | translate
+          }}</span>
+        </div>
+        <div *ngSwitchCase="3">
+          <span class="app-status danger">{{
+            "statusArchive" | translate
+          }}</span>
+        </div>
+        <div *ngSwitchCase="4">
+          <span class="app-status success">{{ "isComplete" | translate }}</span>
+        </div>
+        <div *ngSwitchCase="5">
+          <span class="app-status danger">{{
+            "STATUS_BLOCKED" | translate
+          }}</span>
+        </div>
+        <div *ngSwitchCase="6">
+          <span class="app-status danger">{{ "wasCanceled" | translate }}</span>
+        </div>
+        <div *ngSwitchCase="7">
+          <span class="app-status info">{{ "waitingToPay" | translate }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card__user">
+      <div class="card__user__view">
+        <img src="./assets/images/view-icon.svg" alt="icon" />
+        <span>{{ cardInfo.views ? cardInfo.views : 0 }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+@import "../../../../../../../../../../dist/ngx-az-core/assets/styles/_scroll.less";
+
+.consultant-chat {
+  flex: 2;
+  margin-right: 30px;
+
+  @media (max-width: 767px) {
+    margin-right: 0;
+  }
+
+  &__top {
+    display: flex;
+
+    .input {
+      flex-grow: 1;
+    }
+
+    button {
+      display: none;
+      background: #3056ff;
+      border: none;
+      outline: none;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      margin-left: 16px;
+
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
+  }
+
+  &__messages {
+    .scroll();
+
+    &__list {
+      padding: 0;
+      margin: 0;
+      height: 590px;
+      overflow: auto;
+      padding-right: 10px;
+      .scroll();
+
+      @media (max-width: 767px) {
+        height: initial;
+        padding-right: 0;
+      }
+
+      li {
+        list-style: none;
+      }
+    }
+  }
+}
+
+.mb-1 {
+  margin-bottom: 16px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+
+  &__info {
+    margin-left: 12px;
+
+    &__name {
+      font-size: 16px;
+      line-height: 16px;
+      font-family: Agrofont-Medium;
+      color: #292d32;
+      margin-bottom: 8px;
+    }
+
+    &__status {
+      font-size: 14px;
+      line-height: 14px;
+      color: #333333;
+      font-family: Agrofont-Regular;
+    }
+  }
+}
+
+.filter {
+  flex: 1;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.grid-block {
+  display: flex;
+}
+
+.skeleton {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.close {
+  width: max-content;
+  margin-left: auto;
+
+  span {
+    font-size: 20px;
+  }
+}

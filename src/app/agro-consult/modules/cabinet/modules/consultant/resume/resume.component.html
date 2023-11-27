@@ -1,0 +1,82 @@
+<div class="resume">
+  <ng-container *ngIf="resumeList && resumeList.length; else empty">
+    <ul class="resume__list">
+      <li *ngFor="let resume of resumeList">
+        <nz-ribbon
+          [nzText]="
+            resume.status === 1
+              ? ('onModerate' | translate)
+              : resume.status === 2
+              ? ('userStatus.active' | translate)
+              : ('userStatus.blocked' | translate)
+          "
+          [nzColor]="
+            resume.status === 1
+              ? 'geekblue'
+              : resume.status === 2
+              ? 'green'
+              : 'red'
+          "
+        >
+          <div class="resume__list__item">
+            <div class="left">
+              <div class="left__info">
+                <h3 [routerLink]="[resume.id]">{{ resume.category }}</h3>
+              </div>
+              <div class="resume__list__item__switcher">
+                <nz-switch
+                  [(ngModel)]="resume.visible"
+                  [nzLoading]="isLoading"
+                  (ngModelChange)="changeVisible(resume.id, $event)"
+                ></nz-switch>
+                <span class="text">{{
+                  resume.visible
+                    ? ("openVacant" | translate)
+                    : ("invisibleResume" | translate)
+                }}</span>
+              </div>
+            </div>
+            <div class="right">
+              <span
+                class="right__btn edit"
+                [routerLink]="[
+                  '../../../main',
+                  'become-consultant',
+                  'resume',
+                  resume.id
+                ]"
+              >
+                <az-svg-edit class="d-flex"></az-svg-edit>
+              </span>
+              <span
+                (click)="remove(resume.id, resume.applications_count)"
+                class="right__btn delete"
+              >
+                <az-svg-delete></az-svg-delete>
+              </span>
+            </div>
+          </div>
+        </nz-ribbon>
+      </li>
+    </ul>
+  </ng-container>
+  <ng-template #empty>
+    <div class="empty">
+      <nz-empty [nzNotFoundContent]="'resumeNotFound' | translate"></nz-empty>
+    </div>
+  </ng-template>
+  <button
+    *ngIf="resumeList && resumeList.length < 3"
+    class="resume__btn"
+    [routerLink]="['../../../main', 'become-consultant']"
+  >
+    {{ "newResume" | translate }}
+  </button>
+</div>
+
+<az-confirmation-modal [(isVisible)]="isVisible"></az-confirmation-modal>
+<az-delete-resume-modal
+  [id]="id"
+  [(isVisible)]="isVisibleDeleteModal"
+  (refreshResumeList)="getMyResume()"
+></az-delete-resume-modal>

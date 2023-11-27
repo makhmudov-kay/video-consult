@@ -1,0 +1,18 @@
+<nz-radio-group
+  [ngModel]="radioValue"
+  nzButtonStyle="solid"
+  nzSize="large"
+  class="radio"
+  (ngModelChange)="radioValueChange.emit($event)"
+>
+  <label
+    nz-radio-button
+    [nzValue]="item.value"
+    *ngFor="let item of radioOptions"
+  >
+    <span class="label"
+      >{{ item.label | translate }}
+      <span class="label__count">{{ item.count }}</span></span
+    ></label
+  >
+</nz-radio-group>

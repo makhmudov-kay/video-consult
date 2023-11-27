@@ -1,0 +1,288 @@
+<ng-container *ngIf="application">
+  <div class="detail">
+    <div class="detail__content">
+      <div class="info" *ngIf="!myResumeList">
+        <nz-alert
+          nzType="info"
+          [nzMessage]="'hasNotResumeInfo' | translate"
+          nzShowIcon
+        ></nz-alert>
+      </div>
+
+      <div class="detail__content__header">
+        <div
+          class="detail__content__header__btn"
+          (click)="navigateTo()"
+          [ngClass]="{isMobileDevice}"
+        >
+          <az-svg-arrow-left class="d-flex"></az-svg-arrow-left>
+        </div>
+        <div class="detail__content__header__title">
+          <span>{{ "order" | translate }} №{{ application.id }}</span>
+        </div>
+        <div *ngIf="applicationStatus" class="detail__content__header__status">
+          <span>{{ applicationStatus }}</span>
+        </div>
+      </div>
+
+      <div class="detail__content__title border-top">
+        <h4 class="detail__content__title__text">{{ application.title }}</h4>
+        <span class="detail__content__title__date">{{
+          application.created_at | formatDateFns | async
+        }}</span>
+        <div
+          class="detail__content__title__price"
+          *ngIf="!application.is_free; else free"
+        >
+          {{
+            application.price_from
+              ? (application.price_from | number) + " - "
+              : ""
+          }}
+          {{ application.price_to | number }} сум
+        </div>
+        <ng-template #free>
+          <div class="detail__content__title__price">
+            {{ "free" | translate }}
+          </div>
+        </ng-template>
+        <div class="detail__category">{{ application.category }}</div>
+      </div>
+
+      <div
+        class="detail__content__attached border-top"
+        *ngIf="application.files?.length"
+      >
+        <div class="detail__content__attached__files">
+          <div class="detail__files__cards">
+            <div
+              *ngFor="let image of application.files"
+              class="detail__files__img"
+            >
+              <img nz-image [nzSrc]="image" alt="image" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail__content__description border-top">
+        <h5 class="detail__content__description__title">
+          {{ "description" | translate }}
+        </h5>
+        <p class="detail__content__description__text">
+          {{ application.description }}
+        </p>
+      </div>
+
+      <div class="detail__content__time border-top">
+        <h5 class="detail__content__description__title">
+          {{ "when" | translate }}
+        </h5>
+        <div class="detail__content__time__info">
+          <div class="detail__content__time__info__icon">
+            <az-svg-calendar class="d-flex"></az-svg-calendar>
+          </div>
+          <span class="detail__content__time__info__text">{{
+            application.when_date
+              ? (application.when_date | date: 'dd.MM.yy')
+              : ("comfortTime" | translate)
+          }}</span>
+        </div>
+      </div>
+
+      <div class="detail__content__customer border-top">
+        <az-user-info [userInfo]="application.user"></az-user-info>
+      </div>
+    </div>
+
+    <div class="detail__actions" *ngIf="checkResponse">
+      <div class="info" *ngIf="!isActivePaymnetCard">
+        <nz-alert
+          nzType="error"
+          [nzMessage]="'statusPaymentCard' | translate"
+          nzShowIcon
+        ></nz-alert>
+      </div>
+
+      <ng-container
+        *ngIf="
+          application.status !== 6 &&
+            application.status !== 3 &&
+            canceledApplication;
+          else canceledInfo
+        "
+      >
+        <div class="detail__actions__btn">
+          <ng-container
+            *ngIf="
+              application.type !== 'private' || application.status === 2;
+              else canceled
+            "
+          >
+            <button
+              class="prev"
+              [ngClass]="{isMobileDevice}"
+              [routerLink]="['../../search']"
+            >
+              {{ "back" | translate }}
+            </button>
+          </ng-container>
+          <ng-template #canceled>
+            <button class="prev" (click)="deniedApplication()">
+              {{ "deny" | translate }}
+            </button>
+          </ng-template>
+
+          <!-- ACCEPT AND RESPONSE -->
+          <ng-container
+            *ngIf="
+              !checkResponse.check_response && !responsed && isActivePaymnetCard
+            "
+          >
+            <button
+              *ngIf="application.type === 'private'; else public"
+              class="respond"
+              (click)="showModalForPrivateApplication()"
+            >
+              {{ "acceptDeal" | translate }}
+            </button>
+
+            <ng-template #public>
+              <ng-container
+                *ngIf="myResumeList; else withoutResume"
+              >
+                <button class="respond" (click)="showModalOrDrawer()">
+                  {{ "response" | translate }}
+                </button>
+              </ng-container>
+              <ng-template #withoutResume>
+                <button class="respond" (click)="createResume()">
+                  {{ "createResume" | translate }}
+                </button>
+              </ng-template>
+            </ng-template>
+          </ng-container>
+
+          <button
+            *ngIf="!isActivePaymnetCard"
+            class="respond"
+            (click)="navigateToAgroPay()"
+          >
+            {{ "navigateToPay.btn" | translate }}
+          </button>
+
+          <button
+            *ngIf="
+              (checkResponse.check_response || responsed) && isActivePaymnetCard
+            "
+            class="respond"
+            [routerLink]="['../../chat', chatId]"
+            [fragment]="isMobileDevice ? 'mobile' : ''"
+          >
+            {{ "goToChat" | translate }}
+          </button>
+        </div>
+      </ng-container>
+      <ng-template #canceledInfo>
+        <ng-container
+          *ngIf="
+            application.status === 3 &&
+              application.type === 'private' &&
+              isActivePaymnetCard;
+            else denied
+          "
+        >
+          <button
+            *ngIf="!checkResponse.check_response && !responsed"
+            (click)="checkIsActual(application.id)"
+            class="is-actual"
+          >
+            {{ "isActual" | translate }}
+          </button>
+
+          <button
+            *ngIf="checkResponse.check_response || responsed"
+            class="is-actual"
+            [routerLink]="['../../chat', chatId]"
+          >
+            {{ "goToChat" | translate }}
+          </button>
+        </ng-container>
+
+        <ng-template #denied>
+          <div class="denied-application">
+            <span>{{ "deniedApplication" | translate }}</span>
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+</ng-container>
+
+<!-- MODAL -->
+<az-send-proposal-modal
+  [myResumeList]="myResumeList"
+  [(isVisible)]="isVisibleModal"
+  (handleSubmit)="sendRespond()"
+  [form]="form"
+  [isFree]="application.is_free"
+  (setFreeConsult)="freeConsult($event)"
+  [userInfo]="application.user"
+  [isLoading]="isLoading"
+></az-send-proposal-modal>
+
+<!-- Private MODAL -->
+<az-send-proposal-modal
+  [(isVisible)]="isVisiblePrivateModal"
+  (handleSubmit)="sendPrivateRespond()"
+  [form]="privateForm"
+  [userInfo]="application.user"
+  [private]="true"
+  [isFree]="application.is_free"
+  (setFreeConsult)="freeConsult($event)"
+  [isLoading]="isLoading"
+></az-send-proposal-modal>
+
+<!-- DRAWER -->
+<ng-container *ngIf="myResumeList">
+  <nz-drawer
+    [nzClosable]="false"
+    [(nzVisible)]="isVisibleDrawer"
+    nzPlacement="bottom"
+    (nzOnClose)="close()"
+    nzHeight="90%"
+  >
+    <ng-container *nzDrawerContent>
+      <az-proposal-content
+        (okHandler)="sendRespond()"
+        [myResumeList]="myResumeList"
+        [userInfo]="application.user"
+        (setFreeConsult)="freeConsult($event)"
+        [form]="form"
+        [isFree]="application.is_free"
+        [isLoading]="isLoading"
+      ></az-proposal-content>
+    </ng-container>
+  </nz-drawer>
+</ng-container>
+
+<!-- Private DRAWER -->
+<nz-drawer
+  [nzClosable]="false"
+  [(nzVisible)]="isVisiblePrivateDrawer"
+  nzPlacement="bottom"
+  (nzOnClose)="close()"
+  nzHeight="90%"
+>
+  <ng-container *nzDrawerContent>
+    <az-proposal-content
+      (okHandler)="sendPrivateRespond()"
+      [userInfo]="application.user"
+      [form]="privateForm"
+      [private]="true"
+      [isFree]="application.is_free"
+      (setFreeConsult)="freeConsult($event)"
+      [isLoading]="isLoading"
+    ></az-proposal-content>
+  </ng-container>
+</nz-drawer>

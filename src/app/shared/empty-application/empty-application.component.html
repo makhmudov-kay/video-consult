@@ -1,0 +1,8 @@
+<div class="empty">
+  <nz-empty
+    [nzNotFoundContent]="searchApplication ? template : null"
+  ></nz-empty>
+  <ng-template #template>
+    <button (click)="navigateToSearch()" class="navigate">{{ "applicationsSearch" | translate }}</button>
+  </ng-template>
+</div>

@@ -1,0 +1,120 @@
+@import "../../../assets/styles/text.less";
+
+.card {
+  border-radius: 8px;
+  padding: 16px;
+  background: #f5f5f7;
+  margin-bottom: 24px;
+  cursor: pointer;
+
+  &__time {
+    width: max-content;
+    margin-left: auto;
+    font-size: 10px;
+    line-height: 12px;
+    color: grey;
+    margin-bottom: 5px;
+
+    &.paddingRight {
+      padding-right: 120px;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    @media (max-width: 575px) {
+      margin-bottom: 8px;
+    }
+
+    h4 {
+      .text(24px, 31px, #282828, Agrofont-Medium);
+
+      @media (max-width: 575px) {
+        .text(20px, 26px, #282828, Agrofont-Medium);
+      }
+    }
+
+    span {
+      .text(16px, 20px, #fff, Mont-SemiBold);
+      display: flex;
+      width: 25px;
+      height: 25px;
+      background: #2b4cff;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+
+    span {
+      .text(16px, 20px, #86898c, Agrofont-Regular);
+      margin-left: 4px;
+
+      @media (max-width: 575px) {
+        .text(12px, 13px, #86898c, Agrofont-Regular);
+      }
+    }
+  }
+
+  &__user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__view {
+      display: flex;
+
+      span {
+        .text(16px, 20px, #86898c, Agrofont-Bold);
+        margin-left: 4px;
+      }
+    }
+
+    &__avatar {
+      display: flex;
+
+      span {
+        margin-left: 14px;
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.app-status {
+  font-size: 14px;
+  line-height: 16px;
+  display: block;
+  padding: 5px 8px;
+  border-radius: 8px;
+  margin-left: 10px !important;
+
+  &.info {
+    background: none;
+    border: 1px solid #5671ff;
+    color: #5671ff !important;
+  }
+
+  &.success {
+    border: 1px solid #4eb565;
+    color: #4eb565 !important;
+  }
+
+  &.danger {
+    border: 1px solid tomato;
+    color: tomato !important;
+  }
+}

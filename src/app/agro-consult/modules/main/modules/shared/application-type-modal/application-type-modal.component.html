@@ -1,0 +1,58 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzFooter]="null"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzBodyStyle]="{ padding: '24px' }"
+  nzWidth="672px"
+>
+  <ng-container *nzModalContent>
+    <div>
+      <h4>{{ "chooseTypeApplication" | translate }}</h4>
+      <nz-divider></nz-divider>
+
+      <label class="radio-label">
+        <div class="step__radio__label">
+          <input
+            type="radio"
+            name="date"
+            value="create-application"
+            [(ngModel)]="radioValue"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <span class="check-custom-mark"><span></span></span
+          >{{ "publicTypeApplication" | translate }}
+        </div>
+
+        <p>
+          {{ "publicType.description" | translate }}<br /><br />
+          {{ "publicType.descriptionSec" | translate }}
+        </p>
+      </label>
+
+      <nz-divider></nz-divider>
+
+      <label class="radio-label">
+        <div class="step__radio__label">
+          <input
+            type="radio"
+            name="date"
+            value="private"
+            [(ngModel)]="radioValue"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <span class="check-custom-mark"><span></span></span
+          >{{ "privateApplication" | translate }}
+        </div>
+        <p>
+          {{ "privateApplication.description" | translate }}
+        </p>
+      </label>
+
+      <nz-divider></nz-divider>
+      <div class="modal-btn">
+        <button (click)="handleOk()">{{ "go" | translate }}</button>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>

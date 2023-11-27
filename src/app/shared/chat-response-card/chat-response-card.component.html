@@ -1,0 +1,28 @@
+<div class="response-card">
+  <div class="response-card__info">
+    <div class="response-card__user">
+      <nz-avatar
+        [nzSize]="48"
+        nzIcon="user"
+        [nzSrc]="response.user.avatar"
+      ></nz-avatar>
+      <div class="response-card__user__info">
+        <div class="response-card__user__info__name">
+          {{ response.user.fullname }}
+        </div>
+        <div class="response-card__user__info__status">
+          {{ response.category }}
+        </div>
+      </div>
+    </div>
+    <span class="amount">{{
+      +response.amount > 0 ? (+response.amount | azCurrency) : ("free" | translate)
+    }}</span>
+  </div>
+  <div class="response-card__text">
+    <p>
+      {{ response.text }}
+    </p>
+    <span>{{ response.created_at | date }}</span>
+  </div>
+</div>

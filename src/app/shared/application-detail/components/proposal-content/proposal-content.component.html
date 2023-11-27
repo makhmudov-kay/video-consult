@@ -1,0 +1,95 @@
+<form nz-form [formGroup]="form">
+  <div class="proposal">
+    <div class="proposal__user border-bottom">
+      <az-user-info [userInfo]="userInfo"></az-user-info>
+    </div>
+    <div class="proposal__price borderBottom">
+      <h5 class="proposal__title">{{ "priceToService" | translate }}</h5>
+      <p class="proposal__subtitle">
+        {{ "priceExample" | translate }}
+      </p>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="'inputPrice' | translate">
+          <input
+            nzSize="large"
+            formControlName="amount"
+            nz-input
+            mask="separator"
+            [placeholder]="'offerPrice' | translate"
+            maxlength="8"
+            min="1000"
+          /> </nz-form-control
+      ></nz-form-item>
+      <nz-form-item style="margin-bottom: 0">
+        <nz-form-control [nzErrorTip]="'inputPrice' | translate">
+          <label class="response__label">
+            <input
+              type="checkbox"
+              [ngModel]="freeConsultation"
+              (ngModelChange)="setFree($event)"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <span class="check-custom-mark">
+              <img src="./assets/images/check-filter.png" alt="icon" />
+            </span>
+            <span class="response__label__text">{{
+              "freeConsultation" | translate
+            }}</span>
+          </label>
+        </nz-form-control></nz-form-item
+      >
+    </div>
+    <div class="proposal__text" [ngClass]="{ borderBottom: !private }">
+      <h5 class="proposal__title mb">{{ "offerText" | translate }}</h5>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="'sendResponse.coverLetter' | translate">
+          <textarea
+            nz-input
+            nzSize="large"
+            [placeholder]="'sendResponse.text' | translate"
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+            formControlName="text"
+          ></textarea></nz-form-control
+      ></nz-form-item>
+    </div>
+    <div class="proposal__select" *ngIf="!private">
+      <h5 class="proposal__title">
+        {{ "chooseResumeForResponse" | translate }}
+      </h5>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="'chooseYourResume' | translate">
+          <nz-select
+            class="select"
+            nzSize="large"
+            formControlName="resume_id"
+          >
+            <nz-option
+              *ngFor="let resume of activeResumeList"
+              [nzValue]="resume.id"
+              [nzLabel]="resume.category + ' | ' + resume.position"
+            ></nz-option>
+          </nz-select> </nz-form-control
+      ></nz-form-item>
+      <nz-alert
+        *ngIf="activeResumeList && activeResumeList.length === 0"
+        nzType="info"
+        [nzMessage]="'onModerate.text' | translate"
+      ></nz-alert>
+    </div>
+
+    <div class="proposal__actions">
+      <button class="proposal__actions__btn back" (click)="handleCancel()">
+        {{ "back" | translate }}
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        [nzLoading]="isLoading"
+        class="proposal__actions__btn request"
+        (click)="handleOk()"
+      >
+        {{ "response" | translate }}
+      </button>
+    </div>
+  </div>
+</form>

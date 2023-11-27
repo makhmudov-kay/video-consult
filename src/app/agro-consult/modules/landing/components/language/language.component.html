@@ -1,0 +1,9 @@
+<ul class="language">
+  <li
+    (click)="onChangeLanguage(language.code)"
+    *ngFor="let language of language$ | async"
+    [ngClass]="{ active: currentLanguageCode === language.code }"
+  >
+    {{ language.short_name }}
+  </li>
+</ul>

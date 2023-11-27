@@ -1,0 +1,31 @@
+<ng-container *ngIf="isModal; else drawer">
+  <nz-modal
+    [(nzVisible)]="isVisibleConfirm"
+    [nzFooter]="null"
+    (nzOnCancel)="closeModal()"
+  >
+    <ng-container *nzModalContent>
+      <az-confirm-content
+        (handleOkEmitter)="handleOk()"
+        (handleCloseEmitter)="closeModal()"
+      ></az-confirm-content>
+    </ng-container>
+  </nz-modal>
+</ng-container>
+
+<!-- DRAWER -->
+<ng-template #drawer>
+  <nz-drawer
+    [nzClosable]="false"
+    [(nzVisible)]="isVisibleConfirm"
+    nzPlacement="bottom"
+    (nzOnClose)="closeModal()"
+  >
+    <ng-container *nzDrawerContent>
+      <az-confirm-content
+        (handleOkEmitter)="handleOk()"
+        (handleCloseEmitter)="closeModal()"
+      ></az-confirm-content>
+    </ng-container>
+  </nz-drawer>
+</ng-template>

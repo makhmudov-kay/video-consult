@@ -1,0 +1,72 @@
+.attached {
+  margin-bottom: 48px;
+
+    @media (max-width: 991px) {
+      margin-bottom: 36px;
+    }
+
+    @media (max-width: 575px) {
+      margin-bottom: 30px;
+    }
+  &__files {
+    &__img {
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__documents {
+    margin-top: 16px;
+  }
+
+  &__docs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #f2f2f2;
+      color: #86898c;
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      transition: 0.3s;
+
+      &:hover {
+        background: #86898c;
+        color: #f2f2f2;
+      }
+
+      span {
+        padding: 10px;
+        font-size: 12px;
+        line-height: 12px;
+        font-family: Agrofont-Regular;
+        word-wrap: break-word;
+        word-break: break-all; /* более приоритетно */
+      }
+    }
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 40px;
+
+    @media (max-width: 575px) {
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+}

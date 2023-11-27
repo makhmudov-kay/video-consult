@@ -1,0 +1,85 @@
+@import "../../../../../../../../assets/styles/text.less";
+
+:host ::ng-deep {
+  #fr-logo {
+    display: none;
+  }
+
+  .ant-form-item-label > label {
+    font-size: 20px;
+    font-family: Agrofont-Medium;
+  }
+
+  .fr-wrapper {
+    a:first-of-type {
+      display: none !important;
+    }
+
+    border-radius: 0 0 8px 8px;
+    border-bottom: 1px solid #d9d9d9 !important;
+
+    &::after {
+      content: none !important;
+    }
+  }
+
+  .fr-second-toolbar {
+    display: none;
+  }
+
+  .fr-box {
+    /*  border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #d9d9d9; */
+  }
+}
+
+.info {
+  @media (max-width: 767px) {
+    // padding: 24px;
+  }
+
+  &__top {
+    padding-bottom: 17px;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 575px) {
+      flex-direction: column;
+    }
+  }
+
+  &__bottom {
+    padding-top: 17px;
+
+    .subtitle {
+      .text(12px, 15px, #86898c, Agrofont-Regular);
+      display: block;
+      margin: 17px 0;
+
+      @media (max-width: 575px) {
+        // text-align: center;
+      }
+    }
+  }
+
+  &__name {
+    .text(24px, 24px, #000, Agrofont-Medium);
+    width: 100%;
+    margin-bottom: 16px;
+
+    @media (max-width: 575px) {
+      // text-align: center;
+      display: block;
+      margin: auto auto 12px auto;
+    }
+  }
+}
+
+nz-select {
+  width: 100%;
+}
+
+nz-form-item {
+  width: 100%;
+}

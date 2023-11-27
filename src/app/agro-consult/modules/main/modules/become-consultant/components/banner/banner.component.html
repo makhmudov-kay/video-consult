@@ -1,0 +1,18 @@
+<div class="become-consultant__bottom">
+  <div class="container">
+    <div class="become-consultant__bottom__description">
+      <h4>{{'positiveWorkConsultant' | translate}}</h4>
+      <div class="become-consultant__bottom__description__features">
+        <div
+          *ngFor="let card of bannerInfo"
+          class="become-consultant__bottom__description__features__element"
+        >
+          <az-banner-card [bannerCard]="card"></az-banner-card>
+        </div>
+      </div>
+    </div>
+    <div class="become-consultant__bottom__img">
+      <img src="./assets/images/become-consultant.png" alt="image" />
+    </div>
+  </div>
+</div>

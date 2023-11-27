@@ -1,0 +1,111 @@
+<ng-container *ngIf="consultant?.id && !isSkeleton; else skeleton">
+  <div
+    class="card"
+    (click)="navigateToDetailInfo(consultant.id)"
+    [ngStyle]="{ borderRadius: agrozamin ? ' 16px' : '24px' }"
+  >
+    <div
+      class="card__img"
+      [ngStyle]="{ borderRadius: agrozamin ? ' 8px' : '12px' }"
+    >
+      <img
+        [src]="consultant.user.avatar"
+        [azHandleImgError]="'./assets/images/default.jpg'"
+        alt="icon"
+      />
+    </div>
+    <div class="card__title">
+      <div class="card__title__user">
+        <h4
+          class="card__title__user__title"
+          nz-typography
+          nzEllipsis
+          nzEllipsisRows="2"
+        >
+          {{ consultant.user.fullname }}
+        </h4>
+        <span class="card__title__user__status"
+          >
+          <!-- {{ "lastOnline" | translate }} -->
+          {{ consultant.user.last_online_at | formatDateFns | async }}</span
+        >
+      </div>
+
+      <div class="card__category">
+        <span
+          >{{ "category.type" | translate }}:
+          <strong>{{ consultant.category }}</strong></span
+        >
+      </div>
+      <div class="card__category position">
+        <p nz-typography nzEllipsis [nzEllipsisRows]="2"
+          >{{ "specialization" | translate }}:
+          <strong>{{ consultant.position }}</strong></p
+        >
+      </div>
+
+      <div class="card__title__rating">
+        <div class="card__title__rating__marks">
+          <img src="./assets/images/star.svg" alt="star" />
+          <span>{{ consultant.review.rating | number : "0.1-1" }}</span>
+        </div>
+        <div class="card__title__rating__review">
+          <img src="./assets/images/review.svg" alt="star" />
+          <span>{{
+            "respondCount" | translate : { count: consultant.review.count }
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #skeleton>
+  <div
+    class="card"
+    (click)="navigateToDetailInfo(consultant.id)"
+    [ngStyle]="{ borderRadius: agrozamin ? ' 16px' : '24px' }"
+  >
+    <div
+      class="card__img"
+      [ngStyle]="{ borderRadius: agrozamin ? ' 8px' : '12px' }"
+    >
+      <nz-skeleton-element
+        nzType="image"
+        style="width: 100%; height: 252px"
+      ></nz-skeleton-element>
+    </div>
+    <div class="card__title">
+      <div class="card__title__user">
+        <nz-skeleton-element
+          nzType="input"
+          style="width: 100%; margin-bottom: 10px; height: 32px"
+        ></nz-skeleton-element>
+        <nz-skeleton-element
+          nzType="input"
+          style="width: 100%; height: 20px"
+        ></nz-skeleton-element>
+      </div>
+
+      <div class="card__category">
+        <nz-skeleton-element
+          nzType="input"
+          style="width: 100%; height: 20px"
+        ></nz-skeleton-element>
+      </div>
+      <div class="card__category position">
+        <nz-skeleton-element
+          nzType="input"
+          style="width: 100%; height: 20px"
+        ></nz-skeleton-element>
+      </div>
+
+      <div class="card__title__rating">
+        <nz-skeleton-element
+          nzType="input"
+          style="width: 70%; height: 20px"
+        ></nz-skeleton-element>
+      </div>
+    </div>
+  </div>
+</ng-template>

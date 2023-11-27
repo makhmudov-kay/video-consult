@@ -1,0 +1,67 @@
+<div class="chat__filter" *ngIf="categoryList">
+  <form [formGroup]="form">
+    <div class="chat__filter__header">
+      <h4>{{ "filters" | translate }}</h4>
+      <button (click)="reset()">{{ "reset" | translate }}</button>
+    </div>
+    <div class="chat__filter__resume">
+      <h4 class="chat__filter__subtitle">{{ "resume" | translate }}</h4>
+      <div class="filter__category__checkbox">
+        <label class="filter__category__checkbox__label">
+          <input
+            type="radio"
+            [value]="null"
+            formControlName="category_id"
+            (change)="filterByCategory(null)"
+          />
+          <span class="check-custom-mark">
+            <img src="./assets/images/check-filter.png" alt="icon" />
+          </span>
+          <span class="filter__category__checkbox__label__text">{{
+            "all" | translate
+          }}</span>
+        </label>
+        <label
+          *ngFor="let resume of filteredCategoryList"
+          class="filter__category__checkbox__label"
+        >
+          <input
+            type="radio"
+            [value]="resume.category_id"
+            formControlName="category_id"
+            (change)="filterByCategory(resume.category_id)"
+          />
+          <span class="check-custom-mark">
+            <img src="./assets/images/check-filter.png" alt="icon" />
+          </span>
+          <span class="filter__category__checkbox__label__text">{{
+            resume.category
+          }}</span>
+        </label>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <div class="chat__filter__status">
+      <h4 class="chat__filter__subtitle">{{ "chatStatus" | translate }}</h4>
+      <div class="filter__category__checkbox">
+        <label
+          *ngFor="let status of clientApplicationRadioOptions"
+          class="filter__category__checkbox__label"
+        >
+          <input
+            type="radio"
+            [value]="status.value"
+            formControlName="status"
+            (change)="filterByStatus(status.value)"
+          />
+          <span class="check-custom-mark">
+            <img src="./assets/images/check-filter.png" alt="icon" />
+          </span>
+          <span class="filter__category__checkbox__label__text">{{
+            status.label | translate
+          }}</span>
+        </label>
+      </div>
+    </div>
+  </form>
+</div>

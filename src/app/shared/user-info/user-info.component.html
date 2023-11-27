@@ -1,0 +1,24 @@
+<div class="user border-top" *ngIf="userInfo">
+  <nz-avatar
+    [nzSize]="avatarSize"
+    [nzSrc]="userInfo.avatar"
+    nzIcon="user"
+  ></nz-avatar>
+  <div class="user__info">
+    <div class="user__info__name" [ngClass]="{ chat: isChat }">
+      {{ userInfo.fullname }}
+    </div>
+    <div
+      class="user__info__status"
+      [ngClass]="{
+        chat: isChat,
+        green: userInfo.is_online,
+        grey: !userInfo.is_online
+      }"
+    >
+      {{
+        userInfo.is_online ? ("online" | translate) : ("offline" | translate)
+      }}
+    </div>
+  </div>
+</div>

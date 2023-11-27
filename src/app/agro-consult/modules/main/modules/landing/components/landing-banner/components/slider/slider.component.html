@@ -1,0 +1,77 @@
+<div class="landing-banner">
+  <div class="landing-banner__container">
+    <div class="landing-banner__block">
+      <div class="landing-banner__info">
+        <div>
+          <h3 class="landing-banner__info__title">
+            {{ "selectForYouNeedConsultant" | translate }}
+          </h3>
+          <p class="landing-banner__info__text">
+            {{ "landingBanner.description" | translate }}
+          </p>
+          <div class="landing-banner__info__statistic" *ngIf="statisticCount">
+            <div class="landing-banner__info__statistic__block">
+              <h5>{{ statisticCount.count_applications }}</h5>
+              <span>{{ "activeApplication" | translate }}</span>
+            </div>
+            <div class="landing-banner__info__statistic__block">
+              <h5>{{ statisticCount.count_finished_applications }}</h5>
+              <span>{{ "completedConsult" | translate }}</span>
+            </div>
+            <div class="landing-banner__info__statistic__block">
+              <h5>{{ statisticCount.count_resumes }}</h5>
+              <span>{{ "consultants" | translate }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="landing-banner__info__btngroupe inside-banner">
+          <button
+            class="landing-banner__info__btn"
+            (click)="isVisibleChange.emit(true)"
+          >
+            {{ "creatingApplication" | translate }}
+            <img src="./assets/images/plus-square.svg" alt="icon" />
+          </button>
+          <button
+            class="landing-banner__info__btn guide"
+            (click)="guideVisible.emit(true)"
+          >
+            <span>{{ "howToUse" | translate }}</span>
+            <az-svg-instruction class="d-flex"></az-svg-instruction>
+          </button>
+        </div>
+      </div>
+      <div
+        class="landing-banner__img"
+        [ngClass]="{yellow: isClass === 2, yellGre: isClass === 4, green: isClass === 3,}"
+      >
+        <img [src]="bannerImg" alt="banner" />
+      </div>
+    </div>
+  </div>
+
+  <div class="landing-banner__circle">
+    <img [src]="circleImg" alt="circle" />
+  </div>
+
+  <!-- <div class="landing-banner__bot">
+    <az-tg-bot-link [whiteBg]="true"></az-tg-bot-link>
+  </div> -->
+</div>
+
+<div class="landing-banner__info__btngroupe outside-banner container">
+  <button
+    class="landing-banner__info__btn"
+    (click)="isVisibleChange.emit(true)"
+  >
+    {{ "creatingApplication" | translate }}
+    <img src="./assets/images/plus-square.svg" alt="icon" />
+  </button>
+  <button
+    class="landing-banner__info__btn guide"
+    (click)="guideVisible.emit(true)"
+  >
+    <span>{{ "howToUse" | translate }}</span>
+    <az-svg-instruction class="d-flex"></az-svg-instruction>
+  </button>
+</div>

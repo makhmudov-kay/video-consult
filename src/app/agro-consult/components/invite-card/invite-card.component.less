@@ -1,0 +1,96 @@
+.call-wrapper {
+  position: fixed;
+  max-width: 340px;
+  width: 100%;
+  z-index: 5000;
+  top: 14%;
+  right: 1%;
+
+  .call {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 10px;
+    max-width: 360px;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.2);
+
+    h3 {
+      font-size: 20px;
+      line-height: 26px;
+      color: #282828;
+      font-family: Agrofont-Medium;
+    }
+
+    &__btn {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      button {
+        width: 48%;
+        font-size: 14px;
+        line-height: 18px;
+        font-family: Agrofont-Medium;
+        padding: 15px 0;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      &__success {
+        background: #2c4eff;
+        color: #fff;
+
+        &:hover {
+          background: darken(#2c4eff, 3%);
+        }
+
+        &:active {
+          background: darken(#2c4eff, 7%);
+        }
+      }
+
+      &__danger {
+        background: #f5f5f7;
+        color: #282828;
+
+        &:hover {
+          background: darken(#f5f5f7, 3%);
+        }
+
+        &:active {
+          background: darken(#f5f5f7, 7%);
+        }
+      }
+    }
+
+    &__text {
+      font-size: 14px;
+      line-height: 20px;
+      font-family: Agrofont-Regular;
+      color: #86898c;
+      text-decoration: underline;
+    }
+  }
+
+  nz-divider {
+    margin: 16px 0;
+  }
+
+  .invite-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      border: none;
+      background: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}

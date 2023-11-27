@@ -1,0 +1,123 @@
+.banner {
+  height: 341px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 50px;
+  margin-top: 25px;
+
+  @media (max-width: 767px) {
+    height: 575px;
+  }
+
+  @media (max-width: 480px) {
+    height: 640px;
+  }
+
+  @media (max-width: 402px) {
+    height: 670px;
+  }
+
+  @media (max-width: 368px) {
+    height: 690px;
+  }
+
+  &__bg {
+    height: 300px;
+    width: 100%;
+    border-radius: 20px;
+    background: #f4f6ff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+
+    @media (max-width: 767px) {
+      height: 540px;
+    }
+
+    @media (max-width: 480px) {
+      height: 620px;
+    }
+
+    @media (max-width: 402px) {
+      height: 650px;
+    }
+  }
+
+  &__info {
+    position: relative;
+    z-index: 10;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+
+    @media (max-width: 991px) {
+      padding: 0 24px;
+      gap: 20px;
+    }
+
+    @media (max-width: 767px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &__text {
+      padding-top: 40px;
+      max-width: 650px;
+      width: 100%;
+
+      @media (max-width: 767px) {
+        text-align: center;
+        padding-top: 20px;
+      }
+
+      @media (max-width: 575px) {
+        padding-top: 10px;
+      }
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 41px;
+      color: #282828;
+      font-family: Agrofont-Bold;
+      margin-bottom: 24px;
+
+      @media (max-width: 991px) {
+        font-size: 24px;
+        line-height: 30px;
+        margin-bottom: 18px;
+      }
+    }
+
+    &__description {
+      font-size: 16px;
+      line-height: 20px;
+      font-family: Agrofont-Regular;
+      color: #282828;
+      margin-bottom: 32px;
+
+      @media (max-width: 991px) {
+        font-size: 14px;
+        line-height: 18px;
+        margin-bottom: 20px;
+      }
+    }
+
+    &__links {
+      display: flex;
+      gap: 20px;
+
+      @media (max-width: 767px) {
+        justify-content: center;
+      }
+
+      @media (max-width: 480px) {
+        gap: 10px;
+        flex-direction: column;
+      }
+    }
+  }
+}

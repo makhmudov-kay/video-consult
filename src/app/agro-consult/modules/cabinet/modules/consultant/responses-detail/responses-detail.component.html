@@ -1,0 +1,5 @@
+<az-application-detail
+  *ngIf="application$ | async as application"
+  [application]="application"
+  [applicationStatus]="'youResponded' | translate"
+></az-application-detail>

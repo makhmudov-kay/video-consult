@@ -1,0 +1,128 @@
+<az-step-header
+  [step]="step"
+  [title]="'priceLimit' | translate"
+></az-step-header>
+<form nz-form [formGroup]="form">
+  <div class="step__radio">
+    <label class="step__radio__label">
+      <input
+        type="radio"
+        value="free"
+        name="priceType"
+        [ngModel]="priceType"
+        (ngModelChange)="changePickerValue($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <span class="check-custom-mark"><span></span></span
+      >{{ "freeApplication" | translate }}
+    </label>
+    <label class="step__radio__label">
+      <input
+        type="radio"
+        value="paid"
+        name="priceType"
+        [ngModel]="priceType"
+        (ngModelChange)="changePickerValue($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <span class="check-custom-mark"><span></span></span
+      >{{ "readyToPay" | translate }}
+    </label>
+  </div>
+
+  <div class="step__price" *ngIf="priceType === 'paid'">
+    <ng-container *ngIf="!id; else personalPrice">
+      <nz-input-group
+        [nzSuffix]="suffixTemplateInfo"
+        [nzPrefix]="prefixFrom"
+        [nzStatus]="
+          validation || rangeError || maxPriceValidation ? 'error' : ''
+        "
+      >
+        <input
+          nz-input
+          nzSize="large"
+          mask="separator"
+          formControlName="price_from"
+          (ngModelChange)="handlePriceFrom()"
+          [ngStyle]="{
+            background:
+              validation || rangeError || maxPriceValidation
+                ? '#fff'
+                : '#f5f5f7'
+          }"
+        />
+      </nz-input-group>
+      <nz-input-group
+        [nzSuffix]="suffixTemplateInfo"
+        [nzPrefix]="prefixTo"
+        [nzStatus]="
+          validation || rangeError || maxPriceValidation ? 'error' : ''
+        "
+      >
+        <input
+          nz-input
+          nzSize="large"
+          mask="separator"
+          formControlName="price_to"
+          (ngModelChange)="changeValidationStatus()"
+          [ngStyle]="{
+            background:
+              validation || rangeError || maxPriceValidation
+                ? '#fff'
+                : '#f5f5f7'
+          }"
+        />
+      </nz-input-group>
+    </ng-container>
+
+    <ng-template #personalPrice>
+      <nz-input-group
+        [nzSuffix]="suffixTemplateInfo"
+        [nzStatus]="
+          validation || rangeError || maxPriceValidation ? 'error' : ''
+        "
+      >
+        <input
+          nz-input
+          nzSize="large"
+          mask="separator"
+          formControlName="price_to"
+          (ngModelChange)="handlePersonalPrice()"
+          [ngStyle]="{
+            background:
+              validation || rangeError || maxPriceValidation
+                ? '#fff'
+                : '#f5f5f7'
+          }"
+        />
+      </nz-input-group>
+    </ng-template>
+
+    <div class="validation" *ngIf="validation">
+      <small>
+        {{ "priceLimit.text" | translate }}
+      </small>
+    </div>
+    <div class="validation" *ngIf="rangeError">
+      <small>
+        {{ "consultPriceValidation" | translate }}
+      </small>
+    </div>
+    <div class="validation" *ngIf="maxPriceValidation">
+      <small>
+        {{ "maxPriceValidation" | translate }}
+      </small>
+    </div>
+
+    <ng-template #prefixFrom
+      ><span class="prefix">{{ "from" | translate }}</span></ng-template
+    >
+    <ng-template #prefixTo
+      ><span class="prefix">{{ "to" | translate }}</span></ng-template
+    >
+    <ng-template #suffixTemplateInfo>
+      <span class="suffix">{{ "sum" | translate }}</span>
+    </ng-template>
+  </div>
+</form>

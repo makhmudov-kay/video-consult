@@ -1,0 +1,28 @@
+<ngx-ui-loader
+  [fgsTemplate]="foregroundSpinner"
+  [bgsTemplate]="backgroundSpinner"
+  [overlayColor]="'transparent'"
+  [pbColor]="'#4562ff'"
+  [pbThickness]="3"
+></ngx-ui-loader>
+<ng-template #foregroundSpinner></ng-template>
+<ng-template #backgroundSpinner></ng-template>
+
+<az-spin>
+  <router-outlet></router-outlet>
+</az-spin>
+<az-message-modal></az-message-modal>
+
+<az-video-call
+  #videoCall
+  *ngIf="application$ | async as application"
+  [id]="id$ | async"
+  [authuserid]="authuserid$ | async"
+  [profileId]="profileId$ | async"
+  [avatar]="application.profile.avatar"
+  [fullname]="application.profile.fullname"
+  (joinedUserChange)="listenJoinedUsers($event)"
+  (isStreamingHandler)="isStreamingHandler($event)"
+></az-video-call>
+
+<az-post-message></az-post-message>

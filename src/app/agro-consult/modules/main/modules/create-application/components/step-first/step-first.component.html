@@ -1,0 +1,30 @@
+<az-step-header
+  [step]="step"
+  [title]="'setApplicationName' | translate"
+  [description]="'setApplicationName.text' | translate"
+></az-step-header>
+<form nz-form [formGroup]="form">
+  <input
+    class="step__input"
+    nz-input
+    [placeholder]="'inputApplicationName' | translate"
+    formControlName="title"
+    nzSize="large"
+    [nzStatus]="
+      (form.get('title')?.touched && form.get('title')?.invalid) || validation
+        ? 'error'
+        : ''
+    "
+    (keydown.enter)="nextStep($event)"
+    (ngModelChange)="changeValidationStatus($event)"
+    
+  />
+  <div
+    class="validation"
+    *ngIf="
+      (form.get('title')?.touched && form.get('title')?.invalid) || validation
+    "
+  >
+    <small> {{ "inputApplicationName" | translate }} </small>
+  </div>
+</form>

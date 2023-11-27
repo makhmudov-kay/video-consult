@@ -1,0 +1,76 @@
+<div class="applications">
+  <div class="applications__left">
+    <div class="applications__search">
+      <div class="applications__search__input">
+        <az-search-input (searchText)="submitSearch($event)"></az-search-input>
+      </div>
+      <button class="applications__search__btn" (click)="open()">
+        <img src="./assets/images/icons/filter.svg" alt="icon" />
+      </button>
+    </div>
+    <div class="applications__list">
+      <div
+        (scroll)="onScrollEvent($event)"
+        class="applications__list__content"
+        *ngIf="data.data && data.data.length; else empty"
+      >
+        <ng-container *ngIf="isLoaded || !isAvailableSkeleton; else skeleton">
+          <az-application-card-list
+            *ngFor="let item of data.data"
+            [status]="true"
+            [application]="item"
+          ></az-application-card-list>
+        </ng-container>
+        <ng-template #skeleton>
+          <div class="applications__skelet" *ngFor="let item of data.data">
+            <nz-skeleton
+              [nzAvatar]="true"
+              [nzParagraph]="{ rows: 4 }"
+            ></nz-skeleton>
+          </div>
+        </ng-template>
+      </div>
+      <ng-template #empty>
+        <div class="applications__list__content">
+          <az-empty-application [searchApplication]="true"></az-empty-application>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="applications__list__filter">
+    <az-application-filter
+      *ngIf="categoryList$ | async as categoryList; else filterSkelet"
+      [myOrderApplication]="clientApplicationRadioOptions"
+      [isMyApplication]="true"
+      (filterParams)="searchByFilter($event)"
+      [categoryList]="categoryList"
+      [form]="form"
+    ></az-application-filter>
+    <ng-template #filterSkelet>
+      <div class="applications__list__filter__skelet">
+        <nz-skeleton [nzParagraph]="{ rows: 14 }"></nz-skeleton>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- DRAWER FILTER -->
+<az-drawer
+  [visible]="visible"
+  (closeDrawer)="close($event)"
+  [height]="'75%'"
+  [placement]="'bottom'"
+>
+  <div>    
+    <az-application-filter
+      *ngIf="categoryList$ | async as categoryList"
+      (closeDrawer)="close(false)"
+      [myOrderApplication]="clientApplicationRadioOptions"
+      [form]="form"
+      [isDrawer]="true"
+      [categoryList]="categoryList"
+      (filterParams)="searchByFilter($event)"
+    ></az-application-filter>
+  </div>
+</az-drawer>

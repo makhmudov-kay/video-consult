@@ -1,0 +1,45 @@
+<div class="filter__block">
+  <div class="filter__header">
+    <h4>{{ "filters" | translate }}</h4>
+    <button type="button" (click)="reset()">{{ "reset" | translate }}</button>
+  </div>
+  <div class="filter__application">
+    <h4 class="filter__title">{{ "filterByApplication" | translate }}</h4>
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      [nzPlaceHolder]="'chooseApplication' | translate"
+      nzSize="large"
+      [(ngModel)]="selectedApp"
+      (ngModelChange)="handleApplicationChange($event)"
+    >
+      <nz-option
+        [nzLabel]="application.title"
+        [nzValue]="application.id"
+        *ngFor="let application of applicationsList"
+      ></nz-option>
+    </nz-select>
+  </div>
+  <div class="filter__status">
+    <h4 class="filter__title">{{ "filterByStatus" | translate }}</h4>
+    <form [formGroup]="form">
+      <label
+        *ngFor="let status of clientApplicationRadioOptions"
+        class="filter__category__checkbox__label"
+      >
+        <input
+          type="radio"
+          [value]="status.value"
+          formControlName="status"
+          (ngModelChange)="filterByStatus($event)"
+        />
+        <span class="check-custom-mark">
+          <img src="./assets/images/check-filter.png" alt="icon" />
+        </span>
+        <span class="filter__category__checkbox__label__text">{{
+          status.label | translate
+        }}</span>
+      </label>
+    </form>
+  </div>
+</div>

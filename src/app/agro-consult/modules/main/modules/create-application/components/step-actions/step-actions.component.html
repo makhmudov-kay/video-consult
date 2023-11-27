@@ -1,0 +1,50 @@
+<div class="step__action">
+  <!-- PREV STEP BUTTON -->
+  <button
+    class="step__action__btn prev"
+    (click)="pre()"
+    type="button"
+    *ngIf="currentStep > 0"
+  >
+    <img src="./assets/images/Arrow_left.svg" alt="icon" />
+    <span>{{ "back" | translate }}</span>
+  </button>
+  <!-- ================ -->
+  <button
+    class="step__action__btn home"
+    [routerLink]="['/']"
+    type="button"
+    *ngIf="currentStep === 0"
+  >
+    <span>{{ "goToMain" | translate }}</span>
+  </button>
+  <!-- NEXT STEP BUTTON -->
+  <button
+    class="step__action__btn next"
+    type="button"
+    [disabled]="disableBtn"
+    (click)="next()"
+    *ngIf="currentStep < 5"
+  >
+    <span>{{ "continue" | translate }}</span>
+    <img src="./assets/images/Arrow_right.svg" alt="icon" />
+  </button>
+  <!-- ================ -->
+  <button
+    class="step__action__btn done"
+    [ngClass]="{ loading: isLoading }"
+    (click)="submit()"
+    type="submit"
+    *ngIf="currentStep === 5"
+    [disabled]="isLoading"
+  >
+    <ng-container *ngIf="!isLoading; else loading"></ng-container>
+    <div *ngIf="!isLoading">
+      <span>{{ "post" | translate }}</span>
+      <img src="./assets/images/Arrow_right-white.svg" alt="icon" />
+    </div>
+    <ng-template #loading>
+      <span nz-icon [nzType]="'loading'"></span>
+    </ng-template>
+  </button>
+</div>

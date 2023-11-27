@@ -1,0 +1,288 @@
+.payment {
+  &__title {
+    font-size: 20px;
+    line-height: 26px;
+    color: #282828;
+    font-family: Agrofont-Medium;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    color: #86898c;
+    font-family: Agrofont-Regular;
+    margin-bottom: 8px;
+    display: block;
+
+    &.title {
+      font-size: 20px;
+      line-height: 26px;
+      font-family: Agrofont-Medium;
+      color: #242533;
+    }
+  }
+
+  &__reciever {
+    padding: 24px 0;
+    border-bottom: 1px solid #d9d9d9;
+
+    &__user {
+      font-size: 20px;
+      line-height: 26px;
+      font-family: Agrofont-Regular;
+      color: #242533;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  &__price {
+    font-size: 20px;
+    line-height: 26px;
+    color: #242533;
+    font-family: Agrofont-Regular;
+  }
+
+  &__list {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    label {
+      input {
+        appearance: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      input:checked ~ .payment__card {
+        outline: 3px solid #258043;
+      }
+    }
+  }
+
+  &__card {
+    width: 230px;
+    height: 140px;
+    background: #6710e6;
+    border-radius: 16px;
+    padding: 12px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    // border: 3px solid #258043;
+
+    &__triangles {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      .top {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 70px 70px 0;
+        border-color: transparent #3fe0ae transparent transparent;
+      }
+
+      .bootom {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 70px 70px;
+        border-color: transparent transparent #3fe0ae transparent;
+      }
+    }
+
+    &__info {
+      position: absolute;
+      z-index: 5000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &__type {
+        font-family: Agrofont-Bold;
+        font-size: 14px;
+        line-height: 18px;
+        margin-bottom: 5px;
+      }
+
+      &__name {
+        font-size: 12px;
+        line-height: 12px;
+      }
+
+      &__balance {
+        font-size: 16px;
+        line-height: 20px;
+        font-family: Agrofont-Medium;
+        padding: 15px 0;
+      }
+
+      &__number {
+        font-size: 14px;
+        line-height: 16px;
+      }
+    }
+  }
+
+  &__add-card {
+    border: 1px dashed #cfd3d8;
+    border-radius: 16px;
+    padding: 12px;
+    width: 230px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      border: 1px dashed #2c4eff;
+
+      span,
+      p {
+        color: #2c4eff;
+      }
+    }
+
+    span {
+      font-size: 25px;
+      color: #cfd3d8;
+      display: block;
+      margin-bottom: 4px;
+      transition: 0.3s;
+    }
+
+    p {
+      color: #cfd3d8;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+      font-family: Mont-SemiBold;
+      transition: 0.3s;
+    }
+  }
+
+  &__btn {
+    padding-top: 24px;
+
+    button {
+      background: #2c4eff;
+      color: #fff;
+      border: none;
+      outline: none;
+      display: block;
+      width: 100%;
+      padding: 16px 0;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 18px;
+      font-family: Agrofont-Medium;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background: lighten(#2c4eff, 5%);
+      }
+    }
+  }
+
+  &__add-new-card {
+    padding-top: 24px;
+
+    label {
+      font-size: 14px;
+      line-height: 20px;
+      font-family: Agrofont-Regular;
+      color: #86898c;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input {
+      background: #f4f6ff;
+      border: none;
+    }
+
+    &__btn {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+
+      button {
+        border: 1px solid #cfd3d8;
+        padding: 16px 32px;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 18px;
+        color: #282828;
+        font-family: Agrofont-Medium;
+        background: #fff;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background: #2c4eff;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &__card-number {
+    margin-bottom: 16px;
+  }
+
+  &__card-date {
+    max-width: 300px;
+    width: 100%;
+    padding-bottom: 24px;
+
+    &__block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 200px;
+      width: 100%;
+    }
+  }
+
+  &__text {
+    padding-top: 24px;
+  }
+
+  &__success {
+    color: #22a33f;
+    font-size: 24px;
+    line-height: 30px;
+    font-family: Agrofont-Medium;
+    margin-bottom: 16px;
+  }
+
+  &__safe {
+    font-size: 20px;
+    line-height: 26px;
+    font-family: Agrofont-Medium;
+    color: #242533;
+    margin-bottom: 16px;
+  }
+
+  &__safe-desc {
+    font-size: 14px;
+    line-height: 20px;
+    color: #86898c;
+    font-family: Agrofont-Regular;
+  }
+}

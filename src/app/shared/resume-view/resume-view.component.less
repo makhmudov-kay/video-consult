@@ -1,0 +1,248 @@
+@import "../../../assets/styles/text.less";
+
+.view {
+  background: #ffffff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 24px;
+
+  &__title {
+    .text(24px, 30px, #333, Agrofont-Bold);
+    margin-bottom: 8px;
+
+    @media (max-width: 575px) {
+      .text(20px, 26px, #333, Agrofont-Bold);
+    }
+  }
+
+  &__text,
+  .fr-view {
+    .text(24px, 30px, #242533, Agrofont-Regular);
+
+    @media (max-width: 575px) {
+      .text(14px, 18px, #333, Agrofont-Regular);
+    }
+
+    &.some {
+      margin-right: 8px;
+      background: rgb(235, 235, 235);
+      padding: 4px 8px;
+      margin-bottom: 8px;
+      display: inline-block;
+      border-radius: 8px;
+    }
+  }
+
+  &__user {
+    display: flex;
+    margin-bottom: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+
+    @media (max-width: 575px) {
+      justify-content: center;
+    }
+
+    &__ava {
+      margin-right: 24px;
+
+      @media (max-width: 575px) {
+        margin: auto;
+      }
+
+      &__img {
+        width: 120px;
+        height: 145px;
+        border-radius: 8px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    &__name {
+      .text(32px, 32px, #292d32, Agrofont-Bold);
+      margin-bottom: 16px;
+
+      @media (max-width: 575px) {
+        .text(24px, 24px, #292d32, Agrofont-Bold);
+        margin-top: 8px;
+        text-align: center;
+      }
+    }
+
+    &__rating {
+      display: flex;
+      align-items: center;
+      @media (max-width: 575px) {
+        justify-content: center;
+      }
+
+      svg {
+        margin-right: 6px;
+      }
+
+      span {
+        .text(16px, 18px, #000, Agrofont-Medium);
+      }
+
+      &__stars {
+        margin-right: 16px;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 575px) {
+          text-align: center;
+        }
+
+        span {
+          margin-left: 5px;
+        }
+      }
+
+      &__response {
+        display: flex;
+        align-items: center;
+
+        span {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  &__attached {
+    margin-bottom: 24px;
+
+    &__block {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__img {
+      width: 120px;
+      height: 120px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      cursor: pointer;
+
+      @media (max-width: 575px) {
+        width: 72px;
+        height: 72px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__description {
+    margin-bottom: 24px;
+  }
+
+  &__specialization {
+    margin-bottom: 24px;
+  }
+
+  &__skills {
+    margin-bottom: 24px;
+  }
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+
+  @media (max-width: 575px) {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+
+  &__btn {
+    padding: 16px 0;
+    width: 49%;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: Agrofont-Medium;
+    cursor: pointer;
+
+    @media (max-width: 575px) {
+      width: 100%;
+      margin-bottom: 12px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    &.back {
+      color: #282828;
+    }
+
+    &.request {
+      background: #2c4eff;
+      color: #fff;
+    }
+  }
+}
+
+.blocked {
+  // padding: 20px;
+  margin-bottom: 20px;
+}
+
+.attached {
+  &__documents {
+    margin-bottom: 16px;
+  }
+
+  &__docs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #f2f2f2;
+      color: #86898c;
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      transition: 0.3s;
+
+      &:hover {
+        background: #86898c;
+        color: #f2f2f2;
+      }
+
+      span {
+        padding: 10px;
+        font-size: 12px;
+        line-height: 12px;
+        font-family: Agrofont-Regular;
+        word-wrap: break-word;
+        word-break: break-all; /* более приоритетно */
+      }
+    }
+  }
+}
+
+

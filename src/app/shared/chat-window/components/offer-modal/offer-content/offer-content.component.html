@@ -1,0 +1,43 @@
+<form nz-form [formGroup]="form">
+  <div class="proposal">
+    <div class="proposal__price border-bottom">
+      <h5 class="proposal__title">{{ "priceToService" | translate }}</h5>
+      <p class="proposal__subtitle">
+        {{ "confirmPrice" | translate }}
+      </p>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="'offerPrice' | translate">
+          <input
+            nzSize="large"
+            formControlName="amount"
+            nz-input
+            mask="separator"
+            maxlength="8"
+            min="1000"
+            [placeholder]="'offerPrice' | translate"
+          /> </nz-form-control
+      ></nz-form-item>
+    </div>
+    <div class="proposal__text border-bottom">
+      <h5 class="proposal__title mb">{{ "offerOrQuestion" | translate }}</h5>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="'sendResponse.coverLetter' | translate">
+          <textarea
+            nz-input
+            nzSize="large"
+            [placeholder]="'sendResponse.text' | translate"
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
+            formControlName="text"
+          ></textarea></nz-form-control
+      ></nz-form-item>
+    </div>
+    <div class="proposal__actions">
+      <button class="proposal__actions__btn back" (click)="handleCancel.emit()">
+        {{ "back" | translate }}
+      </button>
+      <button class="proposal__actions__btn request" (click)="sendOffer.emit()">
+        {{ "send" | translate }}
+      </button>
+    </div>
+  </div>
+</form>

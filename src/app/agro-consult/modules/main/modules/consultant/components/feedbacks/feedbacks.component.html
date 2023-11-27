@@ -1,0 +1,13 @@
+<div class="feedback">
+  <div class="feedback__title">
+    <h4 class="title">{{ "responds" | translate }}</h4>
+    <div class="feedback__title__raiting">
+      <img src="./assets/images/star-feed.svg" alt="icon" />
+      <span>{{ consultantInfo.review.rating | number : "1.1-1" }}</span>
+    </div>
+  </div>
+  <div class="feedback__count">
+    {{ consultantInfo.reviews.length }} {{ "comments" | translate }}
+  </div>
+  <az-commentary [reviews]="consultantInfo.reviews"></az-commentary>
+</div>

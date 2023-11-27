@@ -1,0 +1,69 @@
+.application__card {
+  padding: 24px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+
+  &__title {
+    font-size: 20px;
+    line-height: 24px;
+    font-family: Agrofont-Bold;
+    color: #282828;
+    margin-bottom: 24px;
+  }
+
+  &__description {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: Agrofont-Regular;
+    color: #1e1e1e;
+    max-width: 800px;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  &__price {
+    font-size: 20px;
+    line-height: 25px;
+    color: #2b4cff;
+    font-family: Agrofont-Regular;
+    margin-bottom: 24px;
+  }
+
+  &__img {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    &__block {
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      margin-right: 8px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+  }
+
+  &__pickedtime {
+    margin-top: 24px;
+
+    span {
+      font-size: 14px;
+      line-height: 24px;
+      color: #b7bcca;
+      margin-left: 16px;
+      font-family: Agrofont-Regular;
+    }
+  }
+}

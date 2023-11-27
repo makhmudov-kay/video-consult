@@ -1,0 +1,94 @@
+.become-consultant {
+  &__top {
+    padding: 40px 0;
+    border-top: 2px solid #282828;
+    display: flex;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+
+    &__title {
+      width: 50%;
+
+      @media (max-width: 767px) {
+        order: 2;
+        width: 100%;
+      }
+
+      h4 {
+        font-size: 32px;
+        line-height: 41px;
+        font-family: Agrofont-Bold;
+        color: #282828;
+        margin-bottom: 48px;
+        @media (max-width: 767px) {
+          text-align: center;
+        }
+      }
+
+      button {
+        padding: 16px 32px;
+        border-radius: 8px;
+        background: #396afc;
+        border: none;
+        font-size: 14px;
+        line-height: 18px;
+        font-family: Mont-Bold;
+        color: #fff;
+        cursor: pointer;
+        transition: 0.3s;
+        @media (max-width: 767px) {
+          display: block;
+          margin: auto;
+        }
+
+        &:hover {
+          background: lighten(#396afc, 5%);
+        }
+        &:active {
+          background: darken(#396afc, 10%);
+        }
+      }
+    }
+
+    &__subtitle {
+      width: 50%;
+
+      @media (max-width: 767px) {
+        order: 1;
+        width: 100%;
+      }
+
+      p {
+        font-size: 40px;
+        line-height: 51px;
+        font-family: Agrofont-Regular;
+        max-width: 400px;
+        width: 100%;
+
+        @media (max-width: 767px) {
+          max-width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.resume-limit {
+  &__title {
+    font-size: 20px;
+    line-height: 26px;
+    font-family: Agrofont-Medium;
+    color: #242533;
+    margin-bottom: 16px;
+  }
+
+  &__text {
+    font-family: Agrofont-Regular;
+    font-size: 16px;
+    line-height: 20px;
+    color: #333333;
+  }
+}

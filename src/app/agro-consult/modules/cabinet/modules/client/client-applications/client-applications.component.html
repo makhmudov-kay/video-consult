@@ -1,0 +1,66 @@
+<div class="applications">
+  <div class="applications__search">
+    <div class="applications__search__input">
+      <az-search-input (searchText)="searchText($event)"></az-search-input>
+    </div>
+    <button class="applications__search__btn" (click)="isVisible = true">
+      <span class="applications__search__btn__text">{{
+        "newApplication" | translate
+      }}</span>
+      <span
+        class="applications__search__btn__icon"
+        nz-icon
+        nzType="plus-circle"
+        nzTheme="outline"
+      ></span>
+    </button>
+  </div>
+  <div class="applications__filter">
+    <az-radio-group
+      [radioOptions]="clientApplicationRadioOptions"
+      [(radioValue)]="statusFilterValue"
+      (radioValueChange)="handleChangeFilter($event)"
+    ></az-radio-group>
+  </div>
+  <div *ngIf="applications$ | async as applications; else skelet">
+    <div class="applications__list" *ngIf="applications.length; else empty">
+      <ng-container *ngFor="let item of applications">
+        <nz-ribbon
+          *ngIf="item.type === 'private'; else public"
+          [nzText]="'privateApplication' | translate"
+        >
+          <az-client-application-card
+            [isCabinet]="true"
+            [routerLink]="[item.id]"
+            [cardInfo]="item"
+            [status]="item.status"
+          ></az-client-application-card>
+        </nz-ribbon>
+
+        <ng-template #public>
+          <az-client-application-card
+            [isCabinet]="true"
+            [routerLink]="[item.id]"
+            [cardInfo]="item"
+            [status]="item.status"
+          ></az-client-application-card>
+        </ng-template>
+      </ng-container>
+    </div>
+    <ng-template #empty>
+      <div class="applications__list">
+        <az-empty-application></az-empty-application>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-template #skelet>
+    <div class="skeleton" *ngFor="let skeleton of [].constructor(4)">
+      <nz-skeleton [nzParagraph]="{ rows: 1 }"></nz-skeleton>
+    </div>
+  </ng-template>
+</div>
+
+<az-application-type-modal
+  [(isVisible)]="isVisible"
+></az-application-type-modal>

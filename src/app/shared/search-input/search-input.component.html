@@ -1,0 +1,29 @@
+<div class="search">
+  <nz-input-group
+    [nzPrefix]="prefixTemplateUser"
+    nzSize="large"
+    [nzSuffix]="inputClearTpl"
+  >
+    <input
+      nz-input
+      [placeholder]="'search' | translate"
+      [(ngModel)]="searchValue"
+      (keydown.enter)="submit()"
+    />
+  </nz-input-group>
+
+  <ng-template #prefixTemplateUser
+    ><span nz-icon nzType="search"></span
+  ></ng-template>
+
+  <ng-template #inputClearTpl>
+    <span
+      nz-icon
+      class="ant-input-clear-icon"
+      nzTheme="fill"
+      nzType="close-circle"
+      *ngIf="searchValue"
+      (click)="submit(true)"
+    ></span>
+  </ng-template>
+</div>

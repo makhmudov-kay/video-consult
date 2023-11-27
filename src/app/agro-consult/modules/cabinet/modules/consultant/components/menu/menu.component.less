@@ -1,0 +1,104 @@
+.horizontal-menu {
+  padding: 24px 16px;
+  background: #fff;
+  border-radius: 16px;
+  margin-bottom: 24px;
+
+  @media (max-width: 575px) {
+    padding: 6px;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__item {
+      list-style: none;
+      text-align: center;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      a {
+        padding: 8px 24px;
+        font-size: 12px;
+        line-height: 17px;
+        font-family: Mont-Bold;
+        color: #000;
+
+        @media (max-width: 850px) {
+          padding: 8px 16px;
+        }
+
+        @media (max-width: 767px) {
+          display: block;
+        }
+
+        @media (max-width: 575px) {
+          padding: 4px 8px;
+        }
+      }
+
+      span[nz-icon] {
+        vertical-align: middle;
+        margin-right: 12px;
+
+        @media (max-width: 767px) {
+          display: block;
+          margin-right: 0;
+        }
+
+        ::ng-deep {
+          svg {
+            @media (max-width: 575px) {
+              width: 28px;
+              height: 29px;
+            }
+          }
+        }
+      }
+
+      a.active {
+        background: linear-gradient(
+          90deg,
+          rgba(57, 106, 252, 0.15) 0%,
+          rgba(41, 72, 255, 0.15) 100%
+        );
+        opacity: 0.8;
+        border-radius: 4px;
+        color: #396afc;
+
+        @media (max-width: 767px) {
+          background: none;
+        }
+
+        ::ng-deep {
+          svg {
+            path {
+              stroke: #396afc;
+            }
+
+            circle {
+              stroke: #396afc;
+            }
+
+            @media (max-width: 575px) {
+              width: 28px;
+              height: 29px;
+            }
+          }
+        }
+      }
+
+      &__text {
+        @media (max-width: 575px) {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<ng-container *ngIf="isModal; else drawer">
+  <nz-modal
+    [(nzVisible)]="isVisibleModal"
+    (nzOnCancel)="handleCancel()"
+    [nzFooter]="null"
+  >
+    <ng-container *nzModalContent>
+      <az-offer-content
+        [form]="form"
+        (handleCancel)="handleCancel()"
+        (sendOffer)="sendOffer()"
+      ></az-offer-content>
+    </ng-container>
+  </nz-modal>
+</ng-container>
+
+<ng-template #drawer>
+  <nz-drawer
+    [nzClosable]="false"
+    [(nzVisible)]="isVisibleModal"
+    nzPlacement="bottom"
+    (nzOnClose)="handleCancel()"
+    nzHeight="50%"
+  >
+    <ng-container *nzDrawerContent>
+      <az-offer-content
+        [form]="form"
+        (handleCancel)="handleCancel()"
+        (sendOffer)="sendOffer()"
+      ></az-offer-content>
+    </ng-container>
+  </nz-drawer>
+</ng-template>

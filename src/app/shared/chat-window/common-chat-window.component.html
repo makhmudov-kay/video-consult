@@ -1,0 +1,52 @@
+<ng-container *ngIf="application$ | async as application">
+  <div class="chat">
+    <!-- HEADER -->
+    <az-chat-header
+      [isMobileDevice]="isMobileDevice"
+      [isClient]="isClient"
+      [application]="application"
+      [applicationStatus]="applicationStatus"
+      [waiting]="waiting"
+      [waitingNotificate]="waitingNotificate"
+      [joinedUser]="joinedUser"
+      [isStreaming]="isStreaming"
+      [notificateForReady]="notificateForReady"
+      [liveIsStreaming]="liveIsStreaming"
+      [sendInvite]="sendInvite"
+      (startCall)="placeVideoCall($event)"
+      (invite)="inviteUser()"
+      (readyToConsult)="informConsultantAboutReady()"
+    ></az-chat-header>
+
+    <!-- APPLICATION -->
+    <az-chat-application-card
+      [isMobileDevice]="isMobileDevice"
+      [application]="application"
+    ></az-chat-application-card>
+
+    <!-- MESSAGE WINDOW -->
+    <az-messages-window
+      [applicationId]="application.application.id"
+      [id]="id"
+      [resumeId]="application.application.resume_id"
+      [toProfileId]="application.to_profile_id"
+      [status]="application.application.status"
+      [applicationType]="application.application.type"
+      (statusChange)="applicationStatusChange()"
+      [profileId]="profileId"
+      [consultantId]="application.profile.profile_id"
+      [applicationInfo]="application"
+      [isClient]="isClient"
+      (listenerStatus)="setStatusFromListener($event)"
+      [joinedUser]="joinedUser"
+      [isStreaming]="isStreaming"
+      (handleVideoCall)="
+        placeVideoCall({
+          profileId: application.profile.id,
+          fullName: application.profile.fullname
+        })
+      "
+      (handleInvite)="inviteUser()"
+    ></az-messages-window>
+  </div>
+</ng-container>

@@ -1,0 +1,146 @@
+<div class="consultant-about" *ngIf="consultantInfo; else skeleton">
+  <div
+    nz-row
+    class="consultant-about__user"
+    [nzGutter]="[
+      { xs: 0, sm: 0, md: 36, lg: 28, xl: 48 },
+      { xs: 16, sm: 0 }
+    ]"
+  >
+    <div nz-col nzXs="24" nzSm="12" nzMd="11" nzLg="9" nzXl="8">
+      <div class="consultant-about__user__avatar">
+        <!-- AVATAR -->
+        <!-- <img
+          [src]="
+            consultantInfo.user.avatar
+              ? consultantInfo.user.avatar
+              : './assets/images/default.jpg'
+          "
+          alt="avatar"
+        /> -->
+        <img
+          nz-image
+          [nzSrc]="consultantInfo.user.avatar
+          ? consultantInfo.user.avatar
+          : './assets/images/default.jpg'"
+          alt="avatar"
+        />
+        <!-- ----------------- -->
+      </div>
+    </div>
+    <div nz-col nzXs="24" nzSm="12" nzMd="13" nzLg="15" nzXl="16">
+      <div class="consultant-about__user__block">
+        <div>
+          <!-- FULL NAME -->
+          <h3 class="consultant-about__user__name">
+            {{ consultantInfo.user.fullname }}
+          </h3>
+          <!-- ------------------ -->
+
+          <!-- LAST ONLINE -->
+          <p
+            class="consultant-about__user__status"
+            [ngClass]="{ isOnline: consultantInfo.user.is_online }"
+          >
+            <span *ngIf="consultantInfo.user.is_online" class="online"></span>
+            {{
+              consultantInfo.user.is_online
+                ? ("online" | translate)
+                : (consultantInfo.user.last_online_at | formatDateFns | async)
+            }}
+          </p>
+          <!-- ------------------ -->
+
+          <!-- REVIEWS -->
+          <div class="consultant-about__user__rating">
+            <div class="consultant-about__user__rating_info">
+              <img src="./assets/images/star-detail.svg" alt="icon" />
+              <span>{{ consultantInfo.review.rating | number : "0.1-1" }}</span>
+            </div>
+            <div class="consultant-about__user__rating_info">
+              <img src="./assets/images/feedback.svg" alt="icon" />
+              <span>{{
+                "respondCount"
+                  | translate : { count: consultantInfo.review.count }
+              }}</span>
+            </div>
+          </div>
+          <!-- -------------- -->
+        </div>
+        <div
+          class="consultant-about__user__btn"
+          *ngIf="profileId !== consultantInfo.profile_id"
+        >
+          <!-- BUTTON -->
+          <button
+            [routerLink]="['../../create-application', consultantInfo.id]"
+          >
+            {{ "submitApplication" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-divider class="divider"></nz-divider>
+</div>
+
+<!--  -->
+<ng-template #skeleton>
+  <div class="consultant-about">
+    <div
+      nz-row
+      class="consultant-about__user"
+      [nzGutter]="[
+        { xs: 0, sm: 0, md: 36, lg: 28, xl: 48 },
+        { xs: 16, sm: 0 }
+      ]"
+    >
+      <div nz-col nzXs="24" nzSm="12" nzMd="11" nzLg="9" nzXl="8">
+        <div class="consultant-about__user__avatar">
+          <!-- AVATAR -->
+          <nz-skeleton-element
+            nzType="image"
+            [nzActive]="true"
+          ></nz-skeleton-element>
+          <!-- ----------------- -->
+        </div>
+      </div>
+      <div nz-col nzXs="24" nzSm="12" nzMd="13" nzLg="15" nzXl="16">
+        <div class="consultant-about__user__block">
+          <div>
+            <!-- FULL NAME -->
+            <nz-skeleton-element
+              nzType="input"
+              [nzActive]="true"
+              style="width: 100%"
+            ></nz-skeleton-element>
+            <!-- ------------------ -->
+            <!-- LAST ONLINE -->
+            <nz-skeleton-element
+              nzType="input"
+              [nzActive]="true"
+              style="width: 100%"
+            ></nz-skeleton-element>
+            <!-- ------------------ -->
+            <!-- REVIEWS -->
+            <nz-skeleton-element
+              nzType="input"
+              [nzActive]="true"
+              style="width: 100%"
+            ></nz-skeleton-element>
+            <!-- -------------- -->
+          </div>
+          <div class="consultant-about__user__btn">
+            <!-- BUTTON -->
+            <nz-skeleton-element
+              nzType="input"
+              [nzActive]="true"
+              style="width: 240px"
+            ></nz-skeleton-element>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nz-divider class="divider"></nz-divider>
+  </div>
+</ng-template>

@@ -1,0 +1,103 @@
+.type {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+
+  @media (max-width: 767px) {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 575px) {
+    gap: 16px;
+  }
+
+  &__card {
+    width: 50%;
+    height: 100%;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      appearance: none;
+    }
+
+    label {
+      border: 1px solid #d9d9d9;
+      padding: 20px 24px;
+      border-radius: 16px;
+      display: block;
+      cursor: pointer;
+
+      @media (max-width: 767px) {
+        min-height: initial;
+        padding: 16px;
+      }
+
+      h5 {
+        font-size: 24px;
+        line-height: 30px;
+        font-family: Agrofont-Medium;
+        color: #11253d;
+
+        @media (max-width: 575px) {
+          text-align: center;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 20px;
+        font-family: Agrofont-Regular;
+        color: #86898c;
+        margin-bottom: 0;
+
+        @media (max-width: 575px) {
+          display: none;
+        }
+      }
+    }
+
+    .check-marker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span {
+        width: 16px;
+        height: 16px;
+        background: #f4f6ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 10px;
+          line-height: 10px;
+          color: #fff;
+          display: none;
+        }
+      }
+    }
+
+    input:checked + label {
+      background: #f4f6ff;
+      border: 1px solid #2a4aff;
+
+      .check-marker {
+        span {
+          background: #2a4aff;
+
+          i {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}
